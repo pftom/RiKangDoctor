@@ -44,6 +44,21 @@ class FinishedListItem extends PureComponent {
 
     const lastTime = '2017年7月15日';
 
+    let ITEM = [];
+    if (item.ratings && !isNaN(parseInt(ratings))) {
+      for (let i = 0; i < parseInt(item.ratings); i++) {
+        ITEM.push(
+          <Image source={require('../img/smallHeart.png')} style={styles.img} />
+        )
+      }
+
+      for (let i = 0; i < 5 - parseInt(item.ratings); i++) {
+        ITEM.push(
+          <Image source={require('../img/smallSolidHeart.png')} style={styles.img} />
+        )
+      }
+    }
+
     return (
       <View style={styles.container}>
         <View style={styles.box}>
@@ -59,10 +74,23 @@ class FinishedListItem extends PureComponent {
                 {
                   item.appraised 
                   ? (
-                    <Text>该用户暂未评价</Text>
+                    <Text style={styles.unApparise}>该用户暂未评价</Text>
                   )
                   : (
-
+                    <View style={styles.starBox}>
+                      <View style={styles.heartBox}>
+                        {
+                          ITEM.map((item, key) => (
+                            item
+                          ))
+                        }
+                      </View>
+                      <TouchableWithoutFeedback onPress={() => { this.handleBtn() }} style={styles.buttonContainer}>
+                      <View style={styles.buttonBox}>
+                        <Text style={[ styles.content, this.props.textStyle ]}>查看评论详情</Text>
+                      </View>
+                    </TouchableWithoutFeedback>
+                    </View>
                   )
                 }
               </View>
