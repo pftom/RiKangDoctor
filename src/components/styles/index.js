@@ -13,6 +13,8 @@ import { BottomButtonStyle } from './BottomButtonStyle';
 import { SelectBoxStyle } from './SelectBoxStyle';
 import { PutQuestionStyle } from './PutQuestionStyle';
 import { ConsultOrderStyle } from './ConsultOrderStyle';
+//doctor side style
+import { NewOrderListItemStyle } from './NewOrderListItemStyle';
 
 
 export {
@@ -35,4 +37,6 @@ export {
 
   PutQuestionStyle,
   ConsultOrderStyle,
+
+  NewOrderListItemStyle,
 }
