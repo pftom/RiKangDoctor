@@ -23,7 +23,7 @@ import {
 import { getPostSelector } from '../../../selectors/';
 
 //import post style
-import { NewOrderListItemStyle as styles } from '../../styles/';
+import { UnderGoingListItemStyle as styles } from '../../styles/';
 
 
 
@@ -41,18 +41,21 @@ class UnderGoingListItem extends PureComponent {
       lastMessage = lastMessage.slice(0, 13) + '...';
     }
 
+    const lastTime = '12:01';
+
     return (
       <View style={styles.container}>
         <View style={styles.box}>
-          <View style={styles.idBox}>
-            <View style={styles.doctorAvatarBox}>
-              <Image source={{ uri: item.avatar }} style={styles.doctorAvatar} />
-            </View>
-            <View>
-              <Text style={styles.name}>{item.name}</Text>
+          <View style={styles.doctorAvatarBox}>
+            <Image source={{ uri: item.avatar }} style={styles.doctorAvatar} />
+          </View>
+          <View style={styles.rightBox}>
+              <View style={styles.nameBox}>
+                <Text style={styles.name}>{item.name}</Text>
+                <Text style={styles.lastTime}>{lastTime}</Text>
+              </View>
               <Text style={styles.lastMessage}>{lastMessage}</Text>
             </View>
-          </View>
         </View>
       </View>
     )

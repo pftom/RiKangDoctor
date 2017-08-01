@@ -16,6 +16,7 @@ import { ConsultOrderStyle } from './ConsultOrderStyle';
 //doctor side style
 import { NewOrderListItemStyle } from './NewOrderListItemStyle';
 import { UnderGoingListItemStyle } from './UnderGoingListItemStyle';
+import { FinishedListItemStyle } from './FinishedListItemStyle';
 
 
 export {
@@ -41,4 +42,5 @@ export {
 
   NewOrderListItemStyle,
   UnderGoingListItemStyle,
+  FinishedListItemStyle,
 }

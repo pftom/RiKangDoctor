@@ -23,7 +23,7 @@ import {
 import { getPostSelector } from '../../../selectors/';
 
 //import post style
-import { NewOrderListItemStyle as styles } from '../../styles/';
+import { FinishedListItemStyle as styles } from '../../styles/';
 
 
 
@@ -34,24 +34,39 @@ class FinishedListItem extends PureComponent {
   }
 
   render() {
+    const { item } = this.props;
 
-    let lastTime = "接受（剩余1小时48分）";
+    let lastMessage = "每次洗完澡后记得局部要用护肤品哈哈哈哈或或";
+
+    if (lastMessage.length > 13) {
+      lastMessage = lastMessage.slice(0, 13) + '...';
+    }
+
+    const lastTime = '2017年7月15日';
 
     return (
       <View style={styles.container}>
         <View style={styles.box}>
-          <View style={styles.idBox}>
-            <View style={styles.doctorAvatarBox}>
-              <Image source={{ uri: item.avatar }} style={styles.doctorAvatar} />
-            </View>
-            <Text style={styles.name}>{item.name}</Text>
-            <Text style={styles.consult}>向您发出咨询请求</Text>
+          <View style={styles.doctorAvatarBox}>
+            <Image source={{ uri: item.avatar }} style={styles.doctorAvatar} />
           </View>
-          <TouchableWithoutFeedback onPress={() => { this.handleBtn() }} style={styles.buttonContainer}>
-            <View style={styles.buttonBox}>
-              <Text style={[ styles.content, this.props.textStyle ]}>{lastTime}</Text>
+          <View style={styles.rightBox}>
+              <View style={styles.nameBox}>
+                <Text style={styles.name}>{item.name}</Text>
+                <Text style={styles.lastTime}>{lastTime}</Text>
+              </View>
+              <View style={styles.appraiseBox}>
+                {
+                  item.appraised 
+                  ? (
+                    <Text>该用户暂未评价</Text>
+                  )
+                  : (
+
+                  )
+                }
+              </View>
             </View>
-          </TouchableWithoutFeedback>
         </View>
       </View>
     )
