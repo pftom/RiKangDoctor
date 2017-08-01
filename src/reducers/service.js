@@ -2,210 +2,91 @@ import { List, Map } from 'immutable';
 
 //import action constants
 import { 
-  CREATE_NEW_ORDER,
-  CREATE_NEW_ORDER_SUCCESS,
-  CREATE_NEW_ORDER_ERROR,
+  GET_SERVICE_ORDER,
+  GET_SERVICE_ORDER_ERROR,
+  GET_SERVICE_ORDER_SUCCESS,
 
-  PAY,
-  PAY_ERROR,
-  PAY_SUCCESS,
+  ACCEPT_SERVICE_ORDER,
+  ACCEPT_SERVICE_ORDER_ERROR,
+  ACCEPT_SERVICE_ORDER_SUCCESS,
 
-  CANCEL_ORDER,
-  CANCEL_ORDER_SUCCESS,
-  CANCEL_ORDER_ERROR,
-
-  REFUND,
-  REFUND_SUCCESS,
-  REFUND_ERROR,
-
-  FINISH_ORDER,
-  FINISH_ORDER_SUCCESS,
-  FINISH_ORDER_ERROR,
-
-
-  CLEAR_SERVICE_STATE,
+  CLEAR_ORDER_STATE,
 } from '../constants/';
 
 const initialServiceValue = Map({
-  newOrder: null,
-  charge: null,
-  refund: null,
-  
-  isCreateNewOrder: false,
-  createNewOrderSuccess: false,
-  createNewOrderError: false,
+  orders: List([]),
 
-  isCancelOrder: false,
-  cancelOrderSuccess: false,
-  cancelOrderError: false,
+  isGetOrders: false,
+  getOrderSuccess: false,
+  getOrderError: false,
 
-  isPaying: false,
-  paySuccess: false,
-  payError: false,
-
-  isRefunding: false,
-  refundSuccess: false,
-  refundError: false,
-
-  isFinsishOrder: false,
-  finishOrderSuccess: false,
-  finishOrderError: false,
+  isAcceptOrder: false,
+  acceptOrderSuccess: false,
+  acceptOrderError: false,
 });
 
 
 const service = (state = initialServiceValue, action) => {
-  switch(action.type) {
-    case CREATE_NEW_ORDER:
+  switch (action.type) {
+    case GET_SERVICE_ORDER:
 
       return state.merge({
-        isCreateNewOrder: true,
-        createNewOrderSuccess: false,
-        createNewOrderError: false,
+        isGetOrders: true,
+        getOrderError: false,
+        getOrderSuccess: false,
       });
-
-    case CREATE_NEW_ORDER_SUCCESS:
-
-      const { newOrder } = action;
-
-      return state.merge({
-        isCreateNewOrder: false,
-        createNewOrderSuccess: true,
-        newOrder,
-      });
-
-    case CREATE_NEW_ORDER_ERROR:
-
-      return state.merge({
-        isCreateNewOrder: false,
-        createNewOrderError: true,
-      });
-
-
-    case CANCEL_ORDER:
-
-      return state.merge({
-        isCancelOrder: true,
-        cancelOrderSuccess: false,
-        cancelOrderError: false,
-      });
-
     
-    case CANCEL_ORDER_SUCCESS:
+    case GET_SERVICE_ORDER_SUCCESS:
 
+      const { orders } = action;
+      
       return state.merge({
-        isCancelOrder: false,
-        createNewOrderSuccess: true,
+        isGetOrders: false,
+        getOrderSuccess: true,
+        orders,
+      });
+
+    case GET_SERVICE_ORDER_ERROR:
+      
+      return state.merge({
+        isGetOrders: false,
+        getOrderError: true,
       });
 
 
-    case CANCEL_ORDER_ERROR:
+    case ACCEPT_SERVICE_ORDER:
 
       return state.merge({
-        isCancelOrder: false,
-        createNewOrderError: true,
+        isAcceptOrder: true,
+        acceptOrderSuccess: false,
+        acceptOrderError: false,
       });
 
-
-    case PAY:
+    case ACCEPT_SERVICE_ORDER_SUCCESS:
 
       return state.merge({
-        isPaying: true,
-        paySuccess: false,
-        payError: false,
+        isAcceptOrder: false,
+        acceptOrderSuccess: true,
       });
 
-    case PAY_SUCCESS:
-
-      const { charge } = action;
+    case ACCEPT_SERVICE_ORDER:
 
       return state.merge({
-        isPaying: false,
-        paySuccess: true,
-        charge,
+        isAcceptOrder: false,
+        acceptOrderError: true,
       });
 
-    case PAY_ERROR:
-
+    case CLEAR_ORDER_STATE:
+      
       return state.merge({
-        isPaying: false,
-        payError: true,
-      });
-
-    case REFUND:
-
-      return state.merge({
-        isRefunding: true,
-        refundSuccess: false,
-        refundError: false,
-      });
-
-    case REFUND_SUCCESS:
-
-      const { refund } = action;
-
-      return state.merge({
-        isRefunding: false,
-        refundSuccess: true,
-        refund,
-      });
-
-    case REFUND_ERROR:
-
-      return state.merge({
-        isRefunding: false,
-        refundError: true,
-      });
-
-    case FINISH_ORDER:
-
-      return state.merge({
-        isFinsishOrder: true,
-        finishOrderSuccess: false,
-        finishOrderError: false,
-      });
-
-    case FINISH_ORDER_SUCCESS:
-
-      return state.merge({
-        isFinsishOrder: false,
-        finishOrderSuccess: true,
-      });
-
-    case FINISH_ORDER_ERROR:
-
-      return state.merge({
-        isFinsishOrder: false,
-        finishOrderError: true,
-      });
-
-
-    case CLEAR_SERVICE_STATE:
-
-      return state.merge({
-        isCreateNewOrder: false,
-        createNewOrderSuccess: false,
-        createNewOrderError: false,
-
-        isCancelOrder: false,
-        cancelOrderSuccess: false,
-        cancelOrderError: false,
-
-        isPaying: false,
-        paySuccess: false,
-        payError: false,
-
-        isRefunding: false,
-        refundSuccess: false,
-        refundError: false,
-
-        isFinsishOrder: false,
-        finishOrderSuccess: false,
-        finishOrderError: false,
+        isGetOrders: false,
+        getOrderError: false,
+        getOrderSuccess: false,
+        isAcceptOrder: false,
+        acceptOrderSuccess: false,
+        acceptOrderError: false,
       })
 
-    default: 
-      return state;
-    
   }
 }
 

@@ -15,6 +15,7 @@ import { PutQuestionStyle } from './PutQuestionStyle';
 import { ConsultOrderStyle } from './ConsultOrderStyle';
 //doctor side style
 import { NewOrderListItemStyle } from './NewOrderListItemStyle';
+import { UnderGoingListItemStyle } from './UnderGoingListItemStyle';
 
 
 export {
@@ -39,4 +40,5 @@ export {
   ConsultOrderStyle,
 
   NewOrderListItemStyle,
+  UnderGoingListItemStyle,
 }

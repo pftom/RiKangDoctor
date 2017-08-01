@@ -13,6 +13,9 @@ import { handleHospitalDoctors } from './hospital_data';
 
 import { selectDep } from './selectDep';
 
+//doctor service section;
+import { handleServiceData, ITEMS } from './handleServiceData';
+
 
 export {
   headerTitleData,
@@ -25,4 +28,7 @@ export {
 
   selectDep,
   handleHospitals,
+
+  handleServiceData,
+  ITEMS,
 }

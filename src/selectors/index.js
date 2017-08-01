@@ -41,6 +41,11 @@ import {
   getQuestionStatusSelector,
 } from './PutQuestionSelector.js';
 
+
+import {
+  getServiceSelector,
+} from './serviceSelector.js';
+
 export {
   getInputInitial,
 
@@ -68,5 +73,7 @@ export {
 
   getAnswerCommentSelector,
   getQuestionStatusSelector,
+
+  getServiceSelector,
 
 }

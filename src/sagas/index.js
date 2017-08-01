@@ -74,11 +74,8 @@ import {
 } from './answerSaga';
 
 import {
-  watchCreateNewOrder,
-  watchCancel,
-  watchPay,
-  watchRefund,
-  watchFinishOrder,
+  watchAcceptOrder,
+  watchGetServiceOrder,
 } from './serviceSaga.js';
 
 export default function* rootSaga() {
@@ -135,10 +132,7 @@ export default function* rootSaga() {
     watchClearCommentState(),
 
 
-    watchCreateNewOrder(),
-    watchCancel(),
-    watchPay(),
-    watchRefund(),
-    watchFinishOrder(),
+    watchAcceptOrder(),
+    watchGetServiceOrder(),
   ]);
 }

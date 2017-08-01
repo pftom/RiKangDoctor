@@ -6,19 +6,9 @@ import { connect } from 'react-redux';
 import LinearGradient from 'react-native-linear-gradient';
 import ScrollableTabView from 'react-native-scrollable-tab-view';
 
-import CustomTabBar from '../../TabOne/views/CustomTabBar';
-import UltimateListView from '../../common/UltimateListView';
+import CustomTabBar from './CustomTabBar';
+import UltimateFlatList from '../../common/UltimateFlatList';
 
-//import fav doc
-import NearByDoctorSection from '../../TabOne/views/NearByDoctorSection';
-//import post section 
-import PostSection from '../../TabOne/views/PostSection';
-//import problem item
-import ProblemItem from './ProblemItem';
-//import Service item
-import PaidServiceItem from './PaidServiceItem';
-//IMPORT underway service item
-import ServiceItem from './ServiceItem'
 
 //import px to dp 
 import px2dp from '../../../utils/px2dp';
@@ -27,83 +17,85 @@ import newOrder from './newOrder';
 
 //import action constants
 import { 
-  GET_PATIENT_PROFILE,
-  GET_PATIENT_FAV_DOCTORS,
-  GET_PATIENT_FAV_POSTS,
-  GET_PATIENT_QUESTIONS,
-  GET_PATIENT_STARRED_QUESTIONS,
-  GET_PATIENT_SERVICES,
+  GET_SERVICE_ORDER,
+  ACCEPT_SERVICE_ORDER,
+  CLEAR_ORDER_STATE,
  } from '../../../constants/'
 
 //import selector from select data
-import { getPatientSelector } from '../../../selectors/';
+import { getServiceSelector } from '../../../selectors/';
 
-import TabThreeHeaderSection from './TabThreeHeaderSection';
+import TabOneHeaderSection from './TabOneHeaderSection';
+
+//import list item
+//import new order list item
+import NewOrderListItem from './NewOrderListItem';
+//import going list item
+import UnderGoingListItem from './UnderGoingListItem';
+//import finished list item
+import FinishedListItem from './FinishedListItem';
 
 //use fake data
 
 //import handle data func
 import {
-  handleUserData,
+  handleServiceData,
   ITEMS,
-  jumpToScreenLists,
 } from '../data/'
 
-import {
-  handleNearby,
-  handleHealthPost,
-} from '../../TabOne/data/TabOneMainScreen_data.js'
 
 
-
-class UserScreen extends PureComponent {
+class TabOneMainScreen extends PureComponent {
 
   componentDidMount() {
 
     const { dispatch, navigation, token } = this.props;
 
-    // dispatch({ type: GET_PATIENT_STARRED_QUESTIONS, payload: { token } });
-    // dispatch({ type: GET_PATIENT_SERVICES, payload: { token } });
+    dispatch({ type: GET_SERVICE_ORDER, payload: { token } });
   } 
 
-  render() {
-    const { dispatch, navigation, token,  patientProfile  } = this.props;
-    //get faved data
-    const { postFav, doctorFav, questionFav, questionStarredFav, servicesFav } = this.props;
-    //get fetch data
-    const { postFetch } = this.props;
+  renderItem = (item, kind) => {
+    const { navigation, dispatch, token } = this.props;
 
-    let patientUnderWayServicesData = {
-      data: [],
-      count: 0,
-    };
-    let patientPaidServicesData = {
-      data: [],
-      count: 0,
-    };
-    let patientFinishedServicesData = {
-      data: [],
-      count: 0,
-    };
+    if (kind === 'newOrderData') {
+      return <NewOrderListItem item={item} navigation={navigation} dispatch={dispatch} token={token} />;
+    }
+
+    if (kind === 'underGoingData') {
+      return <UnderGoingListItem item={item} navigation={navigation} dispatch={dispatch} token={token} />;
+    }
+
+    if (kind === 'finishedData') {
+      return <FinishedListItem item={item} navigation={navigation} dispatch={dispatch} token={token} />;
+    }
+  }
+
+  render() {
+    const { dispatch, navigation, token  } = this.props;
+    //get service data
+    const { token, orders, isGetOrders, getOrderSuccess, getOrderError, isAcceptOrder, acceptOrderSuccess, acceptOrderError } = this.props;
+
+    let newOrderData = [];
+    let underGoingData = [];
+    let finishedData = [];
     //service for later handle
-    // if (patientServices) {
-    //   patientUnderWayServicesData = handleUserData(patientServices.get('results'), 'services', 'underway');
-    //   patientPaidServicesData = handleUserData(patientServices.get('results'), 'services', 'paid')
-    //   patientFinishedServicesData = handleUserData(patientServices.get('results'), 'services', 'finished');
-    // }
+    if (orders.size > 0) {
+      newOrderData = handleUserData(orders, 'paid');
+      underGoingData = handleUserData(orders, 'underway')
+      finishedData = handleUserData(orders, 'finished');
+    }
+
+    const DATA = [
+      newOrderData,
+      underGoingData,
+      finishedData,
+    ];
 
     
     
     return (
       <View style={{ flex: 1, backgroundColor: '#F5F6F7'}}>
-        {
-          <TabThreeHeaderSection 
-            patientProfile={patientProfile} 
-            navigation={navigation}
-            token={token}
-            dispatch={dispatch}
-          />
-        }
+        <TabOneHeaderSection />
         <ScrollableTabView
           page={0}
           style={ Platform.OS === 'ios' ? { marginTop: px2dp(148) } : { marginTop: px2dp(147) }}
@@ -122,18 +114,17 @@ class UserScreen extends PureComponent {
           }
         >
           {
-            ITEMS.map((item, key) => (
+            ITEMS.map((kind, key) => (
               <UltimateFlatList
-              listData={nearbyDoctor}
-              method={GET_DOCTORS}
-              data={doctors}
-              enableRefresh={true}
-              refreshMethod={[ GET_DOCTORS ]}
-              dispatch={this.props.dispatch}
-              token={token}
-              footText={"到底了哦"}
-              renderItem={(item) => <DoctorListItem token={token} navigation={navigation} item={item} />}
-          />
+                key={key}
+                listData={DATA[key]}
+                data={orders}
+                simplify={true}
+                dispatch={this.props.dispatch}
+                token={token}
+                footText={"到底了哦"}
+                renderItem={(item) => { return this.renderItem(item, kind); }}
+              />
             ))
           }
         </ScrollableTabView>
@@ -143,5 +134,5 @@ class UserScreen extends PureComponent {
 }
 
 export default connect(
-  state => getPatientSelector(state),
-)(UserScreen);
+  state => getServiceSelector(state),
+)(TabOneMainScreen);
