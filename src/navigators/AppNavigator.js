@@ -64,6 +64,10 @@ import CommentList from '../components/TabTwo/views/CommentList';
 //doctor section 
 import NewQuestion from '../components/TabTwo/views/NewQuestion';
 
+//basic
+import BasicDataFirst from '../components/BasicDataFirst';
+import BasicDataSecond from '../components/BasicDataSecond';
+
 
 
 //register and login logic navigator
@@ -117,6 +121,9 @@ export const AppNavigator = StackNavigator({
     ImageView: { screen: ImageView },
     CommentList: { screen: CommentList },
     NewQuestion: { screen: NewQuestion },
+
+    BasicDataFirst: { screen: BasicDataFirst },
+    BasicDataSecond: { screen: BasicDataSecond },
 
   },
   {

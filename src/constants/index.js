@@ -66,3 +66,62 @@ export const GET_DOCTOR_PROFILE = 'GET_DOCTOR_PROFILE';
 export const GET_DOCTOR_PROFILE_SUCCESS = 'GET_DOCTOR_PROFILE_SUCCESS';
 export const GET_DOCTOR_PROFILE_ERROR = 'GET_DOCTOR_PROFILE_ERROR';
 
+
+/*
+  user section
+  user section
+  user section
+*/
+
+
+//User action type
+export const BASIC_DATA_FIRST = 'BASIC_DATA_FIRST';
+export const BASIC_DATA_SECOND = 'BASIC_DATA_SECOND';
+
+
+
+//User action type
+export const REGISTER = 'REGISTER';
+export const REGISTER_ERROR = 'REGISTER_ERROR';
+export const REGISTER_SUCCESS = 'REGISTER_SUCCESS';
+
+
+//request sms code action type
+export const REQUEST_SMS_CODE = 'REQUEST_SMS_CODE';
+export const REQUEST_SMS_CODE_ERROR = 'REQUEST_SMS_CODE_ERROR';
+export const REQUEST_SMS_CODE_SUCCESS = 'REQUEST_SMS_CODE_SUCCESS';
+
+//verify send message action type
+export const REGISTER_SEND_MESSAGE = 'REGISTER_SEND_MESSAGE';
+export const REGISTER_SEND_MESSAGE_ERROR = 'REGISTER_SEND_MESSAGE_ERROR';
+export const REGISTER_SEND_MESSAGE_SUCCESS = 'REGISTER_SEND_MESSAGE_SUCCESS';
+
+export const LOGOUT = 'LOGOUT';
+
+export const LOGIN = 'LOGIN';
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
+export const LOGIN_ERROR = 'LOGIN_ERROR';
+
+//change password action constants
+export const CHANGE_PASSWORD = 'CHANGE_PASSWORD';
+export const CHANGE_PASSWORD_SUCCESS = 'CHANGE_PASSWORD_SUCCESS';
+export const CHANGE_PASSWORD_ERROR = 'CHANGE_PASSWORD_ERROR';
+
+export const CLEAR_PASSWORD_STATE = 'CLEAR_PASSWORD_STATE';
+
+//change password action constants
+export const FEEDBACK = 'FEEDBACK';
+export const FEEDBACK_SUCCESS = 'FEEDBACK_SUCCESS';
+export const FEEDBACK_ERROR = 'FEEDBACK_ERROR';
+
+export const CLEAR_FEEDBACK_STATE = 'CLEAR_FEEDBACK_STATE';
+
+//after show the error toast and then clear it
+export const CLEAR_STATE = 'CLEAR_STATE';
+export const CLEAR_FAV_STATE = 'CLEAR_FAV_STATE';
+export const CLEAR = 'CLEAR';
+
+//clear token in the storage
+export const CLEAR_TOKEN = 'CLEAR_TOKEN';
+export const SET_TOKEN = 'SET_TOKEN';
+

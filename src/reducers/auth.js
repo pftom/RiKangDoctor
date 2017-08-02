@@ -63,6 +63,11 @@ const initialAuthState = Immutable.Map({
   isFeedback: false,
   feedbackSuccess: false,
   feedbackError: false,
+
+  authCode: Immutable.Map({
+    status: 1,
+  }),
+  id: null,
 });
 
 const auth = function auth(state = initialAuthState, action) {
@@ -128,6 +133,7 @@ const auth = function auth(state = initialAuthState, action) {
       return state.merge({
         isLoggedIn: false,
         token: null,
+        id: null,
         loginError: false,
         loginSuccess: false,
       });
@@ -272,6 +278,7 @@ const auth = function auth(state = initialAuthState, action) {
       const { auth } = action.payload;
       const token = auth && auth.has('token') && auth.get('token');
       const id = auth && auth.has('id') && auth.get('id');
+      const authCode = auth && auth.has('authCode') && auth.get('authCode');
 
       //use isLoggedIn show the initialScreen
       const isLoggedIn = !!token ? true : false;
@@ -282,6 +289,7 @@ const auth = function auth(state = initialAuthState, action) {
         isLoggedIn,
         token,
         id,
+        authCode,
         loginSuccess: false,
       });
 

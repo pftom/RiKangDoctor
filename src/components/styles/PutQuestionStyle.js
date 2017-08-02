@@ -62,6 +62,16 @@ export const PutQuestionStyle = StyleSheet.create({
     flexDirection: 'row',
     marginBottom: px2dp(47),
   },
+  essential: {
+    fontFamily: 'PingFangSC-Regular',
+    fontSize: px2dp(18),
+    color: '#000',
+  },
+  notice: {
+    fontFamily: 'PingFangSC-Medium',
+    fontSize: px2dp(14),
+    color: '#D0021B',
+  },
   linearGradient: {
     width: px2dp(8),
     height: px2dp(64),
