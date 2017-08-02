@@ -167,7 +167,7 @@ class UltimateFlatList extends PureComponent {
         />
       )
     }
-    console.log('state', this.state.loadingTop);
+    console.log('state', refreshMethod);
 
     return (
       <FlatList

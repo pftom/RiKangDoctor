@@ -30,46 +30,10 @@ import {
 class QuestionListItem extends PureComponent {
   
   render() {
-    const { navigation, questionFav, token, item, dispatch, question, questionStarredFav } = this.props;
-    let whetherStarred = false;
-
-    //whether have fav this doctor
-    questionStarredFav.map(question => {
-      if (question && question.get('id') === item.id) {
-        whetherStarred = true;
-      }
-    });
-
-    let isMine = false;
-    if (questionFav) {
-      questionFav.map(ques => {
-        if (ques.get('id') === item.id) {
-          isMine = true;
-        }
-      })
-    }
-
-    const { 
-      isStarSingleQuestion, 
-      starSingleQuestionSuccess, 
-      starSingleQuestionError,
-      isCancelStarSingleQuestion,
-      cancelStarSingleQuestionSuccess,
-      cancelStarSingleQuestionError,
-     } = this.props;
-
-
-    let httpStatus = {
-      isStarSingleQuestion,
-      starSingleQuestionSuccess,
-      starSingleQuestionError,
-      isCancelStarSingleQuestion,
-      cancelStarSingleQuestionSuccess,
-      cancelStarSingleQuestionError,
-    };
+    const { navigation, token, item, dispatch, question } = this.props;
 
     return (
-      <TouchableWithoutFeedback onPress={() => { navigation.navigate('QuestionDetail', { id: item.key, token, questionFav })}} style={styles.touchBox}>
+      <TouchableWithoutFeedback onPress={() => { navigation.navigate('QuestionDetail', { id: item.key, token })}} style={styles.touchBox}>
         <View style={styles.container}>
             <View style={styles.QuestionBox}>
               <Text style={styles.title}>{item.title}</Text>
@@ -77,15 +41,11 @@ class QuestionListItem extends PureComponent {
                 <TagBox 
                   star={true} 
                   item={item} 
-                  btnText={"关注"}
-                  isMine={isMine}
+                  btnText={"回答"}
                   navigation={navigation}
                   token={token}
-                  httpStatus={httpStatus}
                   dispatch={dispatch}
-                  whetherStarred={whetherStarred}
-                  handleCancelStar={() => { dispatch({ type: CANCEL_STAR_SINGLE_QUESTION, payload: { token, id: item.id } }) }}
-                  handleAddStar={() => { dispatch({ type: STAR_SINGLE_QUESTION, payload: { token, id: item.id, question } }) }}
+                  handleNavigation={() => { navigation.navigate('QuestionDetail', { id: item.key, token })} }
                 />
               </View>
             </View>

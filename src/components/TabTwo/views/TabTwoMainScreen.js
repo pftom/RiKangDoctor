@@ -11,174 +11,150 @@ import {
 import { connect } from 'react-redux';
 
 //import action constants
-import { GET_QUESTIONS } from '../../../constants/'
+import { GET_QUESTIONS, GET_SINGLE_DOCTOR_ANSWERS, } from '../../../constants/'
 //import selector
 import { getQaSelector } from '../../../selectors/'
 
-
-
-//import header
-import Header from '../../common/Header';
-
 import QuestionListItem from './QuestionListItem';
+//import list data
+import QaAnswerListItem from './QaAnswerListItem';
 
 //import list
-import { UltimateFlatList, SelectBox } from '../../common/';
-
-//import styles
-import { QaMainScreenStyle as styles } from '../styles/';
-
-import { opppsiteDepartment } from '../../../utils/transferAbbr';
+import { UltimateFlatList } from '../../common/';
 
 import {
   handleQuestions,
 } from '../data/';
 
-const sortData = [
-  {
-    label: '默认排序',
-    value: '默认排序',
-  },
-  {
-    label: '关注数最多',
-    value: '关注数最多',
-  },
-  {
-    label: '回答数最多',
-    value: '回答数最多'
-  }
-];
+//handle func
+import {
+  handleAnswers
+} from '../../TabTwo/data/';
+
+import ScrollableTabView from 'react-native-scrollable-tab-view';
+
+import CustomTabBar from '../../TabOne/views/CustomTabBar';
+
+
+//import px to dp 
+import px2dp from '../../../utils/px2dp';
+
+import TabOneHeaderSection from '../../TabOne/views/TabOneHeaderSection';
 
 class QaScreen extends PureComponent {
 
   constructor(props) {
     super(props);
 
-    this.state = {
-      sort: '默认排序',
-      dep: '全部科室',
-      text: '',
-    }
+    // this.state = {
+    //   sort: '默认排序',
+    //   dep: '全部科室',
+    //   text: '',
+    // }
   }
 
   componentDidMount() {
-    const { navigation, dispatch, token } = this.props;
+    const { navigation, dispatch, token, userId } = this.props;
 
     dispatch({ type: GET_QUESTIONS, payload: { token, refresh: true }});
+    dispatch({ type: GET_SINGLE_DOCTOR_ANSWERS, payload: { token, id: userId, refresh: true }});
   }
 
-  handleSelectSort = (sort) => {
-    this.setState({
-      sort,
-    })
-  }
+  renderItem = (item, kind) => {
+    const { navigation, dispatch, token, questionFav, questionStarredFav } = this.props;
 
-  handleSelectDep = (dep) => {
-    this.setState({
-      dep,
-    })
-  }
-
-  handleSubmit = () => {
-    const { navigation, dispatch, token } = this.props;
-
-    let query = null;
-    let search = false;
-    if (this.state.text) {
-      query = {
-        search: this.state.text,
-      }
-      search = true;
+    if (kind === 'questionList') {
+      return <QuestionListItem questionFav={questionFav} questionStarredFav={questionStarredFav} token={token} dispatch={dispatch} navigation={navigation} item={item.item} question={item.question} />
     }
-    
-    dispatch({ type: GET_QUESTIONS, payload: { token, refresh: true, search, query }});
-  }
 
-  handleChangeText = (text) => {
-    const { navigation, dispatch, token } = this.props;
-    this.setState({
-      text,
-    });
-
-    if (text === '') {
-      dispatch({ type: GET_QUESTIONS, payload: { token, refresh: true }});
+    if (kind === 'answerList') {
+      return <QaAnswerListItem  token={token} navigation={navigation} item={item} />
     }
   }
-
+  
   render() {
-    const { questions, navigation, questionFav, token, dispatch, questionStarredFav } = this.props;
-    const { dep, sort } = this.state;
+    const { questions, answers, navigation,  token, dispatch } = this.props;
     let questionList = [];
-    console.log('sort', sort);
     if (questions) {
       //the second params for horizontal(true) show ten item,
-      questionList = handleQuestions(questions.get('results'), opppsiteDepartment[dep], sort[0]);
+      questionList = handleQuestions(questions.get('results'));
       console.log('questionList', questionList);
     }
 
+    let answerList = [];
+    //service for later handle
+    if (answers) {
+      answerList = handleAnswers(answers.get('results'));
+    }
+
+    const DATA = [
+      questionList,
+      answerList,
+    ];
+
+    const LABEL = [
+      '新的问题',
+      '我的回答',
+    ];
+
+    const METHOD = [
+      GET_QUESTIONS,
+      GET_SINGLE_DOCTOR_ANSWERS,
+    ];
+    console.log('method', METHOD[1]);
+
+    const DATASELECT = [
+      questions,
+      answers,
+    ];
+
+    const ITEMS = [
+      'questionList',
+      'answerList',
+    ];
+
     return (
-      <View style={styles.container}>
-        <UltimateFlatList
-         listStyle={styles.listStyle}
-          listData={questionList}
-          method={GET_QUESTIONS}
-          data={questions}
-          enableRefresh={true}
-          refreshMethod={[ GET_QUESTIONS ]}
-          dispatch={this.props.dispatch}
-          token={token}
-          footText={"到底了哦..."}
-          renderItem={(item) => <QuestionListItem questionFav={questionFav} questionStarredFav={questionStarredFav} token={token} dispatch={dispatch} navigation={navigation} item={item.item} question={item.question} />}
-        />
-        <SelectBox 
-          titleLeft={"全部科室"}
-          titleRight={"默认排序"}
-          selectStyle={styles.selectStyle}
-          sortData={sortData}
-          handleSelectDep={this.handleSelectDep}
-          handleSelectSort={this.handleSelectSort}
-        />
-        <Header 
-          navigation={navigation}
-          showGradient={true}
-          headerStyle={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            right: 0,
-          }}
-        />
-
-        <View style={styles.putQuestionContainer}>  
-            <View style={styles.putQuestionBox}>
-              <TouchableHighlight style={styles.putQuestionTouch} onPress={() => { navigation.navigate('PutQuestion', { token, dispatch }) }}>
-                <View style={styles.putQuestionInlineBox}>
-                  <Image source={require('../img/putQuestion.png')} />
-                  <Text style={styles.putQuestionText}>我要提问</Text>
-                </View>
-              </TouchableHighlight>
-            </View>
-        </View>
-
-        <View style={styles.inputContainer}>  
-          <View style={styles.inputBox}>
-            <Image source={require('../img/search.png')} />
-            <View>
-                <TextInput
-                  ref="textInput"
-                  style={[ styles.textInput ]}
-                  placeholder={"搜索你感兴趣的问题"}
-                  onChangeText={(text) => { this.handleChangeText(text) }}
-                  placeholderTextColor="#BFBFBF"
-                  value={this.state.text}
-                  autoCorrect={false}
-                  returnKeyType="search"
-                  onSubmitEditing={() => { this.handleSubmit() }}
-              />
-            </View>
-          </View>
-        </View>
-        
+      <View style={{ flex: 1, backgroundColor: '#F5F6F7'}}>
+        <TabOneHeaderSection content="问答社区" />
+        <ScrollableTabView
+          page={0}
+          style={ Platform.OS === 'ios' ? { marginTop: px2dp(77) } : { marginTop: px2dp(76) }}
+          renderTabBar={
+            () => <CustomTabBar 
+                      multiCustom={true} 
+                      underlineStyle={
+                        Platform.OS === 'ios'
+                        ? { marginLeft: px2dp(57) }
+                        : { marginLeft: 0 }
+                      }
+                      tabTextStyle={{
+                        fontSize: px2dp(18),
+                      }}
+                  />
+          }
+        >
+          {
+            ITEMS.map((kind, key) => {
+              console.log('key', key);
+              console.log('METHOD', METHOD[key]);
+              return (
+                <UltimateFlatList
+                  key={key}
+                  listData={DATA[key]}
+                  tabLabel={LABEL[key]}
+                  method={METHOD[key]}
+                  data={DATASELECT[key]}
+                  enableRefresh={true}
+                  refreshMethod={[ METHOD[key] ]}
+                  dispatch={this.props.dispatch}
+                  token={token}
+                  footText={"到底了哦..."}
+                  renderItem={(item) => { return this.renderItem(item, kind); }}
+                />
+              )
+            })
+          }
+        </ScrollableTabView>
       </View>
     )
   }

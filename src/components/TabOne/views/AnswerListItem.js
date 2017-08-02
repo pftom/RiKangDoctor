@@ -41,7 +41,11 @@ class AnswerListItem extends PureComponent {
           
           <Text style={styles.question_title}>{item.question_title}</Text>
           
-          <Text style={styles.name}>{name}医生的回答</Text>
+          {
+            name && (
+              <Text style={styles.name}>{name}医生的回答</Text>
+            )
+          }
           
           <View style={styles.bottomBox}>
 

@@ -144,7 +144,7 @@ class TabOneMainScreen extends PureComponent {
     
     return (
       <View style={{ flex: 1, backgroundColor: '#F5F6F7'}}>
-        <TabOneHeaderSection />
+        <TabOneHeaderSection content="在线咨询" />
         <ScrollableTabView
           page={0}
           style={ Platform.OS === 'ios' ? { marginTop: px2dp(77) } : { marginTop: px2dp(76) }}

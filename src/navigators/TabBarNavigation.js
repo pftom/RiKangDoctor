@@ -6,12 +6,14 @@ import TabOneNavigation from '../components/TabOne/views/TabOneMainScreen';
 import TabTwoNavigation from '../components/TabTwo/views/TabTwoMainScreen';
 import TabThreeNavigation from '../components/TabThree/views/TabThreeMainScreen';
 
+import px2dp from '../utils/px2dp';
+
 
 const routeConfigs = {
   TabOneNavigation: {
       screen: TabOneNavigation,
       navigationOptions: {
-        tabBarLabel: '日康在线',
+        tabBarLabel: '在线咨询',
         tabBarIcon: ({ focused, tintColor }) => (
             <Image
                 source={ focused ? require('./img/homeBarActive.png') : require('./img/homeBar.png') }
@@ -23,9 +25,9 @@ const routeConfigs = {
   TabTwoNavigation: {
       screen: TabTwoNavigation,
       navigationOptions: {
-        tabBarLabel: '日康知道',
-        tabBarIcon: ({ focused, tintColor }) => ( <
-            Image source = { focused ? require('./img/qaBarActive.png') : require('./img/qaBar.png') }
+        tabBarLabel: '问答社区',
+        tabBarIcon: ({ focused, tintColor }) => ( 
+            <Image source = { focused ? require('./img/qaBarActive.png') : require('./img/qaBar.png') }
             style = {
                 [styles.icon2]
             }
@@ -59,8 +61,8 @@ const tabNavigatorConfig = {
         },
         style: {
             height: 60,
-            borderColor: '#D2D2D2',
-
+            borderTopColor: '#D1D1D1',
+            borderTopWidth: px2dp(1),
             backgroundColor: 'rgba(245, 246, 247, 0.98)',
             paddingTop: 4.7,
             paddingLeft: 25.3,

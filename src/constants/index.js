@@ -1,11 +1,27 @@
 
 /*
-  user section
-  user section
-  user section
+  QUESTION section
+  QUESTION section
+  QUESTION section
 */
 
+//get questions action constants
+export const GET_QUESTIONS = 'GET_QUESTIONS';
+export const GET_QUESTIONS_SUCCESS = 'GET_QUESTIONS_SUCCESS';
+export const GET_QUESTIONS_ERROR = 'GET_QUESTIONS_ERROR';
 
+
+//single DOCTORS ANSWERS actions constants
+export const GET_SINGLE_DOCTOR_ANSWERS = 'GET_SINGLE_DOCTOR_ANSWERS';
+export const GET_SINGLE_DOCTOR_ANSWERS_ERROR = 'GET_SINGLE_DOCTOR_ANSWERS_ERROR';
+export const GET_SINGLE_DOCTOR_ANSWERS_SUCCESS = 'GET_SINGLE_DOCTOR_ANSWERS_SUCCESS';
+
+
+/*
+  SERVICE section
+  SERVICE section
+  SERVICE section
+*/
 
 
 //service action type

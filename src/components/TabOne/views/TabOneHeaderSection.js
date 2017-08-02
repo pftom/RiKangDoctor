@@ -18,7 +18,7 @@ class TabOneHeaderSection extends PureComponent {
             start={{x: 0.0, y: 0.0}} end={{x: 1.0, y: 1.0}}
             colors={['#23BCBB', '#45E994']}
             style={styles.headerBox}>
-        <Text style={styles.consult}>在线咨询</Text>
+        <Text style={styles.consult}>{this.props.content}</Text>
       </LinearGradient>
     )
   }

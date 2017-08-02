@@ -59,7 +59,7 @@ const { width, height } = Dimensions.get('window');
 //import handle data
 import {
   handleAnswers,
-} from '../../TabTwo/data/'
+} from '../../TabTwo/data/';
 
 const lists = [];
 for (let i = 0; i < 40; i++) {
