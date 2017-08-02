@@ -155,7 +155,7 @@ class NewQuestion extends PureComponent {
 
   render() {
     const { question, AllImg, dispatch, navigation } = this.props;
-    const { token, id, questionFav } = navigation.state.params;
+    const { token, id } = navigation.state.params;
 
     let IMGS = [];
     if (AllImg) {

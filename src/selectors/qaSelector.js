@@ -45,8 +45,10 @@ const getCreateAnswerSuccess = (state) => state.getIn(['qa', 'createAnswerSucces
 const getCreateAnswerError = (state) => state.getIn(['qa', 'createAnswerError']);
 
 const getCreateAnswerSelector = createSelector(
-  [ getIsCreateAnswer, getCreateAnswerSuccess, getCreateAnswerError ],
-  (isCreateAnswer, createAnswerSuccess, createAnswerError) => ({
+  [ getQuestion, getQuestionAllImg, getIsCreateAnswer, getCreateAnswerSuccess, getCreateAnswerError ],
+  (question, AllImg, isCreateAnswer, createAnswerSuccess, createAnswerError) => ({
+    question,
+    AllImg, 
     isCreateAnswer,
     createAnswerSuccess,
     createAnswerError,
