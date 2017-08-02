@@ -52,6 +52,43 @@ class BasicDataSecond extends PureComponent {
       'name',
       'hospitalName',
     ];
+
+    let renderContent = null;
+    if (key === 0) {
+      renderContent = (
+        <TextInput
+              ref="textInput"
+              style={[ styles.department, styles.textInput ]}
+              placeholder={key === 0 ? '头像' : '输入您的从医时间'}
+              onChangeText={(text) => this.setState({ DATA[key]: text })}
+              placeholderTextColor="#BFBFBF"
+              value={this.state[DATA[key]]}
+              maxLength={20}
+              autoCorrect={false}
+          />
+      )
+    }
+
+    if (key === 1) {
+      renderContent = (
+        <View style={styles.avatarBox}><Text style={styles.upLoadAvatar}>点击此处上传头像</Text></View>
+      )
+    }
+
+    if (key === 3) {
+      renderContent = (
+        <Picker
+          data={selectDep}
+          title='选择科室'
+          cols={2}
+          value={this.state.pickerValue}
+          onChange={v => this.setState({ pickerValue: v })}
+        >
+          <CustomChildren department={pickerValue.length && pickerValue[1]} />
+        </Picker>
+      )
+    }
+
     return (
       <View style={styles.itemBox} key={key}>
         <LinearGradient
@@ -65,30 +102,6 @@ class BasicDataSecond extends PureComponent {
           </View>
           <View style={styles.bottomBox}>
             {
-              key === 0 || key === 1 
-              ? (
-                <TextInput
-                  ref="textInput"
-                  style={[ styles.department, styles.textInput ]}
-                  placeholder={key === 0 ? '在此输入您的姓名' : '在此填入你就职的医院'}
-                  onChangeText={(text) => this.setState({ DATA[key]: text })}
-                  placeholderTextColor="#BFBFBF"
-                  value={this.state[DATA[key]]}
-                  maxLength={20}
-                  autoCorrect={false}
-              />
-              )
-              : (
-                <Picker
-                  data={selectDep}
-                  title='选择科室'
-                  cols={2}
-                  value={this.state.pickerValue}
-                  onChange={v => this.setState({ pickerValue: v })}
-                >
-                  <CustomChildren department={pickerValue.length && pickerValue[1]} />
-                </Picker>
-              )
             }
           </View>
         </View>

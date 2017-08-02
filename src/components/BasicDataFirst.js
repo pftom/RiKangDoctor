@@ -10,7 +10,7 @@ import { Picker } from 'antd-mobile';
 import { PutQuestionStyle as styles } from './styles/';
 
 //import opposit department
-import { opppsiteDepartment } from '../utils/transferAbbr/';
+import { opppsiteDepartment } from '../utils/transferAbbr';
 
 
 import { selectDep } from './TabTwo/data/';
@@ -19,7 +19,7 @@ const CustomChildren = props => (
   <TouchableOpacity onPress={props.onClick}>
     <View style={styles.selectBox}>
       <Text style={styles.department}>{props.department || '选择你的科室'}</Text>
-      <Image source={require('../img/triangle.png')} />
+      <Image source={require('./TabOne/img/triangle.png')} />
     </View>
   </TouchableOpacity>
 )
@@ -48,10 +48,12 @@ class BasicDataFirst extends PureComponent {
     const { pickerValue } = this.state;
 
     const { navigation } = this.props;
-    const DATA = [
+    let DATA = [
       'name',
       'hospitalName',
     ];
+
+    let updateText = DATA[key];
     return (
       <View style={styles.itemBox} key={key}>
         <LinearGradient
@@ -71,7 +73,7 @@ class BasicDataFirst extends PureComponent {
                   ref="textInput"
                   style={[ styles.department, styles.textInput ]}
                   placeholder={key === 0 ? '在此输入您的姓名' : '在此填入你就职的医院'}
-                  onChangeText={(text) => this.setState({ DATA[key]: text })}
+                  onChangeText={(text) => this.setState({ updateText: text }) }
                   placeholderTextColor="#BFBFBF"
                   value={this.state[DATA[key]]}
                   maxLength={20}
@@ -97,7 +99,7 @@ class BasicDataFirst extends PureComponent {
   }
 
   handleSubmitData = () => {
-    
+
   }
 
   render() {

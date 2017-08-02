@@ -202,6 +202,15 @@ export const PutQuestionStyle = StyleSheet.create({
     width: px2dp(81),
     height: px2dp(31),
     borderRadius: 10,
+  },
+
+  avatarBox: {
+    width: px2dp(109),
+  },
+  upLoadAvatar: {
+    fontFamily: 'PingFangSC-Light',
+    fontSize: px2dp(18),
+    color: '#C8C8C8',
   }
 
 });
