@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { StyleSheet, View, Text, TouchableOpacity, ScrollView, Platform, } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity, ScrollView, Platform, Image } from 'react-native';
 import { connect } from 'react-redux';
 
 
@@ -69,8 +69,8 @@ class UserScreen extends PureComponent {
     // content: doctorProfile.get('ratings'),
     // content: doctorProfile.get('order_num'),
     
-    const DATA = [];
-    if (doctorProfile) {
+    let DATA = [];
+    if (!doctorProfile) {
       DATA = [
         {
           title: '接受咨询次数',
@@ -100,23 +100,25 @@ class UserScreen extends PureComponent {
             dispatch={dispatch}
           />
         }
-          <View>
+          <View style={styles.midBox}>
             {
               DATA.map((item, key) => {
                 if (item.title === '查看收入情况') {
                   return (
-                    <TouchableOpacity onPress={() => { navigation.navigate('Income', { token }) }}>
-                      <View style={[ styles.titleBox, styles.extraTitleBox ]}>
-                        <Text style={[ styles.extraTitle, styles.title ]}>{item.title}</Text>
-                        <Image source={require('../../TabOne/img/go.png')} />
+                    <TouchableOpacity key={key} onPress={() => { navigation.navigate('Income', { token }) }}>
+                      <View style={[ styles.titleBox ]}>
+                        <View style={styles.extraTitleBox}>
+                          <Text style={[ styles.title, styles.extraTitle ]}>{item.title}</Text>
+                          <Image source={require('../img/rightArrow.png')} style={styles.img} />
+                        </View>
                       </View>
                     </TouchableOpacity>
                   )
                 } else {
                   return (
-                    <View style={styles.titleBox}>
+                    <View style={styles.titleBox} key={key}>
                       <Text style={styles.content}>{item.content}</Text>
-                      <Text style={[ styles.extraTitle, styles.title ]}>{item.title}</Text>
+                      <Text style={[ styles.title ]}>{item.title}</Text>
                     </View>
                   )
                 }

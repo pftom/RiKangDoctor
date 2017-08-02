@@ -12,12 +12,8 @@ const { width, height } = Dimensions.get('window');
 export const  HeaderSectionStyle = StyleSheet.create({
   headerBox: {
     width: width,
-    height: px2dp(197),
+    height: px2dp(221),
     alignItems: 'center',
-    position: 'absolute',
-    left: 0,
-    top: 0,
-    right: 0,
   },
 
   headerContainer: {
