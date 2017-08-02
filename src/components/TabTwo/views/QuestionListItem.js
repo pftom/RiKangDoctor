@@ -8,8 +8,6 @@ import {
 } from 'react-native';
 
 import { connect } from 'react-redux';
-//import selector for questionFav data
-import { getQuestionFavSelector } from '../../../selectors/';
 
 
 //import style
@@ -21,16 +19,10 @@ import { getQuestionListSelector } from '../../../selectors/';
 //import tag box
 import { TagBox } from '../../common/';
 
-//import action constants
-import {
-  STAR_SINGLE_QUESTION,
-  CANCEL_STAR_SINGLE_QUESTION,
-} from '../../../constants/';
-
 class QuestionListItem extends PureComponent {
   
   render() {
-    const { navigation, token, item, dispatch, question } = this.props;
+    const { navigation, token, item, dispatch } = this.props;
 
     return (
       <TouchableWithoutFeedback onPress={() => { navigation.navigate('QuestionDetail', { id: item.key, token })}} style={styles.touchBox}>

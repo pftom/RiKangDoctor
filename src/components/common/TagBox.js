@@ -35,8 +35,6 @@ class TagBox extends PureComponent {
 
     const mapImg = star ? require('./img/plus.png') : require('./img/leftArrow.png');
 
-    let renderText = null;
-
     return (
       <View style={[ styles.tagBox, comment && styles.commentBox]}>
           {
@@ -65,13 +63,13 @@ class TagBox extends PureComponent {
             (star || comment || help) && (
               <View style={styles.rightBox}>
                 <TouchableHighlight onPress={() => { this.handleTouch() }} style={styles.btnContainer}>
-                  <View style={[ styles.starBtn, this.state.starred && styles.starredBtn ]}>
+                  <View style={[ styles.starBtn ]}>
                     {
-                      ((star || comment) && !this.state.starred) && (
+                      (star || comment) && (
                         <Image source={mapImg} style={styles.img} />
                       )
                     }
-                    <Text style={styles.starText}>{renderText}</Text>
+                    <Text style={styles.starText}>{btnText}</Text>
                   </View>
                 </TouchableHighlight>
               </View>

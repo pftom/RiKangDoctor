@@ -20,6 +20,7 @@ export const QaAnswerListStyle = StyleSheet.create({
   answerBox: {
     width: px2dp(328),
     marginTop: px2dp(23),
+
   },
 
   answerHead: {
@@ -58,8 +59,9 @@ export const QaAnswerListStyle = StyleSheet.create({
   spreadBox: {
     width: px2dp(24),
     alignItems: 'center',
-    height: px2dp(50),
+    height: px2dp(43),
     justifyContent: 'center',
+    marginTop: px2dp(-10),
   },
   spread: {
     fontFamily: 'PingFangSC-Regular',
@@ -81,7 +83,11 @@ export const QaAnswerListStyle = StyleSheet.create({
     height: px2dp(51),
     alignItems: 'center',
     paddingBottom: px2dp(9),
-  },  
+  }, 
+  noBorder: {
+    borderBottomWidth: 0,
+    borderBottomColor: '#FFF',
+  },
   leftBox: {
     width: px2dp(48),
     justifyContent: 'center',
@@ -108,4 +114,33 @@ export const QaAnswerListStyle = StyleSheet.create({
     width: px2dp(324),
     marginTop: px2dp(5),
   },
+  question_title: {
+    fontFamily: 'PingFangSC-Regular',
+    fontSize: px2dp(18),
+    color: '#000',
+    letterSpacing: px2dp(-0.36),
+  },
+  ques_inner_title: {
+    color: '#09C79C',
+  },
+
+  bottomBox: {
+    marginTop: px2dp(16),
+    width: px2dp(328),
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  iconBox: {
+    width: px2dp(54),
+    height: px2dp(24),
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  iconText: {
+    fontFamily: 'PingFangSC-Light',
+    fontSize: px2dp(16),
+    color: '#000',
+    letterSpacing: px2dp(-0.32),
+  }
 });

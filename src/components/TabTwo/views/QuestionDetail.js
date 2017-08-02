@@ -64,9 +64,9 @@ class QuestionDetail extends PureComponent {
     const { navigation, dispatch } = this.props;
     const { token, id } = navigation.state.params;
 
-    dispatch({ type: GET_SINGLE_QUESTION, payload: { token, id }});
-    dispatch({ type: GET_SINGLE_QUESTION_ALL_IMG, payload: { token, id }});
-    dispatch({ type: GET_SINGLE_QUESTION_ALL_ANSWERS, payload: { token, id, refresh: true }});
+    // dispatch({ type: GET_SINGLE_QUESTION, payload: { token, id }});
+    // dispatch({ type: GET_SINGLE_QUESTION_ALL_IMG, payload: { token, id }});
+    // dispatch({ type: GET_SINGLE_QUESTION_ALL_ANSWERS, payload: { token, id, refresh: true }});
   }
 
   render() {

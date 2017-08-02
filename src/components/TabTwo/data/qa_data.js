@@ -18,32 +18,10 @@ const sortMap = {
 const handleQuestions = (data, dep, sort) => {
   let dataSource = [];
 
-  let sortedData = [];
-  let kind = 'default';
-
-  if (sort) {
-    kind = sortMap[sort]
-  }
-
-  switch(kind) {
-    case 'default':
-      sortedData = data;
-      break;
-    default:
-      sortedData = data.sort((item1, item2) => {
-        if (item1.get(kind) < item2.get(kind)) { return 1; }
-        if (item1.get(kind) > item2.get(kind)) { return -1; }
-        if (item1.get(kind) === item2.get(kind)) { return 0; }
-      });
-  }
-
-  sortedData.map((item) => {
-    if (dep && item.get('department') !== dep) { return; }
-    dataSource.push({
-      item: handleQuestion(item),
-      question: item,
-      key: item.get('id'),
-    });
+  data.map((item) => {
+    dataSource.push(
+      handleQuestion(item),
+    )
   });
 
   return dataSource;
