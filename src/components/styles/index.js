@@ -18,6 +18,8 @@ import { NewOrderListItemStyle } from './NewOrderListItemStyle';
 import { UnderGoingListItemStyle } from './UnderGoingListItemStyle';
 import { FinishedListItemStyle } from './FinishedListItemStyle';
 
+import { HeaderSectionStyle } from './HeaderSectionStyle';
+
 
 export {
   ContainerStyle,
@@ -43,4 +45,5 @@ export {
   NewOrderListItemStyle,
   UnderGoingListItemStyle,
   FinishedListItemStyle,
+  HeaderSectionStyle,
 }

@@ -22,6 +22,8 @@ export const FinishedListItemStyle = StyleSheet.create({
     borderBottomColor: '#DCDCDC',
     flexDirection: 'row',
     justifyContent: 'space-between',
+    marginTop: px2dp(19),
+    paddingBottom: px2dp(12),
   },
   doctorAvatarBox: {
     width: px2dp(60),
@@ -38,7 +40,7 @@ export const FinishedListItemStyle = StyleSheet.create({
   },
   rightBox: {
     width: px2dp(248),
-    height: px2dp(60),
+    height: px2dp(63),
     justifyContent: 'space-between',
   },
   nameBox: {

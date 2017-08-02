@@ -87,6 +87,9 @@ const service = (state = initialServiceValue, action) => {
         acceptOrderError: false,
       })
 
+    default:
+      return state;
+
   }
 }
 

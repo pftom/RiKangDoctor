@@ -7,6 +7,8 @@ import {
   StatusBar,
   Animated,
   Image,
+  TouchableWithoutFeedback,
+  TouchableHighlight,
 } from 'react-native';
 
 import { NavigationActions } from 'react-navigation';
@@ -35,23 +37,30 @@ class NewOrderListItem extends PureComponent {
 
   render() {
 
+    const { item } = this.props;
+
     let lastTime = "接受（剩余1小时48分）";
+    // item.avatar
 
     return (
       <View style={styles.container}>
         <View style={styles.box}>
           <View style={styles.idBox}>
             <View style={styles.doctorAvatarBox}>
-              <Image source={{ uri: item.avatar }} style={styles.doctorAvatar} />
+              <Image source={{ uri: 'https://facebook.github.io/react/img/logo_og.png' }} style={styles.doctorAvatar} />
             </View>
-            <Text style={styles.name}>{item.name}</Text>
-            <Text style={styles.consult}>向您发出咨询请求</Text>
+            <View style={styles.nameBox}>
+              <Text style={styles.name}>{item.name}</Text>
+              <Text style={styles.consult}>向您发出咨询请求</Text>
+            </View>
           </View>
-          <TouchableWithoutFeedback onPress={() => { this.handleBtn() }} style={styles.buttonContainer}>
-            <View style={styles.buttonBox}>
-              <Text style={[ styles.content, this.props.textStyle ]}>{lastTime}</Text>
-            </View>
-          </TouchableWithoutFeedback>
+          <View style={styles.btnBox}>
+            <TouchableHighlight onPress={() => { this.handleBtn() }} style={styles.buttonContainer}>
+              <View style={styles.buttonBox}>
+                <Text style={[ styles.content, this.props.textStyle ]}>{lastTime}</Text>
+              </View>
+            </TouchableHighlight>
+          </View>
         </View>
       </View>
     )

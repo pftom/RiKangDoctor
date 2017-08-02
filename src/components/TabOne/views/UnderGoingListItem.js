@@ -34,6 +34,7 @@ class UnderGoingListItem extends PureComponent {
   }
 
   render() {
+    const { item, navigation, dispatch } = this.props;
 
     let lastMessage = "每次洗完澡后记得局部要用护肤品哈哈哈哈或或";
 
@@ -42,12 +43,13 @@ class UnderGoingListItem extends PureComponent {
     }
 
     const lastTime = '12:01';
+    // item.avatar
 
     return (
       <View style={styles.container}>
         <View style={styles.box}>
           <View style={styles.doctorAvatarBox}>
-            <Image source={{ uri: item.avatar }} style={styles.doctorAvatar} />
+            <Image source={{ uri: 'https://facebook.github.io/react/img/logo_og.png' }} style={styles.doctorAvatar} />
           </View>
           <View style={styles.rightBox}>
               <View style={styles.nameBox}>

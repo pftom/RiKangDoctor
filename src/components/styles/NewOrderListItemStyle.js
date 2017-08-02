@@ -18,15 +18,27 @@ export const NewOrderListItemStyle = StyleSheet.create({
     alignItems: 'center',
   },
   box: {
-    width: px2dp(325),
+    width: px2dp(312),
     borderBottomWidth: px2dp(1),
     borderBottomColor: '#DCDCDC',
+    marginTop: px2dp(18),
+    paddingBottom: px2dp(17),
   },
   idBox: {
-    width: px2dp(325),
+    width: px2dp(312),
     flexDirection: 'row',
     height: px2dp(41),
     alignItems: 'center',
+    justifyContent: 'space-between',
+    marginBottom: px2dp(17),
+  },
+
+  nameBox: {
+    width: px2dp(255),
+    flexDirection: 'row',
+    height: px2dp(41),
+    alignItems: 'center',
+    justifyContent: 'space-between',
   },
   doctorAvatarBox: {
     width: px2dp(41),
@@ -53,18 +65,22 @@ export const NewOrderListItemStyle = StyleSheet.create({
     fontSize: 14,
     color: '#787878',
   },
+  btnBox: {
+    width: px2dp(312),
+    alignItems: 'center',
+  },
 
   buttonBox: {
-    width: px2dp(337),
-    height: px2dp(43),
+    width: px2dp(279),
+    height: px2dp(40),
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#09C79C',
     borderRadius: px2dp(8),
   },
   buttonContainer: {
-    width: px2dp(337),
-    height: px2dp(43),
+    width: px2dp(279),
+    height: px2dp(40),
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#F5F6F7',
@@ -74,7 +90,5 @@ export const NewOrderListItemStyle = StyleSheet.create({
     fontFamily: 'PingFangSC-Medium',
     fontSize: px2dp(20),
     color: '#FFF',
-    letterSpacing: px2dp(5),
-
   },
 });

@@ -7,6 +7,7 @@ import {
   StatusBar,
   Animated,
   Image,
+  TouchableHighlight,
 } from 'react-native';
 
 import { NavigationActions } from 'react-navigation';
@@ -45,16 +46,16 @@ class FinishedListItem extends PureComponent {
     const lastTime = '2017年7月15日';
 
     let ITEM = [];
-    if (item.ratings && !isNaN(parseInt(ratings))) {
+    if (item.ratings && !isNaN(parseInt(item.ratings))) {
       for (let i = 0; i < parseInt(item.ratings); i++) {
         ITEM.push(
-          <Image source={require('../img/smallHeart.png')} style={styles.img} />
+          <Image source={require('../img/smallHeart.png')} style={styles.img} key={i} />
         )
       }
 
       for (let i = 0; i < 5 - parseInt(item.ratings); i++) {
         ITEM.push(
-          <Image source={require('../img/smallSolidHeart.png')} style={styles.img} />
+          <Image source={require('../img/smallSolidHeart.png')} style={styles.img} key={5 - i} />
         )
       }
     }
@@ -63,7 +64,7 @@ class FinishedListItem extends PureComponent {
       <View style={styles.container}>
         <View style={styles.box}>
           <View style={styles.doctorAvatarBox}>
-            <Image source={{ uri: item.avatar }} style={styles.doctorAvatar} />
+            <Image source={{ uri: 'https://facebook.github.io/react/img/logo_og.png' }} style={styles.doctorAvatar} />
           </View>
           <View style={styles.rightBox}>
               <View style={styles.nameBox}>
@@ -85,11 +86,11 @@ class FinishedListItem extends PureComponent {
                           ))
                         }
                       </View>
-                      <TouchableWithoutFeedback onPress={() => { this.handleBtn() }} style={styles.buttonContainer}>
+                      <TouchableHighlight onPress={() => { this.handleBtn() }} style={styles.buttonContainer}>
                       <View style={styles.buttonBox}>
                         <Text style={[ styles.content, this.props.textStyle ]}>查看评论详情</Text>
                       </View>
-                    </TouchableWithoutFeedback>
+                    </TouchableHighlight>
                     </View>
                   )
                 }

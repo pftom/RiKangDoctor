@@ -10,9 +10,9 @@ import Practice from './components/practice';
 class App extends Component {
   render() {
     const { isLoggedIn } = this.props;
-    if (!isLoggedIn) {
-      return <UserNavigator />
-    }
+    // if (!isLoggedIn) {
+    //   return <UserNavigator />
+    // }
     return <AppWithNavigationState navigation={addNavigationHelpers()}/>
   }
 }

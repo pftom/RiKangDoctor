@@ -13,8 +13,6 @@ import UltimateFlatList from '../../common/UltimateFlatList';
 //import px to dp 
 import px2dp from '../../../utils/px2dp';
 
-import newOrder from './newOrder';
-
 //import action constants
 import { 
   GET_SERVICE_ORDER,
@@ -51,7 +49,7 @@ class TabOneMainScreen extends PureComponent {
 
     const { dispatch, navigation, token } = this.props;
 
-    dispatch({ type: GET_SERVICE_ORDER, payload: { token } });
+    // dispatch({ type: GET_SERVICE_ORDER, payload: { token } });
   } 
 
   renderItem = (item, kind) => {
@@ -71,13 +69,58 @@ class TabOneMainScreen extends PureComponent {
   }
 
   render() {
-    const { dispatch, navigation, token  } = this.props;
+    const { dispatch, navigation  } = this.props;
     //get service data
     const { token, orders, isGetOrders, getOrderSuccess, getOrderError, isAcceptOrder, acceptOrderSuccess, acceptOrderError } = this.props;
 
-    let newOrderData = [];
-    let underGoingData = [];
-    let finishedData = [];
+    let newOrderData = [
+      {
+        avatar: require('../img/avatar.jpg'),
+        name: '指尖泛出的繁华',
+        key: 1,
+      },
+      {
+        avatar: require('../img/avatar.jpg'),
+        name: '指尖泛出的繁华',
+        key: 2,
+      },
+      {
+        avatar: require('../img/avatar.jpg'),
+        name: '指尖泛出的繁华',
+        key: 3,
+      },
+    ];
+    let underGoingData = [
+      {
+        name: '指尖泛出的繁华',
+        key: 1,
+      },
+      {
+        name: '指尖泛出的繁华',
+        key: 2,
+      },
+      {
+        name: '指尖泛出的繁华',
+        key: 3,
+      },
+    ];
+    let finishedData = [
+      {
+        name: '指尖泛出的繁华',
+        key: 1,
+        ratings: 4,
+      },
+      {
+        name: '指尖泛出的繁华',
+        key: 2,
+        ratings: 3,
+      },
+      {
+        name: '指尖泛出的繁华',
+        key: 3,
+        ratings: 5,
+      },
+    ];
     //service for later handle
     if (orders.size > 0) {
       newOrderData = handleUserData(orders, 'paid');
@@ -91,6 +134,12 @@ class TabOneMainScreen extends PureComponent {
       finishedData,
     ];
 
+    const LABEL = [
+      '新的咨询',
+      '进行中',
+      '已完成',
+    ];
+
     
     
     return (
@@ -98,7 +147,7 @@ class TabOneMainScreen extends PureComponent {
         <TabOneHeaderSection />
         <ScrollableTabView
           page={0}
-          style={ Platform.OS === 'ios' ? { marginTop: px2dp(148) } : { marginTop: px2dp(147) }}
+          style={ Platform.OS === 'ios' ? { marginTop: px2dp(77) } : { marginTop: px2dp(76) }}
           renderTabBar={
             () => <CustomTabBar 
                       multiCustom={true} 
@@ -120,6 +169,7 @@ class TabOneMainScreen extends PureComponent {
                 listData={DATA[key]}
                 data={orders}
                 simplify={true}
+                tabLabel={LABEL[key]}
                 dispatch={this.props.dispatch}
                 token={token}
                 footText={"到底了哦"}

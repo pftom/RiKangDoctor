@@ -80,59 +80,59 @@ import {
 
 export default function* rootSaga() {
   yield all([
-    loginFlow(),
-    registerFlow(),
-    changePasswordFlow(),
-    clearFlow(),
-    watchRequestSmsCode(),
-    watchVerifySmsCode(),
-    feedbackFlow(),
-
-    watchGetPost(),
-    watchGetPosts(),
-    watchAddPostFav(),
-    watchCancelPostFav(),
-
-    watchGetHospital(),
-    watchGetHospitals(),
-    watchGetHospitalDoctors(),
-
-    watchGetDoctor(),
-    watchGetDoctors(),
-    watchDoctorInfo(),
-    watchDoctorComments(),
-    watchDoctorAnswers(),
-    watchAddDoctorFav(),
-    watchCancelDoctorFav(),
-
-    watchGetPatientProfile(),
-    watchUpdatePatientProfile(),
-    watchGetPatientFavDoctors(),
-    watchGetPatientFavPosts(),
-    watchGetPatientQuestions(),
-    watchGetPatientServices(),
-    watchGetPatientStarredQuestions(),
-
-    watchGetQuestions(),
-    watchCreateSingleQuestion(),
-    watchAddSingleQuestionImg(),
-    watchGetSingleQuestion(),
-    watchUpdateSingleQuestion(),
-    watchGetSingleQuestionAllImg(),
-    watchStarSingleQuestion(),
-    watchCancelStarSingleQuestion(),
-
-
-    watchGetSingleQuestionAllAnswers(),
-    watchCreateSingleQuestionAnswer(),
-    watchGetSingleQuestionAnswer(),
-    watchUpvoteSingleQuestionAnswer(),
-    watchGetAnswerAllComments(),
-    watchCreateSingleQuestionAnswerComment(),
-    watchClearCommentState(),
-
-
     watchAcceptOrder(),
     watchGetServiceOrder(),
   ]);
 }
+
+
+// loginFlow(),
+//     registerFlow(),
+//     changePasswordFlow(),
+//     clearFlow(),
+//     watchRequestSmsCode(),
+//     watchVerifySmsCode(),
+//     feedbackFlow(),
+
+//     watchGetPost(),
+//     watchGetPosts(),
+//     watchAddPostFav(),
+//     watchCancelPostFav(),
+
+//     watchGetHospital(),
+//     watchGetHospitals(),
+//     watchGetHospitalDoctors(),
+
+//     watchGetDoctor(),
+//     watchGetDoctors(),
+//     watchDoctorInfo(),
+//     watchDoctorComments(),
+//     watchDoctorAnswers(),
+//     watchAddDoctorFav(),
+//     watchCancelDoctorFav(),
+
+//     watchGetPatientProfile(),
+//     watchUpdatePatientProfile(),
+//     watchGetPatientFavDoctors(),
+//     watchGetPatientFavPosts(),
+//     watchGetPatientQuestions(),
+//     watchGetPatientServices(),
+//     watchGetPatientStarredQuestions(),
+
+//     watchGetQuestions(),
+//     watchCreateSingleQuestion(),
+//     watchAddSingleQuestionImg(),
+//     watchGetSingleQuestion(),
+//     watchUpdateSingleQuestion(),
+//     watchGetSingleQuestionAllImg(),
+//     watchStarSingleQuestion(),
+//     watchCancelStarSingleQuestion(),
+
+
+//     watchGetSingleQuestionAllAnswers(),
+//     watchCreateSingleQuestionAnswer(),
+//     watchGetSingleQuestionAnswer(),
+//     watchUpvoteSingleQuestionAnswer(),
+//     watchGetAnswerAllComments(),
+//     watchCreateSingleQuestionAnswerComment(),
+//     watchClearCommentState(),
