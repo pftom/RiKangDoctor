@@ -13,8 +13,6 @@ import { connect } from 'react-redux';
 //import style
 import { QuestionListStyle as styles } from '../styles/';
 
-//import selector
-import { getQuestionListSelector } from '../../../selectors/';
 
 //import tag box
 import { TagBox } from '../../common/';
@@ -37,7 +35,7 @@ class QuestionListItem extends PureComponent {
                   navigation={navigation}
                   token={token}
                   dispatch={dispatch}
-                  handleNavigation={() => { navigation.navigate('QuestionDetail', { id: item.key, token })} }
+                  handleNavigation={() => { navigation.navigate('NewQuestion', { id: item.key, token })} }
                 />
               </View>
             </View>
@@ -47,6 +45,4 @@ class QuestionListItem extends PureComponent {
   }
 }
 
-export default connect(
-  state => getQuestionListSelector(state),
-)(QuestionListItem);
+export default connect()(QuestionListItem);

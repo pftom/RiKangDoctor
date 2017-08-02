@@ -53,13 +53,9 @@ import {
 //question watch and handle func
 import {
   watchGetQuestions,
-  watchCreateSingleQuestion,
-  watchAddSingleQuestionImg,
   watchGetSingleQuestion,
-  watchUpdateSingleQuestion,
   watchGetSingleQuestionAllImg,
-  watchStarSingleQuestion,
-  watchCancelStarSingleQuestion,
+  watchCreateSIngleQuestionAnswer,
 } from './questionSaga'
 
 //answers watch and handle func
@@ -82,6 +78,8 @@ export default function* rootSaga() {
   yield all([
     watchAcceptOrder(),
     watchGetServiceOrder(),
+
+    watchCreateSIngleQuestionAnswer(),
   ]);
 }
 

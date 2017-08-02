@@ -7,9 +7,6 @@ import {
   GET_QUESTIONS_SUCCESS,
   GET_QUESTIONS_ERROR,
 
-  CREATE_SINGLE_QUESTION,
-  CREATE_SINGLE_QUESTION_SUCCESS,
-  CREATE_SINGLE_QUESTION_ERROR,
 
   ADD_SINGLE_QUESTION_IMG,
   ADD_SINGLE_QUESTION_IMG_SUCCESS,
@@ -19,21 +16,17 @@ import {
   GET_SINGLE_QUESTION_SUCCESS,
   GET_SINGLE_QUESTION_ERROR,
 
-  UPDATE_SINGLE_QUESTION,
-  UPDATE_SINGLE_QUESTION_SUCCESS,
-  UPDATE_SINGLE_QUESTION_ERROR,
 
   GET_SINGLE_QUESTION_ALL_IMG,
   GET_SINGLE_QUESTION_ALL_IMG_SUCCESS,
   GET_SINGLE_QUESTION_ALL_IMG_ERROR,
 
-  STAR_SINGLE_QUESTION,
-  STAR_SINGLE_QUESTION_SUCCESS,
-  STAR_SINGLE_QUESTION_ERROR,
+  CREATE_SINGLE_QUESTION_ANSWER,
+  CREATE_SINGLE_QUESTION_ANSWER_SUCCESS,
+  CREATE_SINGLE_QUESTION_ANSWER_ERROR,
 
-  CANCEL_STAR_SINGLE_QUESTION,
-  CANCEL_STAR_SINGLE_QUESTION_SUCCESS,
-  CANCEL_STAR_SINGLE_QUESTION_ERROR,
+  CLEAR_NEW_ANSWER_STATE,
+
 } from '../constants/';
 
 //import request api
@@ -63,39 +56,6 @@ function* getQuestions(payload) {
 }
 
 
-//create a new question
-function* createSingleQuestion(payload) {
-  try {
-    const { token, body, imgs } = payload;
-    const question = yield call(request.post, base + qaApi.addQuestion, body, token);
-    const { id } = question;
-    for (let i = 0; i < imgs.length; i++) {
-      //创建表单数据，image要是一个文件，文件要标明编码类型 type: 
-      let data = new FormData();
-      data.append('question', id);
-      data.append('image', { uri: imgs[i].photo, type: 'multipart/form-data', name: 'image.jpg'} );
-      yield put({ type: ADD_SINGLE_QUESTION_IMG, payload: { token, id, body: data }});
-      yield delay(200);
-    }
-    yield put({ type: CREATE_SINGLE_QUESTION_SUCCESS, question });
-  } catch (error) {
-    yield put({ type: CREATE_SINGLE_QUESTION_ERROR });
-  }
-}
-
-//add img for question
-function* addImgForQuestion(action) {
-  try {
-    const { payload } = action;
-    const { token, id, body } = payload;
-    //the last param supply multipart/form-data support
-    const questionImg = yield call(request.post, base + qaSingleApi(id).addQuestionImg, body, token, true);
-    yield put({ type: ADD_SINGLE_QUESTION_IMG_SUCCESS, questionImg });
-  } catch (error) {
-    yield put({ type: ADD_SINGLE_QUESTION_IMG_ERROR, error });
-  }
-}
-
 //get single question
 function* getSingleQuestion(payload) {
   try {
@@ -104,18 +64,6 @@ function* getSingleQuestion(payload) {
     yield put({ type: GET_SINGLE_QUESTION_SUCCESS, question });
   } catch (error) {
     yield put({ type: GET_SINGLE_QUESTION_ERROR });
-  }
-}
-
-function* updateSingleQuestion(payload) {
-  try {
-    const { token, id, body } = payload;
-
-    const question = yield call(request.put, base + qaSingleApi(id).updateSingleQuestion, body, token );
-
-    yield put({ type: UPDATE_SINGLE_QUESTION_SUCCESS, question });
-  } catch (error) {
-    yield put({ type: UPDATE_SINGLE_QUESTION_ERROR });
   }
 }
 
@@ -131,31 +79,19 @@ function* getSingleQuestionAllImg(payload) {
   }
 }
 
-function* starSingleQuestion(payload) {
+function* createSingleQuestionAnswer(payload) {
   try {
-    const { token, id, question } = payload;
-    console.log('url', base + qaSingleApi(id).singleQuestionStar);
-    yield call(request.get, base + qaSingleApi(id).singleQuestionStar, null, token);
+    const { token, id, body } = payload;
 
-    yield put({ type: STAR_SINGLE_QUESTION_SUCCESS, question, id });
+    yield call(request.post, base + qaSingleApi(id).createSingleQuestionAnswer, body, token );
+
+    yield put({ type: CREATE_SINGLE_QUESTION_ANSWER_SUCCESS });
   } catch (error) {
-    yield put({ type: STAR_SINGLE_QUESTION_ERROR });
+    yield put({ type: CREATE_SINGLE_QUESTION_ANSWER_ERROR, error });
   }
 }
 
-//cancel doctor fav
-function* cancelStarSingleQuestion(payload) {
-  try {
-    const { id, token } = payload;
-    //emit http get, cancel single doctor fav
-    yield call(request.get, base + qaSingleApi(id).cancelsingleQuestionStar, null, token);
-    //get doctor fav success 
-    yield put({ type: CANCEL_STAR_SINGLE_QUESTION_SUCCESS, id });
-  } catch (error) {
-    //get fav info error
-    yield put({ type: CANCEL_STAR_SINGLE_QUESTION_ERROR });
-  }
-}
+
 
 
 //HOSPITAL async actions handle function
@@ -167,17 +103,6 @@ function* watchGetQuestions() {
   }
 }
 
-function* watchCreateSingleQuestion() {
-  while (true) {
-    const { payload } = yield take(CREATE_SINGLE_QUESTION);
-
-    yield call(createSingleQuestion, payload);
-  }
-}
-
-function* watchAddSingleQuestionImg() {
-  yield takeEvery(ADD_SINGLE_QUESTION_IMG, addImgForQuestion);
-}
 
 function* watchGetSingleQuestion() {
   while (true) {
@@ -187,13 +112,6 @@ function* watchGetSingleQuestion() {
   }
 }
 
-function* watchUpdateSingleQuestion() {
-  while (true) {
-    const { payload } = yield take(UPDATE_SINGLE_QUESTION);
-
-    yield call(updateSingleQuestion, payload);
-  }
-}
 
 function* watchGetSingleQuestionAllImg() {
   while (true) {
@@ -202,25 +120,13 @@ function* watchGetSingleQuestionAllImg() {
   }
 }
 
-function* watchStarSingleQuestion() {
+function* watchCreateSIngleQuestionAnswer() {
   while (true) {
-    const { payload } = yield take(STAR_SINGLE_QUESTION);
-
-    yield call(starSingleQuestion, payload);
+    const { payload } = yield take(CREATE_SINGLE_QUESTION_ANSWER);
+    yield call(createSingleQuestionAnswer, payload);
   }
 }
 
-
-//watch add doctor fav
-function* watchCancelStarSingleQuestion() {
-  while (true) {
-    
-    //wait for cancel fav
-    const { payload } = yield take(CANCEL_STAR_SINGLE_QUESTION);
-    
-   yield call(cancelStarSingleQuestion, payload);
-  }
-}
 
 
 
@@ -228,11 +134,8 @@ function* watchCancelStarSingleQuestion() {
 
 export {
   watchGetQuestions,
-  watchCreateSingleQuestion,
-  watchAddSingleQuestionImg,
   watchGetSingleQuestion,
-  watchUpdateSingleQuestion,
   watchGetSingleQuestionAllImg,
-  watchStarSingleQuestion,
-  watchCancelStarSingleQuestion,
+  
+  watchCreateSIngleQuestionAnswer,
 }

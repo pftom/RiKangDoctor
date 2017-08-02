@@ -62,6 +62,8 @@ export const qaSingleApi = (id) => ({
   singleAnswerUpvote: `qa/answers/${id}/upvote/`,
   singleAnswerAllComments: `qa/answers/${id}/comments/`,
   addSingleAnswerComments: `qa/answers/${id}/comments/new`,
+
+  createSingleQuestionAnswer: `qa/questions/${id}/answers/new`,
 });
 
 

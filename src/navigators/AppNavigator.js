@@ -61,6 +61,9 @@ import PutQuestionDetail from '../components/TabOne/views/PutQuestionDetail';
 import ImageView from '../components/TabTwo/views/ImageView';
 import CommentList from '../components/TabTwo/views/CommentList';
 
+//doctor section 
+import NewQuestion from '../components/TabTwo/views/NewQuestion';
+
 
 
 //register and login logic navigator
@@ -110,11 +113,10 @@ export const AppNavigator = StackNavigator({
     About: { screen: About },
 
     QuestionDetail: { screen: QuestionDetail },
-    PutQuestionDetail: { screen: PutQuestionDetail },
     AnswerDetail: { screen: AnswerDetail },
-    PutQuestion: { screen: PutQuestion },
     ImageView: { screen: ImageView },
     CommentList: { screen: CommentList },
+    NewQuestion: { screen: NewQuestion },
 
   },
   {

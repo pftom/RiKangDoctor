@@ -2,15 +2,8 @@ import { getInputInitial } from './inputSelector';
 
 import { 
   getHomeSelector, 
-  getPostSelector,
 
 } from './TabOneMainSelector';
-
-import {
-  getHospitalsSelector,
-  getHospitalSelector,
-  getHospitalDoctorsSelector,
-} from './hospitalSelector';
 
 import {
   getDoctorSelector,
@@ -29,17 +22,12 @@ import {
 import {
   getQaSelector,
   getSingleQaSelector,
-  getQuestionFavSelector,
-  getQuestionListSelector,
+  getCreateAnswerSelector,
 } from './qaSelector';
 
 import {
   getAnswerCommentSelector,
 } from './answerSelector.js';
-
-import {
-  getQuestionStatusSelector,
-} from './PutQuestionSelector.js';
 
 
 import {
@@ -51,12 +39,7 @@ export {
 
   getHomeSelector,
   
-  getPostSelector,
   getDoctorsSelector,
-
-  getHospitalsSelector,
-  getHospitalSelector,
-  getHospitalDoctorsSelector,
 
   getDoctorSelector,
   getDoctorInfoSelector,
@@ -68,11 +51,10 @@ export {
 
   getQaSelector,
   getSingleQaSelector,
-  getQuestionFavSelector,
-  getQuestionListSelector,
+  getCreateAnswerSelector,
 
   getAnswerCommentSelector,
-  getQuestionStatusSelector,
+
 
   getServiceSelector,
 

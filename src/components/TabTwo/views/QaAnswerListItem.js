@@ -76,7 +76,7 @@ class QaAnswerListItem extends PureComponent {
       <TouchableWithoutFeedback onPress={() => { navigation.navigate('QuestionDetail', { token, id: item.question})}}>
         <View style={styles.answerContainer}>
           <View style={styles.answerBox}>
-            <Text style={styles.question_title}>{'关于“'}<Text style={styles.ques_inner_title}>{item.question_title}</Text>{'的回答”'}</Text>
+            <Text style={styles.question_title}>{'关于'}<Text style={styles.ques_inner_title}>{'“'}{item.question_title}{'”'}</Text>{'的回答'}</Text>
             <View style={styles.bottomBox}>
 
               {this.renderBottomBox({ 
