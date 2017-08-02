@@ -60,7 +60,7 @@ class TagBox extends PureComponent {
           }
 
           {
-            (star || comment || help) && (
+            ((star || comment || help) && !this.props.notShowBtn) && (
               <View style={styles.rightBox}>
                 <TouchableHighlight onPress={() => { this.handleTouch() }} style={styles.btnContainer}>
                   <View style={[ styles.starBtn ]}>

@@ -19,6 +19,9 @@ export const NewQuestionStyle = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  scrollView: {
+    height: height - px2dp(81),
+  },
   buttonBox: {
     width: px2dp(337),
     height: px2dp(43),

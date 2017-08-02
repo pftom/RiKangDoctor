@@ -68,4 +68,6 @@ export const QaDetailStyle = StyleSheet.create({
     width: px2dp(324),
     marginLeft: px2dp(26),
   },
+
+  
 })

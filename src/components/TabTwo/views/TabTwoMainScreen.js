@@ -182,8 +182,6 @@ class QaScreen extends PureComponent {
         >
           {
             ITEMS.map((kind, key) => {
-              console.log('key', key);
-              console.log('METHOD', METHOD[key]);
               return (
                 <UltimateFlatList
                   key={key}

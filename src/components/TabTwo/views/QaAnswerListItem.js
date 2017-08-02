@@ -37,12 +37,16 @@ class QaAnswerListItem extends PureComponent {
     )
   }
 
-  renderBottomBox = (item) => {
+  renderBottomBox = (itemData) => {
+    const { navigation, item, token } = this.props;
+
     return (
-      <View style={styles.iconBox}>
-        <Image source={item.img} />
-        <Text style={styles.iconText}>{item.text}</Text>
-      </View>
+      <TouchableOpacity onPress={() => { navigation.navigate('CommentList', { token, id: item.question }) }}>
+        <View style={styles.iconBox}>
+          <Image source={itemData.img} />
+          <Text style={styles.iconText}>{itemData.text}</Text>
+        </View>
+      </TouchableOpacity>
     )
   }
 

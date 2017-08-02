@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { TouchableOpacity, Text, View, ScrollView, Image } from 'react-native';
+import { TouchableOpacity, Text, View, ScrollView, Image, TouchableHighlight, } from 'react-native';
 
 import { NavigationActions } from 'react-navigation';
 import { connect } from 'react-redux';
@@ -35,6 +35,7 @@ import { handleQuestion, handleAnswers } from '../data/';
 
 //import style
 import { QaDetailStyle as styles } from '../styles/';
+import { BottomButtonStyle as btnStyles} from '../../styles/';
 
 
 //import list
@@ -70,22 +71,13 @@ class QuestionDetail extends PureComponent {
   }
 
   render() {
-    const { question, userId, AllImg, dispatch, navigation, answers, questionStarredFav } = this.props;
-    const { token, id, questionFav } = navigation.state.params;
+    const { question, userId, AllImg, dispatch, navigation, answers } = this.props;
+    const { token, id } = navigation.state.params;
 
     let answerList = [];
     if (answers) {
       answerList = handleAnswers(answers.get('results'));
     }
-
-    let whetherStarred = false;
-
-    //whether have fav this doctor
-    questionStarredFav.map(question => {
-      if (question && question.get('id') === id) {
-        whetherStarred = true;
-      }
-    })
 
     let IMGS = [];
     if (AllImg) {
@@ -96,17 +88,6 @@ class QuestionDetail extends PureComponent {
       });
     }
 
-    let isMine = false;
-    if (questionFav) {
-      questionFav.map(ques => {
-        if (ques.get('id') === id) {
-          isMine = true;
-        }
-      })
-    }
-
-    const solvedFlag = question && question.has('solved') && question.get('solved');
-
     let header = null;
     if (question) {
       header = () => (
@@ -114,11 +95,6 @@ class QuestionDetail extends PureComponent {
           <View style={styles.topBox}>
               <Text style={styles.title}>
                 {question.get('title')}
-                {
-                  solvedFlag && (
-                    <Text style={styles.solved}>（已解决）</Text>
-                  )
-                }
               </Text>  
               
             </View>
@@ -144,13 +120,9 @@ class QuestionDetail extends PureComponent {
               <TagBox 
                 star={true} 
                 item={handleQuestion(question)} 
-                btnText={"关注"} 
+                notShowBtn={true}
                 navigation={navigation}
                 token={token}
-                isMine={isMine}
-                whetherStarred={whetherStarred}
-                handleCancelStar={() => { dispatch({ type: CANCEL_STAR_SINGLE_QUESTION, payload: { token, id } }) }}
-                handleAddStar={() => { dispatch({ type: STAR_SINGLE_QUESTION, payload: { token, id, question } }) }}
               />
             </View>
             <View style={styles.graySpace}/>
@@ -186,6 +158,14 @@ class QuestionDetail extends PureComponent {
             />
           )
         }
+
+        <View style={[ btnStyles.BottomBox ]}>
+          <TouchableHighlight onPress={() => { this.handleBtn() }} style={btnStyles.buttonContainer}>
+            <View style={btnStyles.buttonBox}>
+              <Text style={[ btnStyles.content, this.props.textStyle ]}>我来回答</Text>
+            </View>
+          </TouchableHighlight>
+        </View>
       </View>
     )
   }

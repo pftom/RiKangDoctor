@@ -16,43 +16,43 @@ import { SEXMAP } from '../data/';
 class TabThreeHeaderSection extends PureComponent {
 
   handleAddPic = (img) => {
-    const { dispatch, token, patientProfile } = this.props;
+    const { dispatch, token, doctorProfile } = this.props;
 
     let body = {
-      name: patientProfile.get('name') || '无',
+      name: doctorProfile.get('name') || '无',
       avatar: img,
-      age: isNaN(parseInt(patientProfile.get('age'))) ? 18 : parseInt(patientProfile.get('age')),
-      sex: patientProfile.get('sex') || 'U',
-      medical_history: patientProfile.get('medical_history'),
+      age: isNaN(parseInt(doctorProfile.get('age'))) ? 18 : parseInt(doctorProfile.get('age')),
+      sex: doctorProfile.get('sex') || 'U',
+      medical_history: doctorProfile.get('medical_history'),
     };
 
     dispatch({ type: UPDATE_PATIENT_PROFILE, payload: { body, token } } )
   }
 
   render() {
-    const { patientProfile, navigation, dispatch, token } = this.props;
+    const { doctorProfile, navigation, dispatch, token } = this.props;
     return (
      <LinearGradient
             start={{x: 0.0, y: 0.0}} end={{x: 1.0, y: 1.0}}
             colors={['#23BCBB', '#45E994']}
             style={styles.headerBox}>
           <View style={styles.topBox}>
-                <TouchableOpacity onPress={() => { navigation.navigate('Setting', { patientProfile, token, dispatch })}}>
+                <TouchableOpacity onPress={() => { navigation.navigate('Setting', { doctorProfile, token, dispatch })}}>
                   <Image source={require('../img/setting.png')} style={styles.setting} />
                 </TouchableOpacity>
               </View>
         
         {
-          patientProfile && (
+          doctorProfile && (
             <View>
               
               <View style={styles.bottomBox}>
                 <View style={styles.leftBox}>
-                  <SelectPhoto handleAddPic={this.handleAddPic} personInfo={true} avatar={patientProfile && patientProfile.get('avatar') || null} />
+                  <SelectPhoto handleAddPic={this.handleAddPic} personInfo={true} avatar={doctorProfile && doctorProfile.get('avatar') || null} />
                 </View>
                 <View style={styles.rightBox}>
-                  <Text style={styles.name}>{patientProfile && patientProfile.get('name') && patientProfile.get('name') || '还没填写姓名'}</Text>
-                  <TouchableOpacity onPress={() => { navigation.navigate('PatientPersonInfo', { token, patientProfile, dispatch })}}>
+                  <Text style={styles.name}>{doctorProfile && doctorProfile.get('name') && doctorProfile.get('name') || '还没填写姓名'}</Text>
+                  <TouchableOpacity onPress={() => { navigation.navigate('PatientPersonInfo', { token, doctorProfile, dispatch })}}>
                     <View style={styles.infoBox}>
                       <Text style={styles.info}>个人信息</Text>
                       <Image source={require('../img/rightArrow.png')} />

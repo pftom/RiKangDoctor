@@ -5,6 +5,8 @@ import { ServiceStyle } from './ServiceStyle';
 import { ChangePasswordStyle } from './ChangePasswordStyle';
 import { AboutStyle } from './AboutStyle';
 
+//doctor
+import { UserScreenStyle } from './UserScreenStyle';
 
 export {
   SelectPhotoStyle,
@@ -13,4 +15,7 @@ export {
   ServiceStyle,
   ChangePasswordStyle,
   AboutStyle,
+
+
+  UserScreenStyle,
 }

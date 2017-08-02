@@ -31,6 +31,7 @@ class QuestionListItem extends PureComponent {
                 <TagBox 
                   star={true} 
                   item={item} 
+                  notShowBtn={false}
                   btnText={"回答"}
                   navigation={navigation}
                   token={token}

@@ -241,6 +241,7 @@ class NewQuestion extends PureComponent {
             />
             <ScrollView
               showsVerticalScrollIndicator={false}
+              style={styles.scrollView}
             >
               {
                 bodyData.map((item, key) => (
