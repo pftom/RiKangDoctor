@@ -28,32 +28,42 @@ export const  HeaderSectionStyle = StyleSheet.create({
   },
   bottomBox: {
     flexDirection: 'row',
-    marginTop: px2dp(11),
-    width: width - 2 * px2dp(25),
+    marginTop: px2dp(29),
+    width: px2dp(289),
+    justifyContent: 'space-between',
   },
 
-  leftBox: {
-    marginRight: px2dp(17),
-    marginLeft: px2dp(9),
-  },
   name: {
     fontFamily: 'PingFangSC-Medium',
-    fontSize: 20,
+    fontSize: px2dp(20),
     color: '#FFF',
   },
   rightBox: {
     backgroundColor: 'transparent',
   },
   infoBox: {
-    marginTop: px2dp(10),
     flexDirection: 'row',
-    height: px2dp(22),
+    height: px2dp(33),
+    width: px2dp(163),
     alignItems: 'center',
+    justifyContent: 'center',
+    borderWidth: px2dp(1),
+    borderColor: '#FFFFFF',
+    backgroundColor: 'transparent',
+    borderRadius: px2dp(8), 
   },
   info: {
     fontFamily: 'PingFangSC-Regular',
-    fontSize: 16,
+    fontSize: px2dp(16),
     color: '#FFF',
-    marginRight: px2dp(8),
+    marginLeft: px2dp(12),
+  },
+
+  hospital: {
+    fontFamily: 'PingFangSC-Light',
+    fontSize: px2dp(18),
+    color: '#FFF',
+    marginTop: px2dp(8),
+    marginBottom: px2dp(12),
   },
 })

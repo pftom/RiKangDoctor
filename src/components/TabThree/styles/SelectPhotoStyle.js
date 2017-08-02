@@ -11,17 +11,17 @@ const { width, height } = Dimensions.get('window');
 //single input style
 export const SelectPhotoStyle = StyleSheet.create({
   avatarBox: {
-    width: px2dp(60),
-    height: px2dp(60),
-    borderRadius: px2dp(30),
+    width: px2dp(90),
+    height: px2dp(90),
+    borderRadius: px2dp(45),
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#F5F6F7',
   },
   avatar: {
-    width: px2dp(60),
-    height: px2dp(60),
-    borderRadius: px2dp(30),
+    width: px2dp(90),
+    height: px2dp(90),
+    borderRadius: px2dp(45),
   },
   avatarText: {
     fontFamily: 'PingFangSC-Regular',

@@ -94,7 +94,7 @@ class UserScreen extends PureComponent {
       <View style={styles.container}>
         {
           <TabThreeHeaderSection 
-            patientProfile={doctorProfile} 
+            doctorProfile={doctorProfile} 
             navigation={navigation}
             token={token}
             dispatch={dispatch}

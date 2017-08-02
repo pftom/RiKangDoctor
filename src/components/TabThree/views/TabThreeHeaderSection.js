@@ -31,6 +31,16 @@ class TabThreeHeaderSection extends PureComponent {
 
   render() {
     const { doctorProfile, navigation, dispatch, token } = this.props;
+
+    const fakeData = {
+      avatar: 'https://facebook.github.io/react/img/logo_og.png',
+      name: '谢尔盖',
+      hospital_name: '常德市第一人民医院',
+    };
+
+    // doctorProfile && doctorProfile.get('avatar') || null
+    // doctorProfile && doctorProfile.get('name') && doctorProfile.get('name') || '还没填写姓名'
+
     return (
      <LinearGradient
             start={{x: 0.0, y: 0.0}} end={{x: 1.0, y: 1.0}}
@@ -43,19 +53,19 @@ class TabThreeHeaderSection extends PureComponent {
               </View>
         
         {
-          doctorProfile && (
+          !doctorProfile && (
             <View>
-              
               <View style={styles.bottomBox}>
                 <View style={styles.leftBox}>
-                  <SelectPhoto handleAddPic={this.handleAddPic} personInfo={true} avatar={doctorProfile && doctorProfile.get('avatar') || null} />
+                  <SelectPhoto handleAddPic={this.handleAddPic} personInfo={true} avatar={fakeData.avatar} />
                 </View>
                 <View style={styles.rightBox}>
-                  <Text style={styles.name}>{doctorProfile && doctorProfile.get('name') && doctorProfile.get('name') || '还没填写姓名'}</Text>
-                  <TouchableOpacity onPress={() => { navigation.navigate('PatientPersonInfo', { token, doctorProfile, dispatch })}}>
+                  <Text style={styles.name}>{fakeData.name}</Text>
+                  <Text style={styles.hospital}>{fakeData.hospital_name}</Text>
+                  <TouchableOpacity onPress={() => { navigation.navigate('DoctorPersonInfo', { token, doctorProfile, dispatch })}}>
                     <View style={styles.infoBox}>
-                      <Text style={styles.info}>个人信息</Text>
-                      <Image source={require('../img/rightArrow.png')} />
+                      <Image source={require('../img/pen.png')} />
+                      <Text style={styles.info}>修改个人资料</Text>
                     </View>
                   </TouchableOpacity>
                 </View>
