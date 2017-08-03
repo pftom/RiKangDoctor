@@ -42,6 +42,8 @@ export const usersApi = {
   patientFavDoctors: 'users/patient/fav-doctors/',
   patientStarredQuestions: 'users/patient/starred-questions/',
   patientServices: 'users/patient/services/',
+
+  doctorInit: 'users/doctor/init',
 };
 
 export const qaApi = {

@@ -76,7 +76,7 @@ class SelectPhoto extends Component {
   }
 
   render() {
-    const { personInfo, addPhoto, settingPhoto, basicPhoto } = this.props;
+    const { personInfo, addPhoto, settingPhoto, basicPhoto, basicFourthPhoto } = this.props;
     const { avatarSource } = this.state;
     console.log('avatarSource', avatarSource);
 
@@ -114,6 +114,20 @@ class SelectPhoto extends Component {
             basicPhoto && (
               <View style={styles.basicBox}>
                 <Image style={styles.basicAvatar} source={{ uri: avatarSource ? avatarSource : this.props.avatar }} />
+              </View>
+            )
+          }
+
+          {
+            basicFourthPhoto && (
+              <View style={styles.basicFourthBox}>
+                <Image source={this.props.icon} />
+                <Text style={styles.uploadText}>点击此处上传</Text>
+                {
+                  this.state.avatarSource && (
+                    <Image style={styles.basicFourthAvatar} source={{ uri: avatarSource ? avatarSource : this.props.avatar }} />
+                  )
+                }
               </View>
             )
           }

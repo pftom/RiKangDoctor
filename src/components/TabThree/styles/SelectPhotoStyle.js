@@ -69,5 +69,28 @@ export const SelectPhotoStyle = StyleSheet.create({
     height: px2dp(60),
     width: px2dp(60),
     borderRadius: px2dp(30),
+  },
+
+  basicFourthBox: {
+    height: px2dp(134),
+    width: px2dp(238),
+    borderRadius: px2dp(8),
+    marginTop: px2dp(18),
+    borderWidth: px2dp(0.5),
+    borderColor: '#D2D2D2',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  basicFourthAvatar: {
+    height: px2dp(134),
+    width: px2dp(238),
+    borderRadius: px2dp(8),
+    position: 'absolute',
+  },
+  uploadText: {
+    fontFamily: 'PingFangSC-Regular',
+    fontSize: px2dp(14),
+    color: '#CDCDCD',
+    marginTop: px2dp(18),
   }
 })

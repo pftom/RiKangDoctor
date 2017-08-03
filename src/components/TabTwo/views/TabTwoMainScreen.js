@@ -56,8 +56,8 @@ class QaScreen extends PureComponent {
   componentDidMount() {
     const { navigation, dispatch, token, userId } = this.props;
 
-    // dispatch({ type: GET_QUESTIONS, payload: { token, refresh: true }});
-    // dispatch({ type: GET_SINGLE_DOCTOR_ANSWERS, payload: { token, id: userId, refresh: true }});
+    dispatch({ type: GET_QUESTIONS, payload: { token, refresh: true }});
+    dispatch({ type: GET_SINGLE_DOCTOR_ANSWERS, payload: { token, id: userId, refresh: true }});
   }
 
   renderItem = (item, kind) => {
@@ -74,61 +74,14 @@ class QaScreen extends PureComponent {
   
   render() {
     const { questions, answers, navigation,  token, dispatch } = this.props;
-    let questionList = [
-      {
-        title: '最近两天疤痕周围突然很痒，请问我这是怎么了？',
-        stars: 221,
-        answer_num: 12,
-        key: 1,
-      },
-      {
-        title: '最近两天疤痕周围突然很痒，请问我这是怎么了？',
-        stars: 221,
-        answer_num: 12,
-        key: 2,
-      },
-      {
-        title: '最近两天疤痕周围突然很痒，请问我这是怎么了？',
-        stars: 221,
-        answer_num: 12,
-        key: 3,
-      },
-    ];
+    let questionList = [];
     if (questions) {
       //the second params for horizontal(true) show ten item,
       questionList = handleQuestions(questions.get('results'));
       console.log('questionList', questionList);
     }
 
-    let answerList = [
-      {
-        question_title: '最近两天疤痕周围突然很痒，请问我这是怎么了？',
-        comment_num: 5,
-        diagnosis: '接触性皮炎',
-        prescription: '卤米松或艾洛松软膏',
-        course: '两周到三周',
-        advice: '上房揭瓦',
-        key: 1,
-      },
-      {
-        question_title: '最近两天疤痕周围突然很痒，请问我这是怎么了？',
-        comment_num: 5,
-        diagnosis: '接触性皮炎',
-        prescription: '卤米松或艾洛松软膏',
-        course: '两周到三周',
-        advice: '上房揭瓦',
-        key: 2,
-      },
-      {
-        question_title: '最近两天疤痕周围突然很痒，请问我这是怎么了？',
-        comment_num: 5,
-        diagnosis: '接触性皮炎',
-        prescription: '卤米松或艾洛松软膏',
-        course: '两周到三周',
-        advice: '上房揭瓦',
-        key: 3,
-      },
-    ];
+    let answerList = [];
     //service for later handle
     if (answers) {
       answerList = handleAnswers(answers.get('results'));

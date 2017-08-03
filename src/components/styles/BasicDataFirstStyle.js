@@ -240,6 +240,7 @@ export const BasicDataFirstStyle = StyleSheet.create({
     color: '#09C79C',
     width: px2dp(150),
     height: px2dp(50),
+    textAlign: 'center',
   },
   vacuateBox: {
     width: px2dp(308),
@@ -251,4 +252,22 @@ export const BasicDataFirstStyle = StyleSheet.create({
     color: '#000000',
   },
 
+  fourthInputBox: {
+    marginTop: px2dp(8),
+  },
+
+  fourthBox: {
+    marginTop: px2dp(21),
+    alignItems: 'center',
+  },
+  fourthTitle: {
+    fontFamily: 'PingFangSC-Regular',
+    fontSize: px2dp(18),
+    color: '#000000',
+  },
+  extraFourthNext: {
+    width: width - 2 * px2dp(40),
+    alignItems: 'flex-end',
+    marginTop: px2dp(30),
+  }
 });

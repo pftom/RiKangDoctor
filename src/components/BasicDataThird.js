@@ -4,7 +4,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import { NavigationActions } from 'react-navigation';
 import { connect } from 'react-redux';
 
-import { Picker } from 'antd-mobile';
+import { Picker, Toast } from 'antd-mobile';
 
 
 import { BasicDataFirstStyle as styles } from './styles/';
@@ -26,12 +26,11 @@ class BasicDataThird extends PureComponent {
     const { navigation } = this.props;
     const { body } = navigation.state.params;
 
-    navigation.navigate('BasicDataFourth', {  body: { ...body, consult_price } } );
-    // if (isNaN(parseFloat(consult_price))) {
-    //   this.failToast('咨询单价必须是有效数字');
-    // } else {
-    //   navigation.navigate('BasicDataFourth', {  body: { ...body, doctor_license, id_card, consult_price } } );
-    // }
+    if (isNaN(Number(consult_price))) {
+      this.failToast('咨询单价必须是有效数字');
+    } else {
+      navigation.navigate('BasicDataFourth', {  body: { ...body, consult_price } } );
+    }
   }
 
   failToast(msg) {

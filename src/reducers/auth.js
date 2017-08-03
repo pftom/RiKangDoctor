@@ -33,6 +33,12 @@ import {
   FEEDBACK_ERROR,
 
   CLEAR_FEEDBACK_STATE,
+
+  SUBMIT_VERIFY_DATA,
+  SUBMIT_VERIFY_DATA_SUCCESS,
+  SUBMIT_VERIFY_DATA_ERROR,
+
+  CLEAR_VERIFY_DATA_STATE,
 } from '../constants/'
 import { persistor } from '../store';
 
@@ -68,6 +74,10 @@ const initialAuthState = Immutable.Map({
     status: 1,
   }),
   id: null,
+
+  isSubmitVerifyCode: false,
+  submitVerifyCodeSuccess: false,
+  submitVerifyCodeError: false,
 });
 
 const auth = function auth(state = initialAuthState, action) {
@@ -242,6 +252,37 @@ const auth = function auth(state = initialAuthState, action) {
         isFeedback: true,
         feedbackError: true,
       });
+
+    case SUBMIT_VERIFY_DATA:
+
+      return state.merge({
+        isSubmitVerifyCode: true,
+        submitVerifyCodeSuccess: false,
+        submitVerifyCodeError: false,
+      });
+
+    case SUBMIT_VERIFY_DATA_SUCCESS:
+
+      return state.merge({
+        isSubmitVerifyCode: false,
+        submitVerifyCodeSuccess: true,
+        authCode: Immutable.Map({ status: 2 })
+      });
+
+    case SUBMIT_VERIFY_DATA_ERROR:
+
+      return state.merge({
+        isSubmitVerifyCode: false,
+        submitVerifyCodeError: true,
+      });
+
+    case CLEAR_VERIFY_DATA_STATE:
+
+      return state.merge({
+        isSubmitVerifyCode: false,
+        submitVerifyCodeSuccess: false,
+        submitVerifyCodeError: false,
+      })
 
     case CLEAR_FEEDBACK_STATE:
 

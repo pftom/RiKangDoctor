@@ -9,6 +9,8 @@ import {
   watchRequestSmsCode,
   watchVerifySmsCode,
   feedbackFlow,
+
+  watchSubmitVerifyCode,
 } from './userSaga';
 
 //import posts sagas
@@ -85,8 +87,16 @@ export default function* rootSaga() {
     feedbackFlow(),
     watchAcceptOrder(),
     watchGetServiceOrder(),
+    watchSubmitVerifyCode(),
 
     watchCreateSIngleQuestionAnswer(),
+    watchGetQuestions(),
+    watchGetSingleQuestion(),
+    watchGetSingleQuestionAllImg(),
+  
+    watchCreateSIngleQuestionAnswer(),
+
+    watchDoctorAnswers(),
   ]);
 }
 
@@ -102,13 +112,7 @@ export default function* rootSaga() {
 //     watchGetHospitals(),
 //     watchGetHospitalDoctors(),
 
-//     watchGetDoctor(),
-//     watchGetDoctors(),
-//     watchDoctorInfo(),
-//     watchDoctorComments(),
-//     watchDoctorAnswers(),
-//     watchAddDoctorFav(),
-//     watchCancelDoctorFav(),
+
 
 //     watchGetPatientProfile(),
 //     watchUpdatePatientProfile(),

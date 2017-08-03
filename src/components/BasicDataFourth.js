@@ -4,7 +4,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import { NavigationActions } from 'react-navigation';
 import { connect } from 'react-redux';
 
-import { Picker } from 'antd-mobile';
+import { Picker, Toast } from 'antd-mobile';
 
 
 import { BasicDataFirstStyle as styles } from './styles/';
@@ -62,8 +62,8 @@ class BasicDataSecond extends PureComponent {
 
     return (
       <View style={styles.fourthBox} key={key}>
-        <Text>{item.title}</Text>
-        <SelectPhoto icon={require('./TabOne/img/camera.png')}  avatar={avatar} basicPhoto={true} sign={key} handleAddPic={this.handleAddPic} />
+        <Text style={styles.fourthTitle}>{item.title}</Text>
+        <SelectPhoto icon={require('./TabOne/img/camera.png')}  avatar={avatar} basicFourthPhoto={true} sign={key} handleAddPic={this.handleAddPic} />
       </View>
     )
   }
@@ -85,15 +85,16 @@ class BasicDataSecond extends PureComponent {
   handleSubmit = () => {
     const { doctor_license, id_card } = this.state;
 
-    const { navigation } = this.props;
-    const { body, dispatch } = navigation.state.params;
+    const { navigation, dispatch, token } = this.props;
+    const { body } = navigation.state.params;
+
 
     if (doctor_license === 'https://facebook.github.io/react/img/logo_og.png') {
       this.failToast('医师执业证书不能为空');
     } else if (id_card === 'https://facebook.github.io/react/img/logo_og.png') {
       this.failToast('持证自拍不能为空');
     } else {
-      dispatch({ type: SUBMIT_VERIFY_DATA, payload: { body: { ...body, doctor_license, id_card } }});
+      dispatch({ type: SUBMIT_VERIFY_DATA, payload: { body: { ...body, doctor_license, id_card }, token }});
     }
   }
 
@@ -128,12 +129,12 @@ class BasicDataSecond extends PureComponent {
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.container}>
         <Text style={styles.titleText}>基本资料</Text>
-        <View style={styles.inputBox}>
+        <View style={styles.fourthInputBox}>
           {
             data.map((item, key) => this.renderInputBox(item, key))
           }
         </View>
-        <View style={[ styles.nextBox, styles.extraNext ]}>
+        <View style={[ styles.extraFourthNext ]}>
           <TouchableOpacity onPress={() => { this.handleSubmit() }}>
             <Image source={require('./TabOne/img/submitData.png')} />
           </TouchableOpacity>
@@ -144,4 +145,8 @@ class BasicDataSecond extends PureComponent {
   }
 }
 
-export default connect()(BasicDataSecond);
+export default connect(
+  state => ({
+    token: state.getIn(['auth', 'token']),
+  })
+)(BasicDataSecond);

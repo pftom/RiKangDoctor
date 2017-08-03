@@ -115,17 +115,15 @@ class BasicDataFirst extends PureComponent {
 
     const { navigation } = this.props;
 
-    navigation.navigate('BasicDataSecond', { body: { name, hospital: hospitalName, department: opppsiteDepartment[pickerValue[0]] }})
-
-    // if (!name) {
-    //   this.failToast('姓名不能为空');
-    // } else if (!hospitalName) {
-    //   this.failToast('医院名不能为空');
-    // } else if (!pickerValue[0]) {
-    //   this.failToast('科室不能为空');
-    // } else {
-    //   navigation.navigate('BasicDataSecond', { body: { name, hospital: hospitalName, department: opppsiteDepartment[pickerValue[0]] }})
-    // }
+    if (!name) {
+      this.failToast('姓名不能为空');
+    } else if (!hospitalName) {
+      this.failToast('医院名不能为空');
+    } else if (!pickerValue[0]) {
+      this.failToast('科室不能为空');
+    } else {
+      navigation.navigate('BasicDataSecond', { body: { name, hospital: hospitalName, department: opppsiteDepartment[pickerValue[0]] }})
+    }
   }
 
   render() {

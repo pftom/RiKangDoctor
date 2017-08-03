@@ -4,13 +4,13 @@ import LinearGradient from 'react-native-linear-gradient';
 import { NavigationActions } from 'react-navigation';
 import { connect } from 'react-redux';
 
-import { Picker } from 'antd-mobile';
+import { Picker, Toast, } from 'antd-mobile';
 
 
 import { BasicDataFirstStyle as styles } from './styles/';
 
 //import opposit department
-import { opppsiteDepartment } from '../utils/transferAbbr';
+import { opppsiteDepartment, transferTitleMap } from '../utils/transferAbbr';
 
 import SelectPhoto from './TabThree/common/SelectPhoto';
 
@@ -65,7 +65,7 @@ class BasicDataSecond extends PureComponent {
         <TextInput
               ref="textInput"
               style={[ styles.department, styles.textInput ]}
-              placeholder={'输入您的从医时间'}
+              placeholder={'输入您的从医时间,格式:YYYY-MM-DD'}
               onChangeText={(text) => this.setState({ doctorAge: text })}
               placeholderTextColor="#BFBFBF"
               value={this.state.doctorAge}
@@ -131,17 +131,16 @@ class BasicDataSecond extends PureComponent {
 
     const { body } = navigation.state.params;
 
-    navigation.navigate('BasicDataThird', { body: { ...body, avatar, doctorAge, pickerValue }});
-
-    // if (avatar === 'https://facebook.github.io/react/img/logo_og.png') {
-    //   this.failToast('头像不能为空');
-    // } else if (isNaN(parseInt(doctorAge))) {
-    //   this.failToast('从医时间只能为数字');
-    // } else if (!pickerValue[0]) {
-    //   this.failToast('职位不能为空');
-    // } else {
-    //   navigation.navigate('BasicDataThird', { body: { ...body, avatar, doctorAge, pickerValue }});
-    // }
+    if (avatar === 'https://facebook.github.io/react/img/logo_og.png') {
+      this.failToast('头像不能为空');
+    } else if ( !(/^[0-9]{4}\-[0-9]{2}\-[0-9]{2}$/.test(doctorAge)) ) {
+      this.failToast('从医时间格式为：YYYY-MM-DD');
+    } else if (!pickerValue[0]) {
+      this.failToast('职位不能为空');
+    } else {
+      console.log('')
+      navigation.navigate('BasicDataThird', { body: { ...body, avatar, start: doctorAge, title: transferTitleMap[pickerValue[0]]  }});
+    }
   }
 
   successToast(msg) {
@@ -160,7 +159,7 @@ class BasicDataSecond extends PureComponent {
     const { navigation, dispatch } = this.props;
     const { token } = navigation.state.params;
 
-    console.log('state', this.state.pickerValue)
+    console.log('state', transferTitleMap[this.state.pickerValue[0]])
 
     const data = [
       {

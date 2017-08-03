@@ -34,6 +34,10 @@ import {
   FEEDBACK,
   FEEDBACK_SUCCESS,
   FEEDBACK_ERROR,
+
+  SUBMIT_VERIFY_DATA,
+  SUBMIT_VERIFY_DATA_SUCCESS,
+  SUBMIT_VERIFY_DATA_ERROR,
 } from '../constants/';
 
 //import request api
@@ -113,6 +117,33 @@ function* verifySmsCode(payload) {
   }
 }
 
+//send message  async actions handle function
+function* submitVerifyCode(payload) {
+  try {
+    const { body, token } = payload;
+
+    const { avatar, doctor_license, id_card } = body;
+    let data = new FormData();
+    let keys = Object.keys(body);
+    for (let i = 0; i < keys.length; i++) {
+      if (keys[i] === 'avatar') {
+        data.append('avatar', { uri: avatar, type: 'multipart/form-data', name: 'avatar.jpg'});
+      } else if (keys[i] === 'doctor_license') {
+        data.append('doctor_license', { uri: doctor_license, type: 'multipart/form-data', name: 'doctor_license.jpg'});
+      } else if (keys[i] === 'id_card') {
+        data.append('id_card', { uri: id_card, type: 'multipart/form-data', name: 'id_card.jpg'});
+      } else {
+        data.append(keys[i], body[keys[i]]);
+      }
+    }
+    //the last param supply multipart/form-data support
+    yield call(request.post, base + usersApi.doctorInit, data, token, true);
+    yield put({ type: SUBMIT_VERIFY_DATA_SUCCESS });
+  } catch(error) {
+    yield put({ type: SUBMIT_VERIFY_DATA_ERROR, error });
+  }
+}
+
 //LOGIN async actions watch function
 function* loginFlow() {
   while (true) {
@@ -175,6 +206,13 @@ function* watchVerifySmsCode() {
   }
 }
 
+function* watchSubmitVerifyCode() {
+  while (true) {
+    const { payload } = yield take(SUBMIT_VERIFY_DATA);
+    yield call(submitVerifyCode, payload)
+  }
+}
+
 
 
 export {
@@ -185,4 +223,6 @@ export {
   watchVerifySmsCode,
   clearFlow,
   feedbackFlow,
+
+  watchSubmitVerifyCode,
 }

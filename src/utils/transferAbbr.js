@@ -69,6 +69,13 @@ const transferTitle = {
   'C':'主任医师',
 };
 
+const transferTitleMap = {
+  '住院医师': 'R',
+  '主治医师': 'A',
+  '副主任医师': 'D',
+  '主任医师': 'C',
+};
+
 const transferHospitalClass = {
 '1A': '一级甲等',
 '1B': '一级乙等',
@@ -95,5 +102,6 @@ export {
   transferHospitalClass,
 
   opppsiteDepartment,
+  transferTitleMap,
   order,
 }
