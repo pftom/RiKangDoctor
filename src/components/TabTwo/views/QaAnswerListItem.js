@@ -38,8 +38,12 @@ class QaAnswerListItem extends PureComponent {
   }
 
   render() {
-    const { item, navigation, token } = this.props;
-    const { userId } = navigation.state.params;
+    const { item, navigation, token, userId } = this.props;
+
+    let isMine = false;
+    if (item.owner.id === userId) {
+      isMine = true;
+    }
     //answer listitem data
     const midBoxData = [
       {
@@ -105,6 +109,7 @@ class QaAnswerListItem extends PureComponent {
           <View style={styles.tagContainer}>
             <TagBox 
               help={true} 
+              isMine
               item={item} 
               btnText={"向TA求助"} 
               navigation={navigation}

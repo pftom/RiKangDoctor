@@ -32,9 +32,9 @@ const getQuestionAllImg = (state) => state.getIn(['qa', 'AllImg']);
 const getAnswers = (state) => state.getIn(['answer', 'answers']);
 
 const getSingleQaSelector = createSelector(
-  [ getUserId, getQuestion, getQuestionAllImg, getAnswers, getQuestionStarredFav ],
-  ( userId, question, AllImg, answers, questionStarredFav) => ({
-    userId,
+  [ getDoctorId, getQuestion, getQuestionAllImg, getAnswers, getQuestionStarredFav ],
+  ( doctorId, question, AllImg, answers, questionStarredFav) => ({
+    doctorId,
     question,
     AllImg,
     answers,

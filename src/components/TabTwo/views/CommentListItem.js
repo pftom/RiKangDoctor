@@ -24,8 +24,8 @@ export const handleTime = (time) => {
 
 class CommentListItem extends PureComponent {
   render() {
-    const { item, navigation, token, commentListSeq } = this.props;
-    const { userId } = navigation.state.params;
+    const { item, navigation, token, commentListSeq, userId } = this.props;
+    console.log('userId', userId);
 
     let name = null;
     if (item.reply_to) {
@@ -64,7 +64,7 @@ class CommentListItem extends PureComponent {
               <TagBox 
                 comment={true} 
                 item={item} 
-                isMine={true}
+                isMine={isMine}
                 btnText={"回复"}
                 handleAnswerBtn={this.props.handleAnswerBtn}
                 navigation={navigation}

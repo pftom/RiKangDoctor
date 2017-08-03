@@ -136,7 +136,7 @@ class CommentList extends PureComponent {
   }
 
   render() {
-    const { dispatch, userId, navigation, singleAnswerAllComments, commentListSeq } = this.props;
+    const { dispatch, doctorId, userId, navigation, singleAnswerAllComments, commentListSeq } = this.props;
     const { token, id } = navigation.state.params;
 
     let commentList = [];

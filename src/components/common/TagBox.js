@@ -20,15 +20,20 @@ import { QuestionListStyle as styles } from '../TabTwo/styles/';
 class TagBox extends PureComponent {
 
   handleTouch = () => {
-    const { star, help, comment, btnText } = this.props;
+    const { star, help, comment, btnText, navigation } = this.props;
     
     if (star) {
       this.props.handleNavigation();
+    }
+
+    if (help) {
+      navigation
     }
   }
   
   render() {
     const { navigation, token, item } = this.props;
+    console.log('item', item)
 
     //get judge condition
     const { star, help, comment, btnText } = this.props;
@@ -50,7 +55,7 @@ class TagBox extends PureComponent {
 
           {
             help && (
-              <TouchableOpacity onPress={() => { navigation.navigate('CommentList', { token, id: item.id }) }}>
+              <TouchableOpacity onPress={() => { navigation.navigate('CommentList', { token, id: item.id, doctorId: item.owner.id }) }}>
                 <View style={[ styles.leftBox]}>
                   <Image source={require('../TabOne/img/comment.png')} />
                   <Text style={styles.upvote}>{item.comment_num || ''}</Text>
@@ -60,7 +65,7 @@ class TagBox extends PureComponent {
           }
 
           {
-            ((star || comment || help) && !this.props.notShowBtn) && (
+            ((star || comment || help) && !this.props.notShowBtn && !this.props.isMine) && (
               <View style={styles.rightBox}>
                 <TouchableHighlight onPress={() => { this.handleTouch() }} style={styles.btnContainer}>
                   <View style={[ styles.starBtn ]}>

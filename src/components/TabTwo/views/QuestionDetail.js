@@ -77,7 +77,7 @@ class QuestionDetail extends PureComponent {
   }
 
   render() {
-    const { question, userId, AllImg, dispatch, navigation, answers } = this.props;
+    const { question, doctorId, AllImg, dispatch, navigation, answers } = this.props;
     const { token, id } = navigation.state.params;
 
     console.log('question', question);
@@ -85,6 +85,7 @@ class QuestionDetail extends PureComponent {
     let answerList = [];
     if (answers) {
       answerList = handleAnswers(answers.get('results'));
+      console.log('answerList', answerList);
     }
 
     let IMGS = [];
@@ -161,7 +162,7 @@ class QuestionDetail extends PureComponent {
               token={token}
               id={id}
               footText={ answerList.length ? "到底了哦..." : "啊哦！还没有回答哦"}
-              renderItem={(item) => <QaAnswerListItem userId={userId} token={token} navigation={navigation} item={item} />}
+              renderItem={(item) => <QaAnswerListItem userId={doctorId} token={token} navigation={navigation} item={item} />}
             />
           )
         }
