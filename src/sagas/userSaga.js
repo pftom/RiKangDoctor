@@ -42,6 +42,10 @@ import {
   GET_DOCTOR_PROFILE,
   GET_DOCTOR_PROFILE_SUCCESS,
   GET_DOCTOR_PROFILE_ERROR,
+
+  GET_DOCTOR_INFO,
+  GET_DOCTOR_INFO_ERROR,
+  GET_DOCTOR_INFO_SUCCESS,
 } from '../constants/';
 
 //import request api
@@ -130,6 +134,17 @@ function* getDoctorProfile(payload) {
     yield put({ type: GET_DOCTOR_PROFILE_SUCCESS, doctorProfile });
   } catch (error) {
     yield put({ type: GET_DOCTOR_PROFILE_ERROR, error });
+  }
+}
+
+function* getDoctorInfo(payload) {
+  try {
+    const { token } = payload;
+    const doctorInfo = yield call(request.get, base + usersApi.doctorInfo, null, token);
+
+    yield put({ type: GET_DOCTOR_INFO_SUCCESS, doctorInfo });
+  } catch (error) {
+    yield put({ type: GET_DOCTOR_INFO_ERROR, error });
   }
 }
 
@@ -237,6 +252,13 @@ function* watchGetDoctorProfile() {
   }
 }
 
+function* watchGetDoctorInfo() {
+  while (true) {
+    const { payload } = yield take(GET_DOCTOR_INFO);
+    yield call(getDoctorInfo, payload)
+  }
+}
+
 
 export {
   loginFlow,
@@ -249,4 +271,5 @@ export {
 
   watchSubmitVerifyCode,
   watchGetDoctorProfile,
+  watchGetDoctorInfo,
 }

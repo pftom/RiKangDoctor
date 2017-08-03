@@ -3,7 +3,7 @@ import { createSelector } from 'reselect';
 //import get token common select
 import { getToken } from './commonSelector';
 
-const getPatientProfile = (state) => state.getIn(['patient', 'patientProfile']);
+const getPatientProfile = (state) => state.getIn(['user', 'patientProfile']);
 const getPatientFavPosts = (state) => state.getIn(['patient', 'postFav']);
 const getPatientFavDoctors = (state) => state.getIn(['patient', 'doctorFav']);
 const getPatientQuestions = (state) => state.getIn(['patient', 'questionFav']);
@@ -12,12 +12,16 @@ const getPatientServices = (state) => state.getIn(['patient', 'servicesFav']);
 
 const getPatientFetchPosts = (state) => state.getIn(['patient', 'patientPosts']);
 
+const getDoctorProfile = (state) => state.getIn(['auth', 'doctorProfile']);
+const getDoctorInfo = (state) => state.getIn(['patient', 'doctorInfo']);
 
-export const getPatientSelector = createSelector(
-  [ getToken, getPatientProfile, getPatientFavPosts, getPatientFavDoctors, getPatientQuestions, getPatientStarredQuestions, getPatientServices, getPatientFetchPosts  ],
-  (token, patientProfile, postFav, doctorFav, questionFav, questionStarredFav, servicesFav, postFetch, ) => ({
+
+export const getDoctorProfileSelector = createSelector(
+  [ getToken, getDoctorInfo, getDoctorProfile, getPatientFavPosts, getPatientFavDoctors, getPatientQuestions, getPatientStarredQuestions, getPatientServices, getPatientFetchPosts  ],
+  (token, doctorInfo, doctorProfile, postFav, doctorFav, questionFav, questionStarredFav, servicesFav, postFetch, ) => ({
     token,
-    patientProfile,
+    doctorInfo,
+    doctorProfile,
 
     postFav,
     doctorFav,

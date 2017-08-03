@@ -26,10 +26,11 @@ import px2dp from '../../../utils/px2dp';
 //import action constants
 import { 
   GET_DOCTOR_PROFILE,
+  GET_DOCTOR_INFO,
  } from '../../../constants/'
 
 //import selector from select data
-import { getPatientSelector } from '../../../selectors/';
+import { getDoctorProfileSelector } from '../../../selectors/';
 
 import TabThreeHeaderSection from './TabThreeHeaderSection';
 
@@ -59,30 +60,33 @@ class UserScreen extends PureComponent {
     const { dispatch, navigation, token } = this.props;
 
     dispatch({ type: GET_DOCTOR_PROFILE, payload: { token } });
+    dispatch({ type: GET_DOCTOR_INFO, payload: { token } });
   } 
 
   render() {
-    const { dispatch, navigation, token,  doctorProfile  } = this.props;
+    const { dispatch, navigation, token,  doctorProfile, doctorInfo  } = this.props;
+    console.log('doctorProfile', doctorProfile && doctorProfile.toJS());
 
-    // content: doctorProfile.get('order_num'),
-    // content: doctorProfile.get('patient_num'),
-    // content: doctorProfile.get('ratings'),
+    // content: ,
+    // content: ,
+    // content: ,
     // content: doctorProfile.get('order_num'),
     
     let DATA = [];
-    if (!doctorProfile) {
+    if (doctorProfile) {
+      console.log(doctorProfile)
       DATA = [
         {
           title: '接受咨询次数',
-          content: 73
+          content: doctorProfile.get('order_num'),
         },
         {
           title: '回答问题次数',
-          content: 150,
+          content: doctorProfile.get('patient_num'),
         },
         {
           title: '用户评分',
-          content: 4.8
+          content: doctorProfile.get('ratings')
         },
         {
           title: '查看收入情况',
@@ -97,6 +101,7 @@ class UserScreen extends PureComponent {
             doctorProfile={doctorProfile} 
             navigation={navigation}
             token={token}
+            doctorInfo={doctorInfo}
             dispatch={dispatch}
           />
         }
@@ -131,5 +136,5 @@ class UserScreen extends PureComponent {
 }
 
 export default connect(
-  state => getPatientSelector(state),
+  state => getDoctorProfileSelector(state),
 )(UserScreen);

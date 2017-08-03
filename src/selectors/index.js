@@ -12,7 +12,7 @@ import {
 } from './doctorSelector';
 
 import {
-  getPatientSelector,
+  getDoctorProfileSelector,
   getPatientProfileSelector,
 
   getChangePasswdSelector,
@@ -41,10 +41,10 @@ export {
   
   getDoctorsSelector,
 
-  getDoctorSelector,
+  getDoctorProfileSelector,
   getDoctorInfoSelector,
 
-  getPatientSelector,
+  getDoctorSelector,
   getPatientProfileSelector,
   getChangePasswdSelector,
   getFeedbackSelector,

@@ -30,6 +30,10 @@ import {
   GET_PATIENT_SERVICES,
   GET_PATIENT_SERVICES_SUCCESS,
   GET_PATIENT_SERVICES_ERROR,
+
+  UPDATE_DOCTOR_INFO,
+  UPDATE_DOCTOR_INFO_ERROR,
+  UPDATE_DOCTOR_INFO_SUCCESS,
 } from '../constants/';
 
 //import request api
@@ -67,10 +71,20 @@ function* updatePatientProfile(payload) {
       }
     }
     //the last param supply multipart/form-data support
-    yield call(request.put, base + usersApi.updatePatientProfile, token, data, true);
+    yield call(request.put, base + usersApi.doctorProfile, token, data, true);
     yield put({ type: UPDATE_PATIENT_PROFILE_SUCCESS, body });
   } catch(error) {
     yield put({ type: UPDATE_PATIENT_PROFILE_ERROR, error });
+  }
+}
+
+function* updateDoctorInfo(payload) {
+  try {
+    const { token, body } = payload;
+    yield call(request.put, base + usersApi.doctorInfo, token, body, );
+    yield put({ type: UPDATE_DOCTOR_INFO_SUCCESS });
+  } catch (error) {
+    yield put({ type: UPDATE_DOCTOR_INFO_ERROR });
   }
 }
 
@@ -152,6 +166,14 @@ function* watchUpdatePatientProfile() {
   }
 }
 
+function* watchUpdateDoctorInfo() {
+  while (true) {
+    const { payload } = yield take(UPDATE_DOCTOR_INFO);
+    // fork return a Task object for cancel later
+    yield call(updateDoctorInfo, payload);
+  }
+}
+
 //patient async actions watch function
 function* watchGetPatientFavPosts() {
   while (true) {
@@ -208,5 +230,6 @@ export {
   watchGetPatientFavPosts,
   watchGetPatientQuestions,
   watchGetPatientServices,
-  watchGetPatientStarredQuestions
+  watchGetPatientStarredQuestions,
+  watchUpdateDoctorInfo,
 }

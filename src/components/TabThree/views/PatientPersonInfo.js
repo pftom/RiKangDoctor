@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { TouchableOpacity, Text, View, Image, Platform, KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard } from 'react-native';
+import { TouchableOpacity, ScrollView, Dimensions, Text, View, Image, Platform, KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import { connect } from 'react-redux';
 
 import { ServiceStyle as styles } from '../styles/';
@@ -8,7 +8,11 @@ import { Header } from '../../common/';
 
 import { createForm } from 'rc-form';
 
-import { GET_PATIENT_PROFILE, UPDATE_PATIENT_PROFILE } from '../../../constants/';
+import px2dp from '../../../utils/px2dp';
+
+const { width, height } = Dimensions.get('window');
+
+import { GET_PATIENT_PROFILE, UPDATE_PATIENT_PROFILE, GET_DOCTOR_INFO, UPDATE_DOCTOR_INFO } from '../../../constants/';
 import { getPatientProfileSelector } from '../../../selectors/';
 
 import { List, InputItem, Switch , WhiteSpace, TextareaItem, Picker } from 'antd-mobile';
@@ -30,21 +34,27 @@ const PICKDATA = [
   },
 ];
 
+import { transferDepartment, transferTitle } from '../../../utils/transferAbbr';
+
 class PatientPersonInfo extends PureComponent {
 
   constructor(props) {
     super(props);
 
-    const { patientProfile } = this.props;
+    const { navigation,  } = this.props;
+    const { doctorInfo, doctorProfile } = navigation.state.params;
 
     this.state = {
-      pickerValue: ['男'],
-      name: patientProfile && patientProfile.get('name') || '' ,
-      age: patientProfile && (patientProfile.get('age') + '') || '18',
-      medical_history: patientProfile && patientProfile.get('medical_history') || '',
-      avatar: patientProfile && patientProfile.get('avatar') || 'https://facebook.github.io/react/img/logo_og.png',
-      change: false,
+      'achievements': doctorInfo && doctorInfo.get('achievements'),
+      'background': doctorInfo && doctorInfo.get('background'),
+      'motto': doctorInfo && doctorInfo.get('motto'),
+      'specialty': doctorInfo && doctorInfo.get('specialty'),
+      'avatar': doctorProfile && doctorProfile.get('avatar'),
     }
+  }
+
+  componentDidMount() {
+    
   }
 
   handleAddPic = (photo, uri) => {
@@ -56,24 +66,71 @@ class PatientPersonInfo extends PureComponent {
 
   handleSubmitProfile = () => {
     const { navigation } = this.props;
-    const { dispatch, token } = navigation.state.params;
-    const { name, avatar, age, pickerValue, medical_history } = this.state;
-    let body = {
-      name: name || '小康',
-      avatar,
-      age: isNaN(parseInt(age)) ? 18 : parseInt(age),
-      sex: SEXMAP[pickerValue[0]],
-      medical_history,
+    const { dispatch, token, doctorProfile, doctorInfo } = navigation.state.params;
+    const { achievements, background, motto, specialty, avatar } = this.state;
+
+
+    if (!doctorProfile || !doctorInfo) {
+      return;
+    }
+
+    let body1 = {
+      achievements,
+      background,
+      motto,
+      specialty,
     };
 
-    dispatch({ type: UPDATE_PATIENT_PROFILE, payload: { body, token } } )
+
+    let body2 = {
+      ...doctorProfile.toJS(),
+      avatar,
+      start: `${2017 - doctorProfile.get('years')}-08-03`
+    }
+
+    dispatch({ type: UPDATE_PATIENT_PROFILE, payload: { body: body2, token } } );
+    dispatch({ type: UPDATE_DOCTOR_INFO, payload: { body: body1, token } } );
 
   }
 
+  handleInput = (sign, text) => {
+    this.setState({
+      [sign]: text
+    });
+  }
+
   render() {
-    const { navigation, patientProfile, submitProfileError, submitProfileSuccess } = this.props;
-    const { dispatch } = navigation.state.params;
-    const medical_history = patientProfile.get('medical_history');
+    const { navigation, submitProfileError, submitProfileSuccess } = this.props;
+    const { dispatch, doctorProfile, doctorInfo } = navigation.state.params;
+
+    console.log('this.props', this.props);
+
+    const bodyData = [
+      {
+        title: '擅长及诊所介绍',
+        placeholder: '在此处填写擅长及诊所介绍',
+        sign: 'achievements',
+        defaultValue: (doctorInfo && doctorInfo.get('achievements')) || '',
+      },
+      {
+        title: '医学教育背景',
+        placeholder: '在此处填写医学教育背景',
+        sign: 'background',
+        defaultValue: (doctorInfo && doctorInfo.get('background')) || '',
+      },
+      {
+        title: '学术研究成果、获奖介绍',
+        placeholder: '在此处填写学术研究成果、获奖介绍',
+        sign: 'motto',
+        defaultValue: (doctorInfo && doctorInfo.get('motto')) || '',
+      },
+      {
+        title: '医生寄语',
+        placeholder: '在此处填写医生寄语',
+        sign: 'specialty',
+        defaultValue: (doctorInfo && doctorInfo.get('specialty')) || '',
+      },
+    ];
 
     return (
       <KeyboardAvoidingView behavior={ Platform.OS === 'ios' ? 'position' : 'height' }>
@@ -90,7 +147,13 @@ class PatientPersonInfo extends PureComponent {
           showGradient={true}
           dispatch={dispatch}
         />
-        <List style={{ marginTop: 16 }}>
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          style={{
+            height: px2dp(height - px2dp(81))
+          }}
+        >
+          <List style={{ marginTop: 16 }}>
           <Item 
             multipleLine={true}
             extra={<SelectPhoto avatar={this.state.avatar} settingPhoto={true} handleAddPic={this.handleAddPic} />}
@@ -99,58 +162,46 @@ class PatientPersonInfo extends PureComponent {
             头像
           </Item>
           <Item
-            extra={patientProfile.get('phone')}
+            extra={doctorProfile.get('name')}
           >
-            手机号
+            姓名
           </Item>
-          <InputItem
-            onChange={text => this.setState({ name: text })}
-            value={this.state.name}
+          <Item
+            extra={doctorProfile.get('hospital')}
           >
-            昵称
-          </InputItem>
-
-          <InputItem
-              onChange={text => this.setState({ age: text })}
-              value={this.state.age}
-              type={'number'}
+            就职医院
+          </Item>
+          <Item
+            extra={transferDepartment[doctorProfile.get('department')]}
           >
-            年龄
-          </InputItem>
-
-          <Picker 
-            title="选择性别"
-            onChange={v => this.setState({ pickerValue: v })}
-            data={PICKDATA}
-            cols={1}
-            value={this.state.pickerValue}
+            科室
+          </Item>
+          <Item
+            extra={doctorProfile.get('years')}
           >
-            <Item
-              arrow={'horizontal'}
-              extra={SEX[patientProfile.get('sex')]}
-            >
-              性别
-            </Item>
-          </Picker>
+            开始从医时间
+          </Item>
+          <Item
+            extra={transferTitle[doctorProfile.get('title')]}
+          >
+            职位
+          </Item>
         </List>
 
-        <List
-         style={{
-           marginTop: 16
-         }}
-        > 
-          <Item>
-            疾病历史
-          </Item>
-
-          <TextareaItem
-            labelNumber={5}
-            rows={5}
-            onChange={text => this.setState({ medical_history: text })}
-            value={this.state.medical_history}
-          />
-
-        </List>
+        {
+          bodyData.map((item, key) => (
+            <List style={{ marginTop: px2dp(10), marginBottom: px2dp(2) }} key={key}>
+              <Item>{item.title}</Item>
+              <TextareaItem
+                placeholder={item.placeholder}
+                count={200}
+                rows={5}
+                onChange={(text) => { this.handleInput(item.sign, text) }}
+              />
+            </List>
+          ))
+        }
+        </ScrollView>
       </View>
       </TouchableWithoutFeedback>
       </KeyboardAvoidingView>

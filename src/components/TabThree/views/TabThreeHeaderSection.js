@@ -21,25 +21,22 @@ class TabThreeHeaderSection extends PureComponent {
     let body = {
       name: doctorProfile.get('name') || '无',
       avatar: img,
-      age: isNaN(parseInt(doctorProfile.get('age'))) ? 18 : parseInt(doctorProfile.get('age')),
-      sex: doctorProfile.get('sex') || 'U',
-      medical_history: doctorProfile.get('medical_history'),
+      consult_price: isNaN(Number(doctorProfile.get('consult_price'))) ? 18 : parseInt(doctorProfile.get('consult_price')),
+      title: doctorProfile.get('title') || 'C',
+      start: `${isNaN(Number(doctorProfile.get('consult_price'))) ? 2017 : 2017 - parseInt(doctorProfile.get('consult_price'))}-08-03`,
+      department: doctorProfile.get('department'),
+      hospital: doctorProfile.get('hospital'),
     };
 
     dispatch({ type: UPDATE_PATIENT_PROFILE, payload: { body, token } } )
   }
 
   render() {
-    const { doctorProfile, navigation, dispatch, token } = this.props;
+    const { doctorProfile, navigation, dispatch, token, doctorInfo } = this.props;
 
-    const fakeData = {
-      avatar: 'https://facebook.github.io/react/img/logo_og.png',
-      name: '谢尔盖',
-      hospital_name: '常德市第一人民医院',
-    };
 
-    // doctorProfile && doctorProfile.get('avatar') || null
-    // doctorProfile && doctorProfile.get('name') && doctorProfile.get('name') || '还没填写姓名'
+    // 
+    // 
 
     return (
      <LinearGradient
@@ -53,16 +50,16 @@ class TabThreeHeaderSection extends PureComponent {
               </View>
         
         {
-          !doctorProfile && (
+          doctorProfile && (
             <View>
               <View style={styles.bottomBox}>
                 <View style={styles.leftBox}>
-                  <SelectPhoto handleAddPic={this.handleAddPic} personInfo={true} avatar={fakeData.avatar} />
+                  <SelectPhoto handleAddPic={this.handleAddPic} personInfo={true} avatar={doctorProfile && doctorProfile.get('avatar') || null} />
                 </View>
                 <View style={styles.rightBox}>
-                  <Text style={styles.name}>{fakeData.name}</Text>
-                  <Text style={styles.hospital}>{fakeData.hospital_name}</Text>
-                  <TouchableOpacity onPress={() => { navigation.navigate('DoctorPersonInfo', { token, doctorProfile, dispatch })}}>
+                  <Text style={styles.name}>{doctorProfile && doctorProfile.get('name') && doctorProfile.get('name') || '还没填写姓名'}</Text>
+                  <Text style={styles.hospital}>{doctorProfile && doctorProfile.get('hospital') && doctorProfile.get('hospital') || '还没填写医院'}</Text>
+                  <TouchableOpacity onPress={() => { navigation.navigate('PatientPersonInfo', { token, doctorProfile, doctorInfo, dispatch })}}>
                     <View style={styles.infoBox}>
                       <Image source={require('../img/pen.png')} />
                       <Text style={styles.info}>修改个人资料</Text>

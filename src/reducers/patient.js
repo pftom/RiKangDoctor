@@ -61,6 +61,10 @@ import {
   GET_PATIENT_STARRED_QUESTIONS_ERROR,
 
   CLEAR_FAV_STATE,
+
+  GET_DOCTOR_INFO,
+  GET_DOCTOR_INFO_SUCCESS,
+  GET_DOCTOR_INFO_ERROR,
 } from '../constants/';
 
 //import util for update data
@@ -101,6 +105,8 @@ const initialPatientValue = Map({
   isSubmitProfile: false,
   submitProfileError: false,
   submitProfileSuccess: false,
+
+  doctorInfo: null,
 });
 
 
@@ -156,6 +162,13 @@ const patient = (state = initialPatientValue, action) => {
         submitProfileError: false,
         submitProfileSuccess: false,
       });
+
+    case GET_DOCTOR_INFO_SUCCESS:
+      const { doctorInfo } = action;
+
+      return state.merge({
+        doctorInfo,
+      })
 
     case UPDATE_PATIENT_PROFILE_SUCCESS:
 

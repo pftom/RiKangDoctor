@@ -34,7 +34,7 @@ export const usersApi = {
   doctorInfo: 'users/doctor-info/',
   updateDoctorInfo: 'users/doctor-info/',
   patientProfile: 'users/patient/profile/',
-  updatePatientProfile: 'users/patient/profile/',
+  updateDoctorProfile: 'users/doctor/profile/',
   patientQuestions: 'users/patient/questions/',
   patientFavPosts: 'users/patient/fav-posts/',
   patientFavDoctors: 'users/patient/fav-doctors/',
@@ -43,6 +43,7 @@ export const usersApi = {
 
   doctorInit: 'users/doctor/init',
   doctorProfile: 'users/doctor/profile/',
+  doctorInfo: 'users/doctor/info/',
 };
 
 export const qaApi = {

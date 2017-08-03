@@ -12,6 +12,7 @@ import {
 
   watchSubmitVerifyCode,
   watchGetDoctorProfile,
+  watchGetDoctorInfo,
 } from './userSaga';
 
 //import posts sagas
@@ -51,6 +52,7 @@ import {
   watchGetPatientQuestions,
   watchGetPatientServices,
   watchGetPatientStarredQuestions,
+  watchUpdateDoctorInfo,
 } from './patientSaga';
 
 //question watch and handle func
@@ -89,6 +91,8 @@ export default function* rootSaga() {
     watchGetServiceOrder(),
     watchSubmitVerifyCode(),
     watchGetDoctorProfile(),
+    watchGetDoctorInfo(),
+    watchUpdateDoctorInfo(),
 
     watchGetQuestions(),
     watchGetSingleQuestion(),
@@ -101,6 +105,8 @@ export default function* rootSaga() {
 
     watchGetAnswerAllComments(),
     watchCreateSingleQuestionAnswerComment(),
+
+    watchUpdatePatientProfile(),
   ]);
 }
 
