@@ -30,8 +30,6 @@ export const usersApi = {
   verifySmsCode: 'users/verify-sms-code',
   changePassword: 'users/change-password',
   feedback: 'feedback/',
-  doctorInit: 'users/doctor-init/',
-  doctorInfo: 'users/doctor-info/',
   updateDoctorInfo: 'users/doctor-info/',
   patientProfile: 'users/patient/profile/',
   updateDoctorProfile: 'users/doctor/profile/',
