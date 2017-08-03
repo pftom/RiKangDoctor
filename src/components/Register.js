@@ -47,6 +47,7 @@ let RegisterForm =  reduxForm({
 
 const mapStateToProps = (state) => ({
     toast: getInputInitial(state),
+    authCodeStatus: state.getIn(['auth', 'authCode', 'status']),
 });
 
 export default connect(mapStateToProps)(RegisterForm);

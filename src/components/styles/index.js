@@ -19,6 +19,7 @@ import { UnderGoingListItemStyle } from './UnderGoingListItemStyle';
 import { FinishedListItemStyle } from './FinishedListItemStyle';
 
 import { HeaderSectionStyle } from './HeaderSectionStyle';
+import { BasicDataFirstStyle } from './BasicDataFirstStyle';
 
 
 export {
@@ -46,4 +47,6 @@ export {
   UnderGoingListItemStyle,
   FinishedListItemStyle,
   HeaderSectionStyle,
+
+  BasicDataFirstStyle,
 }

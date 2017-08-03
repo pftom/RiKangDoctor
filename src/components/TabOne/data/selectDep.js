@@ -133,6 +133,35 @@ for (let i = 0; i < DEPARTMENT_CHOICES.length; i++) {
   selectDep.push(obj);
 }
 
+
+const selectTitle = [
+    {
+        label: '住院医师',
+        value: '住院医师',
+    },
+    {
+        label: '主治医师',
+        value: '主治医师',
+    },
+    {
+        label: '副主任医师',
+        value: '副主任医师',
+    },
+    {
+        label: '主任医师',
+        value: '主任医师',
+    },
+];
+
+const mapTitle = {
+    '住院医师': 'R',
+    '主治医师': 'A',
+    '副主任医师': 'D',
+    '主任医师': 'C',
+};
+
 export {
   selectDep,
+  selectTitle,
+  mapTitle,
 }

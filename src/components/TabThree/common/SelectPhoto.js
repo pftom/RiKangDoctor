@@ -74,7 +74,7 @@ class SelectPhoto extends Component {
   }
 
   render() {
-    const { personInfo, addPhoto, settingPhoto } = this.props;
+    const { personInfo, addPhoto, settingPhoto, basicPhoto } = this.props;
     const { avatarSource } = this.state;
     console.log('avatarSource', avatarSource);
 
@@ -104,6 +104,14 @@ class SelectPhoto extends Component {
             settingPhoto && (
               <View style={styles.settingBox}>
                 <Image style={styles.settingAvatar} source={{ uri: avatarSource ? avatarSource : this.props.avatar }} />
+              </View>
+            )
+          }
+
+          {
+            basicPhoto && (
+              <View style={styles.basicBox}>
+                <Image style={styles.basicAvatar} source={{ uri: avatarSource ? avatarSource : this.props.avatar }} />
               </View>
             )
           }

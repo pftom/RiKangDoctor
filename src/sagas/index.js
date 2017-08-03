@@ -76,6 +76,13 @@ import {
 
 export default function* rootSaga() {
   yield all([
+    loginFlow(),
+    registerFlow(),
+    changePasswordFlow(),
+    clearFlow(),
+    watchRequestSmsCode(),
+    watchVerifySmsCode(),
+    feedbackFlow(),
     watchAcceptOrder(),
     watchGetServiceOrder(),
 
@@ -84,13 +91,7 @@ export default function* rootSaga() {
 }
 
 
-// loginFlow(),
-//     registerFlow(),
-//     changePasswordFlow(),
-//     clearFlow(),
-//     watchRequestSmsCode(),
-//     watchVerifySmsCode(),
-//     feedbackFlow(),
+
 
 //     watchGetPost(),
 //     watchGetPosts(),

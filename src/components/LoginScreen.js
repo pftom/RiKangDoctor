@@ -47,6 +47,7 @@ let LoginForm =  reduxForm({
 //connect redux-store and react-native, get the data from the store.
 const mapStateToProps = (state) => ({
     toast: getInputInitial(state),
+    authCodeStatus: state.getIn(['auth', 'authCode', 'status']),
 });
 
 export default connect(mapStateToProps)(LoginForm);

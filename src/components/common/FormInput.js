@@ -67,7 +67,7 @@ class FormInput extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const { toast, error, kind } = nextProps;
+    const { toast, error, kind, authCodeStatus, navigation } = nextProps;
     console.log('error', error);
     const { loginError, loginSuccess, isLoadingData, registerError, registerSuccess, requestSmsCodeError, requestSmsCodeSuccess } = toast;
 
@@ -108,6 +108,10 @@ class FormInput extends Component {
     }
 
     if(loginSuccess) {
+      console.log('authCodeStatus', authCodeStatus, navigation);
+      if (authCodeStatus === 1) {
+        navigation.navigate('BasicDataFirst');
+      }
       this.successToast('登录成功');
     }
 

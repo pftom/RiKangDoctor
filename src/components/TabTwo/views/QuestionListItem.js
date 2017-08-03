@@ -36,7 +36,7 @@ class QuestionListItem extends PureComponent {
                   navigation={navigation}
                   token={token}
                   dispatch={dispatch}
-                  handleNavigation={() => { navigation.navigate('NewQuestion', { id: item.key, token })} }
+                  handleNavigation={() => { navigation.navigate('NewAnswer', { id: item.key, token })} }
                 />
               </View>
             </View>

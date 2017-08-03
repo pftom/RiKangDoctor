@@ -62,7 +62,7 @@ import ImageView from '../components/TabTwo/views/ImageView';
 import CommentList from '../components/TabTwo/views/CommentList';
 
 //doctor section 
-import NewQuestion from '../components/TabTwo/views/NewQuestion';
+import NewAnswer from '../components/TabTwo/views/NewAnswer';
 
 //basic
 import BasicDataFirst from '../components/BasicDataFirst';
@@ -75,6 +75,8 @@ export const UserNavigator = StackNavigator({
     Login: { screen: LoginScreen },
     Register: { screen: Register },
     RegisterSendMessage: { screen: RegisterSendMessage },
+    BasicDataFirst: { screen: BasicDataFirst },
+    BasicDataSecond: { screen: BasicDataSecond },
   },
   {
     navigationOptions: {
@@ -83,6 +85,19 @@ export const UserNavigator = StackNavigator({
     }
   }
 );
+
+export const BasicNavigator = StackNavigator(
+  {
+    BasicDataFirst: { screen: BasicDataFirst },
+    BasicDataSecond: { screen: BasicDataSecond },
+  },
+  {
+    navigationOptions: {
+      gesturesEnabled: false,
+      header: null,
+    }
+  }
+)
 
 // export const MainNavigator = TabNavigator({
 
@@ -108,6 +123,7 @@ export const AppNavigator = StackNavigator({
     ConsultOrder: { screen: ConsultOrder },
 
     UserNavigator: { screen: UserNavigator },
+    BasicNavigator: { screen: BasicNavigator },
 
     Profile: { screen: ProfileScreen },
     PatientPersonInfo: { screen: PatientPersonInfo },
@@ -120,7 +136,7 @@ export const AppNavigator = StackNavigator({
     AnswerDetail: { screen: AnswerDetail },
     ImageView: { screen: ImageView },
     CommentList: { screen: CommentList },
-    NewQuestion: { screen: NewQuestion },
+    NewAnswer: { screen: NewAnswer },
 
     BasicDataFirst: { screen: BasicDataFirst },
     BasicDataSecond: { screen: BasicDataSecond },
@@ -148,7 +164,7 @@ AppWithNavigationState.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  nav: state.get('nav')
+  nav: state.get('nav'),
 });
 
 export default connect(mapStateToProps)(AppWithNavigationState);

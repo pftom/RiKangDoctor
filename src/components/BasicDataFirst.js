@@ -4,16 +4,17 @@ import LinearGradient from 'react-native-linear-gradient';
 import { NavigationActions } from 'react-navigation';
 import { connect } from 'react-redux';
 
-import { Picker } from 'antd-mobile';
+import { Picker, Toast } from 'antd-mobile';
 
 
-import { PutQuestionStyle as styles } from './styles/';
+
+import { BasicDataFirstStyle as styles } from './styles/';
 
 //import opposit department
 import { opppsiteDepartment } from '../utils/transferAbbr';
 
 
-import { selectDep } from './TabTwo/data/';
+import { selectDep } from './TabOne/data/';
 
 const CustomChildren = props => (
   <TouchableOpacity onPress={props.onClick}>
@@ -53,7 +54,6 @@ class BasicDataFirst extends PureComponent {
       'hospitalName',
     ];
 
-    let updateText = DATA[key];
     return (
       <View style={styles.itemBox} key={key}>
         <LinearGradient
@@ -73,7 +73,7 @@ class BasicDataFirst extends PureComponent {
                   ref="textInput"
                   style={[ styles.department, styles.textInput ]}
                   placeholder={key === 0 ? '在此输入您的姓名' : '在此填入你就职的医院'}
-                  onChangeText={(text) => this.setState({ updateText: text }) }
+                  onChangeText={(text) => this.setState({ [DATA[key]]: text }) }
                   placeholderTextColor="#BFBFBF"
                   value={this.state[DATA[key]]}
                   maxLength={20}
@@ -98,13 +98,39 @@ class BasicDataFirst extends PureComponent {
     )
   }
 
-  handleSubmitData = () => {
+  successToast(msg) {
+    Toast.success(msg, 1);
+  }
 
+  failToast(msg) {
+    Toast.fail(msg, 1);
+  }
+
+  loadingToast() {
+    Toast.loading('请稍后...', 1);
+  }
+
+  handleSubmitData = () => {
+    const { name, hospitalName, pickerValue } = this.state;
+
+    const { navigation } = this.props;
+
+    if (!name) {
+      this.failToast('姓名不能为空');
+    } else if (!hospitalName) {
+      this.failToast('医院名不能为空');
+    } else if (!pickerValue[0]) {
+      this.failToast('科室不能为空');
+    } else {
+      navigation.navigate('BasicDataSecond', { body: { name, hospital: hospitalName, department: opppsiteDepartment[pickerValue[0]] }})
+    }
   }
 
   render() {
     const { navigation, dispatch } = this.props;
-    const { token } = navigation.state.params;
+
+    console.log('navigation', opppsiteDepartment[this.state.pickerValue[0]]);
+    console.log('dep', opppsiteDepartment);
 
     const data = [
       {

@@ -56,7 +56,7 @@ const EXMAPLES = [
   },
 ];
 
-class NewQuestion extends PureComponent {
+class NewAnswer extends PureComponent {
 
   constructor(props) {
     super(props);
@@ -272,4 +272,4 @@ class NewQuestion extends PureComponent {
 
 export default connect(
   state => getCreateAnswerSelector(state),
-)(NewQuestion);
+)(NewAnswer);

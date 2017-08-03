@@ -7,19 +7,29 @@ import { connect } from 'react-redux';
 import { Picker } from 'antd-mobile';
 
 
-import { PutQuestionStyle as styles } from './styles/';
+import { BasicDataFirstStyle as styles } from './styles/';
 
 //import opposit department
-import { opppsiteDepartment } from '../utils/transferAbbr/';
+import { opppsiteDepartment } from '../utils/transferAbbr';
+
+import SelectPhoto from './TabThree/common/SelectPhoto';
 
 
-import { selectDep } from './TabTwo/data/';
+import {  selectTitle, mapTitle } from './TabOne/data/selectDep';
+console.log('selectTitle', selectTitle)
+
+// const selectTitle = [
+//   {
+//     label: 'hh',
+//     value: 'hhh',
+//   }
+// ]
 
 const CustomChildren = props => (
   <TouchableOpacity onPress={props.onClick}>
     <View style={styles.selectBox}>
-      <Text style={styles.department}>{props.department || '选择你的科室'}</Text>
-      <Image source={require('../img/triangle.png')} />
+      <Text style={styles.department}>{props.department || '选择你的职称'}</Text>
+      <Image source={require('./TabOne/img/triangle.png')} />
     </View>
   </TouchableOpacity>
 )
@@ -48,39 +58,38 @@ class BasicDataSecond extends PureComponent {
     const { pickerValue } = this.state;
 
     const { navigation } = this.props;
-    const DATA = [
-      'name',
-      'hospitalName',
-    ];
 
     let renderContent = null;
-    if (key === 0) {
+    if (key === 1) {
       renderContent = (
         <TextInput
               ref="textInput"
               style={[ styles.department, styles.textInput ]}
-              placeholder={key === 0 ? '头像' : '输入您的从医时间'}
-              onChangeText={(text) => this.setState({ DATA[key]: text })}
+              placeholder={'输入您的从医时间'}
+              onChangeText={(text) => this.setState({ doctorAge: text })}
               placeholderTextColor="#BFBFBF"
-              value={this.state[DATA[key]]}
+              value={this.state.doctorAge}
               maxLength={20}
               autoCorrect={false}
           />
       )
     }
 
-    if (key === 1) {
+    if (key === 0) {
       renderContent = (
-        <View style={styles.avatarBox}><Text style={styles.upLoadAvatar}>点击此处上传头像</Text></View>
+        <View style={styles.avatarBox}>
+          <Text style={styles.upLoadAvatar}>点击此处上传</Text>
+          <SelectPhoto avatar={this.state.avatar} basicPhoto={true} handleAddPic={this.handleAddPic} />
+        </View>
       )
     }
 
-    if (key === 3) {
+    if (key === 2) {
       renderContent = (
         <Picker
-          data={selectDep}
-          title='选择科室'
-          cols={2}
+          data={selectTitle}
+          title='选择您的职位'
+          cols={1}
           value={this.state.pickerValue}
           onChange={v => this.setState({ pickerValue: v })}
         >
@@ -102,6 +111,7 @@ class BasicDataSecond extends PureComponent {
           </View>
           <View style={styles.bottomBox}>
             {
+              renderContent
             }
           </View>
         </View>
