@@ -67,6 +67,8 @@ import NewAnswer from '../components/TabTwo/views/NewAnswer';
 //basic
 import BasicDataFirst from '../components/BasicDataFirst';
 import BasicDataSecond from '../components/BasicDataSecond';
+import BasicDataThird from '../components/BasicDataThird';
+import BasicDataFourth from '../components/BasicDataFourth';
 
 
 
@@ -90,6 +92,8 @@ export const BasicNavigator = StackNavigator(
   {
     BasicDataFirst: { screen: BasicDataFirst },
     BasicDataSecond: { screen: BasicDataSecond },
+    BasicDataThird: { screen: BasicDataThird },
+    BasicDataFourth: { screen: BasicDataFourth },
   },
   {
     navigationOptions: {

@@ -134,6 +134,9 @@ export const BasicDataFirstStyle = StyleSheet.create({
     width: width - 2 * px2dp(67),
     alignItems: 'flex-end',
   },
+  extraNext: {
+    marginTop: px2dp(25),
+  },
   detailInput: {
     height: px2dp(112),
     paddingBottom: 2,
@@ -215,6 +218,37 @@ export const BasicDataFirstStyle = StyleSheet.create({
     fontFamily: 'PingFangSC-Light',
     fontSize: px2dp(18),
     color: '#C8C8C8',
-  }
+  },
+
+  consultInputBox: {
+    height: px2dp(67),
+    width: px2dp(220),
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderBottomWidth: px2dp(1),
+    borderBottomColor: '#DADADA',
+    marginTop: px2dp(104),
+    marginBottom: px2dp(77),
+  },
+  inputInnerBox: {
+    width: px2dp(150),
+    height: px2dp(50),
+  },
+  consultInput: {
+    fontFamily: 'PingFangSC-Medium',
+    fontSize: px2dp(48),
+    color: '#09C79C',
+    width: px2dp(150),
+    height: px2dp(50),
+  },
+  vacuateBox: {
+    width: px2dp(308),
+    marginBottom: px2dp(73),
+  },
+  vacuate: {
+    fontFamily: 'PingFangSC-Light',
+    fontSize: px2dp(18),
+    color: '#000000',
+  },
 
 });

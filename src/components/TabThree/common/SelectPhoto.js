@@ -68,7 +68,9 @@ class SelectPhoto extends Component {
 
         const { handleAddPic } = this.props;
 
-        handleAddPic && handleAddPic(response.uri, 'data:image/jpeg;base64,' + response.data);
+
+        //sign for differentiate the avatar kind [id_card, doctor_license]
+        handleAddPic && handleAddPic(response.uri, 'data:image/jpeg;base64,' + response.data, this.props.sign);
       }
     });
   }

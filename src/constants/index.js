@@ -125,3 +125,8 @@ export const CLEAR = 'CLEAR';
 export const CLEAR_TOKEN = 'CLEAR_TOKEN';
 export const SET_TOKEN = 'SET_TOKEN';
 
+//change password action constants
+export const SUBMIT_VERIFY_DATA = 'SUBMIT_VERIFY_DATA';
+export const SUBMIT_VERIFY_DATA_SUCCESS = 'SUBMIT_VERIFY_DATA_SUCCESS';
+export const SUBMIT_VERIFY_DATA_ERROR = 'SUBMIT_VERIFY_DATA_ERROR';
+

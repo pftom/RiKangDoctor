@@ -28,7 +28,7 @@ console.log('selectTitle', selectTitle)
 const CustomChildren = props => (
   <TouchableOpacity onPress={props.onClick}>
     <View style={styles.selectBox}>
-      <Text style={styles.department}>{props.department || '选择你的职称'}</Text>
+      <Text style={styles.department}>{props.title || '选择你的职称'}</Text>
       <Image source={require('./TabOne/img/triangle.png')} />
     </View>
   </TouchableOpacity>
@@ -93,7 +93,7 @@ class BasicDataSecond extends PureComponent {
           value={this.state.pickerValue}
           onChange={v => this.setState({ pickerValue: v })}
         >
-          <CustomChildren department={pickerValue.length && pickerValue[1]} />
+          <CustomChildren title={pickerValue.length && pickerValue[0]} />
         </Picker>
       )
     }
@@ -119,9 +119,48 @@ class BasicDataSecond extends PureComponent {
     )
   }
 
+  handleAddPic = (photo) => {
+    this.setState({
+      avatar: photo,
+    })
+  }
+
+  handleSubmit = () => {
+    const { avatar, doctorAge, pickerValue } = this.state;
+    const { navigation } = this.props;
+
+    const { body } = navigation.state.params;
+
+    navigation.navigate('BasicDataThird', { body: { ...body, avatar, doctorAge, pickerValue }});
+
+    // if (avatar === 'https://facebook.github.io/react/img/logo_og.png') {
+    //   this.failToast('头像不能为空');
+    // } else if (isNaN(parseInt(doctorAge))) {
+    //   this.failToast('从医时间只能为数字');
+    // } else if (!pickerValue[0]) {
+    //   this.failToast('职位不能为空');
+    // } else {
+    //   navigation.navigate('BasicDataThird', { body: { ...body, avatar, doctorAge, pickerValue }});
+    // }
+  }
+
+  successToast(msg) {
+    Toast.success(msg, 1);
+  }
+
+  failToast(msg) {
+    Toast.fail(msg, 1);
+  }
+
+  loadingToast() {
+    Toast.loading('请稍后...', 1);
+  }
+
   render() {
     const { navigation, dispatch } = this.props;
     const { token } = navigation.state.params;
+
+    console.log('state', this.state.pickerValue)
 
     const data = [
       {
@@ -135,7 +174,7 @@ class BasicDataSecond extends PureComponent {
       {
         icon: require('./TabOne/img/kind.png'),
         title: '职位'
-      }
+      },
     ];
 
     return (
@@ -148,9 +187,9 @@ class BasicDataSecond extends PureComponent {
             data.map((item, key) => this.renderInputBox(item, key))
           }
         </View>
-        <View style={styles.nextBox}>
-          <TouchableOpacity onPress={() => { navigation.navigate('BasicDataSecond', { token, dispatch, title: this.state.text, department: opppsiteDepartment[this.state.pickerValue[1]] }) }}>
-            <Image source={require('./TabOne/img/submitData.png')} />
+        <View style={[ styles.nextBox, styles.extraNext ]}>
+          <TouchableOpacity onPress={() => { this.handleSubmit() }}>
+            <Image source={require('./TabOne/img/next.png')} />
           </TouchableOpacity>
         </View>
       </View>
