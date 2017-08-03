@@ -1,10 +1,10 @@
 import React, { PureComponent } from 'react';
-import { TouchableOpacity, Text, KeyboardAvoidingView, Platform, View, ScrollView, Image, TouchableHighlight } from 'react-native';
+import { TouchableOpacity, Text, KeyboardAvoidingView, ListView, Platform, View, ScrollView, Image, TouchableHighlight } from 'react-native';
 
 import { NavigationActions } from 'react-navigation';
 import { connect } from 'react-redux';
 
-import { List, TextareaItem } from 'antd-mobile';
+import { List, TextareaItem, Toast, } from 'antd-mobile';
 const Item = List.Item;
 
 //import async action constants
@@ -34,6 +34,9 @@ import { handleQuestion, handleAnswers } from '../data/';
 //import style
 import { NewQuestionStyle as styles } from '../styles/';
 
+//import style
+import { QaDetailStyle as qaStyles } from '../styles/';
+
 
 //import list
 import { UltimateFlatList } from '../../common/';
@@ -61,11 +64,37 @@ class NewAnswer extends PureComponent {
   constructor(props) {
     super(props);
 
+    const bodyData = [
+      {
+        title: '疾病预测',
+        placeholder: '在此处填写疾病预测',
+        sign: 'diagnosis',
+      },
+      {
+        title: '药物选择',
+        placeholder: '在此处填写疾病预测',
+        sign: 'prescription',
+      },
+      {
+        title: '推荐疗程',
+        placeholder: '在此处填写疾病预测',
+        sign: 'course',
+      },
+      {
+        title: '指导建议',
+        placeholder: '在此处填写疾病预测',
+        sign: 'advice',
+      },
+    ];
+
+    const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+
     this.state = {
       diagnosis: '',
       prescription: '',
       course: '',
       advice: '',
+      dataSource: ds.cloneWithRows(bodyData)
     };
   }
 
@@ -73,8 +102,8 @@ class NewAnswer extends PureComponent {
     const { navigation, dispatch } = this.props;
     const { token, id } = navigation.state.params;
 
-    // dispatch({ type: GET_SINGLE_QUESTION, payload: { token, id }});
-    // dispatch({ type: GET_SINGLE_QUESTION_ALL_IMG, payload: { token, id }});
+    dispatch({ type: GET_SINGLE_QUESTION, payload: { token, id }});
+    dispatch({ type: GET_SINGLE_QUESTION_ALL_IMG, payload: { token, id }});
   }
 
   componentWillReceiveProps(nextProps) {
@@ -96,7 +125,7 @@ class NewAnswer extends PureComponent {
   handleBtn = () => {
     const { navigation, dispatch } = this.props;
     const { token, id } = navigation.state.params;
-    const { diagnosis, prescription, course, advice } = this.props;
+    const { diagnosis, prescription, course, advice } = this.state;
 
     if (diagnosis.length === 0) {
       this.failToast('疾病预测不能为空');
@@ -126,10 +155,9 @@ class NewAnswer extends PureComponent {
     Toast.success(msg, 1);
 
     const resetAction = NavigationActions.reset({
-      index: 0,
+      index: 1,
       actions: [
         NavigationActions.navigate({ routeName: 'TabBarNavigation' }),
-        NavigationActions.navigate({ routeName: 'TabTwoNavigation' }),
         NavigationActions.navigate({ 
           routeName: 'QuestionDetail',  
           params: {
@@ -153,6 +181,12 @@ class NewAnswer extends PureComponent {
     Toast.loading('请稍后...', 1);
   }
 
+  handleInput = (sign, text) => {
+    this.setState({
+      [sign]: text
+    });
+  }
+
   render() {
     const { question, AllImg, dispatch, navigation } = this.props;
     const { token, id } = navigation.state.params;
@@ -169,18 +203,18 @@ class NewAnswer extends PureComponent {
     let header = null;
     if (question) {
       header = () => (
-        <View style={styles.questionContainer}>
-          <View style={styles.topBox}>
-              <Text style={styles.title}>
+        <View style={qaStyles.questionContainer}>
+          <View style={qaStyles.topBox}>
+              <Text style={qaStyles.title}>
                 {question.get('title')}
               </Text>  
               
             </View>
-            <View style={styles.body}>
-              <Text style={styles.content}>{question.get('body')}</Text>
+            <View style={qaStyles.body}>
+              <Text style={qaStyles.content}>{question.get('body')}</Text>
             </View>
             
-            <View style={styles.imgBox}>
+            <View style={qaStyles.imgBox}>
               <ScrollView
                 horizontal={true}
                 showsHorizontalScrollIndicator={false}
@@ -188,41 +222,16 @@ class NewAnswer extends PureComponent {
                 {
                   IMGS.map((item, key) => (
                     <TouchableOpacity key={key} onPress={() => navigation.navigate('ImageView', { media: IMGS })}>
-                      <Image source={{ uri: item.photo }} style={styles.photo} />
+                      <Image source={{ uri: item.photo }} style={qaStyles.photo} />
                     </TouchableOpacity>
                   ))
                 }
               </ScrollView>
             </View>
-            <View style={styles.graySpace}/>
         </View>
       );
     }
 
-
-    const bodyData = [
-      {
-        title: '疾病预测',
-        placeholder: '在此处填写疾病预测',
-        sign: 'diagnosis',
-        
-      },
-      {
-        title: '药物选择',
-        placeholder: '在此处填写疾病预测',
-        sign: 'prescription',
-      },
-      {
-        title: '推荐疗程',
-        placeholder: '在此处填写疾病预测',
-        sign: 'course',
-      },
-      {
-        title: '指导建议',
-        placeholder: '在此处填写疾病预测',
-        sign: 'advice',
-      },
-    ];
 
     return (
           <KeyboardAvoidingView 
@@ -230,41 +239,39 @@ class NewAnswer extends PureComponent {
             behavior={ Platform.OS === 'ios' ? 'position' : 'height'}
             keyboardVerticalOffset={-100}
           >
-            {
-              header
-            }
             <Header
               logoLeft={true}
               headerText={"新的回答"}
               navigation={navigation}
               showGradient={true}
             />
-            <ScrollView
+            <ListView
               showsVerticalScrollIndicator={false}
               style={styles.scrollView}
-            >
-              {
-                bodyData.map((item, key) => (
-                  <List key={key} style={{ marginTop: px2dp(12) }}>
+              dataSource={this.state.dataSource}
+              renderRow={(item) => (
+                <List style={{ marginTop: px2dp(12) }}>
                     <Item>{item.title}</Item>
                     <TextareaItem
                       placeholder={item.placeholder}
-                      value={this.state[item.sign]}
                       count={200}
                       rows={5}
-                      onChange={(text) => { this.setState({ [item.sign]: text }) }}
+                      onChange={(text) => { this.handleInput(item.sign, text) }}
                     />
                   </List>
-                ))
-              }
-              <View style={styles.BottomBtn}>
-                <TouchableHighlight onPress={() => { this.handleBtn() }} style={styles.buttonContainer}>
-                  <View style={styles.buttonBox}>
-                    <Text style={[ styles.content, this.props.textStyle ]}>提交回答</Text>
-                  </View>
-                </TouchableHighlight>
-              </View>
-            </ScrollView>
+              )}
+              renderFooter={() => (
+                <View style={styles.BottomBtn}>
+                  <TouchableHighlight onPress={() => { this.handleBtn() }} style={styles.buttonContainer}>
+                    <View style={styles.buttonBox}>
+                      <Text style={[ styles.content, this.props.textStyle ]}>提交回答</Text>
+                    </View>
+                  </TouchableHighlight>
+                </View>
+              )}
+
+              renderHeader={header}
+            />
         </KeyboardAvoidingView>
     )
   }

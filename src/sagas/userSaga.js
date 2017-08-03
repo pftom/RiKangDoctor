@@ -38,6 +38,10 @@ import {
   SUBMIT_VERIFY_DATA,
   SUBMIT_VERIFY_DATA_SUCCESS,
   SUBMIT_VERIFY_DATA_ERROR,
+
+  GET_DOCTOR_PROFILE,
+  GET_DOCTOR_PROFILE_SUCCESS,
+  GET_DOCTOR_PROFILE_ERROR,
 } from '../constants/';
 
 //import request api
@@ -114,6 +118,18 @@ function* verifySmsCode(payload) {
     yield put({ type: REGISTER_SEND_MESSAGE_SUCCESS, phone });
   } catch (error) {
     yield put({ type: REGISTER_SEND_MESSAGE_ERROR, error });
+  }
+}
+
+
+function* getDoctorProfile(payload) {
+  try {
+    const { token } = payload;
+    const doctorProfile = yield call(request.get, base + usersApi.doctorProfile, null, token);
+
+    yield put({ type: GET_DOCTOR_PROFILE_SUCCESS, doctorProfile });
+  } catch (error) {
+    yield put({ type: GET_DOCTOR_PROFILE_ERROR, error });
   }
 }
 
@@ -214,6 +230,13 @@ function* watchSubmitVerifyCode() {
 }
 
 
+function* watchGetDoctorProfile() {
+  while (true) {
+    const { payload } = yield take(GET_DOCTOR_PROFILE);
+    yield call(getDoctorProfile, payload)
+  }
+}
+
 
 export {
   loginFlow,
@@ -225,4 +248,5 @@ export {
   feedbackFlow,
 
   watchSubmitVerifyCode,
+  watchGetDoctorProfile,
 }

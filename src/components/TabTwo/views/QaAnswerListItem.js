@@ -18,14 +18,14 @@ class QaAnswerListItem extends PureComponent {
     super(props);
 
     this.state = {
-      spread: false,
+      spread: true,
     }
   }
 
   renderItem = (item, key) => {
 
     return (
-      <View style={[ styles.itemBox, key === 3 && styles.noBorder ]} key={key}>
+      <View style={styles.itemBox} key={key}>
         <View style={styles.leftBox}>
           <Image source={item.icon} />
           <Text style={styles.title}>{item.title}</Text>
@@ -37,21 +37,9 @@ class QaAnswerListItem extends PureComponent {
     )
   }
 
-  renderBottomBox = (itemData) => {
-    const { navigation, item, token } = this.props;
-
-    return (
-      <TouchableOpacity onPress={() => { navigation.navigate('CommentList', { token, id: item.question }) }}>
-        <View style={styles.iconBox}>
-          <Image source={itemData.img} />
-          <Text style={styles.iconText}>{itemData.text}</Text>
-        </View>
-      </TouchableOpacity>
-    )
-  }
-
   render() {
     const { item, navigation, token } = this.props;
+    const { userId } = navigation.state.params;
     //answer listitem data
     const midBoxData = [
       {
@@ -77,46 +65,54 @@ class QaAnswerListItem extends PureComponent {
     ];
 
     return (
-      <TouchableWithoutFeedback onPress={() => { navigation.navigate('QuestionDetail', { token, id: item.question})}}>
-        <View style={styles.answerContainer}>
-          <View style={styles.answerBox}>
-            <Text style={styles.question_title}>{'关于'}<Text style={styles.ques_inner_title}>{'“'}{item.question_title}{'”'}</Text>{'的回答'}</Text>
-            <View style={styles.bottomBox}>
-
-              {this.renderBottomBox({ 
-                img: require('../../TabOne/img/comment.png'),
-                text: item.comment_num,
-              })}
-
-              <TouchableWithoutFeedback onPress={() => { this.setState({ spread: !this.state.spread })}}>
-                {
-                  !this.state.spread
-                  ? (
-                    <View style={styles.spreadBox}>
-                        <Image source={require('../../TabOne/img/spread.png')} />
-                        <Text style={styles.spread}>展开</Text>
-                    </View>
-                  )
-                  : (
-                    <View style={styles.spreadBox}>
-                        <Image source={require('../../common/img/up.png')} />
-                        <Text style={styles.spread}>收起</Text>
-                    </View>
-                  )
-                }
-              </TouchableWithoutFeedback>
-
+      <View style={styles.answerContainer}>
+        <View style={styles.answerBox}>
+          <View style={styles.answerHead}>
+            <View style={styles.doctorAvatarBox}>
+              <Image source={{ uri: item.owner.avatar }} style={styles.doctorAvatar} />
             </View>
-            <View style={styles.answerMid}>
+            <View style={styles.idBox}>
+              <Text style={styles.name}>{item.owner.name}</Text>
+              <Text style={styles.location}>
+                {item.owner.hospital_name}{transferDepartment[item.owner.department]}{transferTitle[item.owner.title]}
+              </Text>
+            </View>
+            <TouchableWithoutFeedback onPress={() => { this.setState({ spread: !this.state.spread })}}>
               {
-                this.state.spread && (
-                  midBoxData.map((item, key) => this.renderItem(item, key))
+                this.state.spread
+                ? (
+                  <View style={styles.spreadBox}>
+                      <Image source={require('../../TabOne/img/spread.png')} />
+                      <Text style={styles.spread}>展开</Text>
+                  </View>
+                )
+                : (
+                  <View style={styles.spreadBox}>
+                      <Image source={require('../../common/img/up.png')} />
+                      <Text style={styles.spread}>收起</Text>
+                  </View>
                 )
               }
-            </View>
+            </TouchableWithoutFeedback>
+          </View>
+          <View style={styles.answerMid}>
+            {
+              this.state.spread && (
+                midBoxData.map((item, key) => this.renderItem(item, key))
+              )
+            }
+          </View>
+          <View style={styles.tagContainer}>
+            <TagBox 
+              help={true} 
+              item={item} 
+              btnText={"向TA求助"} 
+              navigation={navigation}
+              token={token}
+            />
           </View>
         </View>
-      </TouchableWithoutFeedback>
+      </View>
     )
   }
 }

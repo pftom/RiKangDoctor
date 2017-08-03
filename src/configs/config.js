@@ -31,8 +31,6 @@ export const usersApi = {
   changePassword: 'users/change-password',
   feedback: 'feedback/',
   doctorInit: 'users/doctor-init/',
-  doctorProfile: 'users/doctor-profile/',
-  updateDoctorProfile: 'users/doctor-profile/',
   doctorInfo: 'users/doctor-info/',
   updateDoctorInfo: 'users/doctor-info/',
   patientProfile: 'users/patient/profile/',
@@ -44,6 +42,7 @@ export const usersApi = {
   patientServices: 'users/patient/services/',
 
   doctorInit: 'users/doctor/init',
+  doctorProfile: 'users/doctor/profile/',
 };
 
 export const qaApi = {
@@ -59,7 +58,6 @@ export const qaSingleApi = (id) => ({
   singleQuestionStar: `qa/questions/${id}/star`,
   cancelsingleQuestionStar: `qa/questions/${id}/unstar`,
   singleQuestionAnswer: `qa/questions/${id}/answers/`,
-  addSingleQuestionAnswers: `qa/questions/${id}/answers/new/`,
   singleAnswer: `qa/answers/${id}/`,
   singleAnswerUpvote: `qa/answers/${id}/upvote/`,
   singleAnswerAllComments: `qa/answers/${id}/comments/`,

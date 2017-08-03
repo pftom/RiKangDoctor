@@ -56,8 +56,8 @@ function* getSingleQuestionAllAnswer(payload) {
 function* createAnswerForSingleQuestion(payload) {
   try {
     const { id, token, body } = payload;
-    const createdAnswer = yield call(request.post, base + qaSingleApi(id).addSingleQuestionAnswer, body, token);
-    yield put({ type: CREATE_SINGLE_QUESTION_ANSWER_SUCCESS, createdAnswer });
+    const createdAnswer = yield call(request.post, base + qaSingleApi(id).createSingleQuestionAnswer, body, token);
+    yield put({ type: CREATE_SINGLE_QUESTION_ANSWER_SUCCESS });
   } catch (error) {
     yield put({ type: CREATE_SINGLE_QUESTION_ANSWER_ERROR });
   }

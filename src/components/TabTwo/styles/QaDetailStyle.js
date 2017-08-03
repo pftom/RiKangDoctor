@@ -28,6 +28,7 @@ export const QaDetailStyle = StyleSheet.create({
     width: px2dp(323),
     marginLeft: px2dp(26),
     marginTop: px2dp(10),
+    marginBottom: px2dp(10),
   },
   photo: {
     width: px2dp(80),

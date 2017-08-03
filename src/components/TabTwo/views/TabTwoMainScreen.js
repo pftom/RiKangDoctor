@@ -11,13 +11,15 @@ import {
 import { connect } from 'react-redux';
 
 //import action constants
-import { GET_QUESTIONS, GET_SINGLE_DOCTOR_ANSWERS, } from '../../../constants/'
+import { GET_QUESTIONS, GET_SINGLE_DOCTOR_ANSWERS, GET_DOCTOR_PROFILE } from '../../../constants/'
 //import selector
 import { getQaSelector } from '../../../selectors/'
 
 import QuestionListItem from './QuestionListItem';
 //import list data
 import QaAnswerListItem from './QaAnswerListItem';
+
+import DoctorAnswerListItem from './DoctorAnswerlistItem';
 
 //import list
 import { UltimateFlatList } from '../../common/';
@@ -54,10 +56,10 @@ class QaScreen extends PureComponent {
   }
 
   componentDidMount() {
-    const { navigation, dispatch, token, userId } = this.props;
+    const { navigation, dispatch, token, doctorId } = this.props;
 
     dispatch({ type: GET_QUESTIONS, payload: { token, refresh: true }});
-    dispatch({ type: GET_SINGLE_DOCTOR_ANSWERS, payload: { token, id: userId, refresh: true }});
+    dispatch({ type: GET_SINGLE_DOCTOR_ANSWERS, payload: { token, id: doctorId, refresh: true }});
   }
 
   renderItem = (item, kind) => {
@@ -68,7 +70,7 @@ class QaScreen extends PureComponent {
     }
 
     if (kind === 'answerList') {
-      return <QaAnswerListItem  token={token} navigation={navigation} item={item} />
+      return <DoctorAnswerListItem  token={token} navigation={navigation} item={item} />
     }
   }
   

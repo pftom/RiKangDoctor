@@ -65,14 +65,22 @@ class QuestionDetail extends PureComponent {
     const { navigation, dispatch } = this.props;
     const { token, id } = navigation.state.params;
 
-    // dispatch({ type: GET_SINGLE_QUESTION, payload: { token, id }});
-    // dispatch({ type: GET_SINGLE_QUESTION_ALL_IMG, payload: { token, id }});
-    // dispatch({ type: GET_SINGLE_QUESTION_ALL_ANSWERS, payload: { token, id, refresh: true }});
+    dispatch({ type: GET_SINGLE_QUESTION, payload: { token, id }});
+    dispatch({ type: GET_SINGLE_QUESTION_ALL_IMG, payload: { token, id }});
+    dispatch({ type: GET_SINGLE_QUESTION_ALL_ANSWERS, payload: { token, id, refresh: true }});
+  }
+
+  handleBtn = () => {
+    const { navigation } = this.props;
+    const { token, id } = navigation.state.params;
+    navigation.navigate('NewAnswer', { id, token });
   }
 
   render() {
     const { question, userId, AllImg, dispatch, navigation, answers } = this.props;
     const { token, id } = navigation.state.params;
+
+    console.log('question', question);
 
     let answerList = [];
     if (answers) {
@@ -138,7 +146,6 @@ class QuestionDetail extends PureComponent {
           navigation={navigation}
           showGradient={true}
         />
-
         {
           answers && (
             <UltimateFlatList

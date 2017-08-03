@@ -18,6 +18,8 @@ import {
   GET_SERVICE_ORDER,
   ACCEPT_SERVICE_ORDER,
   CLEAR_ORDER_STATE,
+
+  GET_DOCTOR_PROFILE,
  } from '../../../constants/'
 
 //import selector from select data
@@ -50,6 +52,7 @@ class TabOneMainScreen extends PureComponent {
     const { dispatch, navigation, token } = this.props;
 
     // dispatch({ type: GET_SERVICE_ORDER, payload: { token } });
+    dispatch({ type: GET_DOCTOR_PROFILE, payload: { token } });
   } 
 
   renderItem = (item, kind) => {

@@ -11,6 +11,7 @@ import {
   feedbackFlow,
 
   watchSubmitVerifyCode,
+  watchGetDoctorProfile,
 } from './userSaga';
 
 //import posts sagas
@@ -57,7 +58,6 @@ import {
   watchGetQuestions,
   watchGetSingleQuestion,
   watchGetSingleQuestionAllImg,
-  watchCreateSIngleQuestionAnswer,
 } from './questionSaga'
 
 //answers watch and handle func
@@ -88,15 +88,19 @@ export default function* rootSaga() {
     watchAcceptOrder(),
     watchGetServiceOrder(),
     watchSubmitVerifyCode(),
+    watchGetDoctorProfile(),
 
-    watchCreateSIngleQuestionAnswer(),
     watchGetQuestions(),
     watchGetSingleQuestion(),
     watchGetSingleQuestionAllImg(),
   
-    watchCreateSIngleQuestionAnswer(),
 
     watchDoctorAnswers(),
+    watchGetSingleQuestionAllAnswers(),
+    watchCreateSingleQuestionAnswer(),
+
+    watchGetAnswerAllComments(),
+    watchCreateSingleQuestionAnswerComment(),
   ]);
 }
 
@@ -132,10 +136,8 @@ export default function* rootSaga() {
 //     watchCancelStarSingleQuestion(),
 
 
-//     watchGetSingleQuestionAllAnswers(),
-//     watchCreateSingleQuestionAnswer(),
-//     watchGetSingleQuestionAnswer(),
-//     watchUpvoteSingleQuestionAnswer(),
-//     watchGetAnswerAllComments(),
-//     watchCreateSingleQuestionAnswerComment(),
-//     watchClearCommentState(),
+    
+    
+    
+    // watchUpvoteSingleQuestionAnswer(),
+    

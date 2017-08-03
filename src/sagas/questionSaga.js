@@ -21,10 +21,6 @@ import {
   GET_SINGLE_QUESTION_ALL_IMG_SUCCESS,
   GET_SINGLE_QUESTION_ALL_IMG_ERROR,
 
-  CREATE_SINGLE_QUESTION_ANSWER,
-  CREATE_SINGLE_QUESTION_ANSWER_SUCCESS,
-  CREATE_SINGLE_QUESTION_ANSWER_ERROR,
-
   CLEAR_NEW_ANSWER_STATE,
 
 } from '../constants/';
@@ -79,18 +75,6 @@ function* getSingleQuestionAllImg(payload) {
   }
 }
 
-function* createSingleQuestionAnswer(payload) {
-  try {
-    const { token, id, body } = payload;
-
-    yield call(request.post, base + qaSingleApi(id).createSingleQuestionAnswer, body, token );
-
-    yield put({ type: CREATE_SINGLE_QUESTION_ANSWER_SUCCESS });
-  } catch (error) {
-    yield put({ type: CREATE_SINGLE_QUESTION_ANSWER_ERROR, error });
-  }
-}
-
 
 
 
@@ -120,13 +104,6 @@ function* watchGetSingleQuestionAllImg() {
   }
 }
 
-function* watchCreateSIngleQuestionAnswer() {
-  while (true) {
-    const { payload } = yield take(CREATE_SINGLE_QUESTION_ANSWER);
-    yield call(createSingleQuestionAnswer, payload);
-  }
-}
-
 
 
 
@@ -136,6 +113,4 @@ export {
   watchGetQuestions,
   watchGetSingleQuestion,
   watchGetSingleQuestionAllImg,
-  
-  watchCreateSIngleQuestionAnswer,
 }

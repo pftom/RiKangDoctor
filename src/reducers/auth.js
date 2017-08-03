@@ -39,6 +39,10 @@ import {
   SUBMIT_VERIFY_DATA_ERROR,
 
   CLEAR_VERIFY_DATA_STATE,
+
+  GET_DOCTOR_PROFILE,
+  GET_DOCTOR_PROFILE_SUCCESS,
+  GET_DOCTOR_PROFILE_ERROR,
 } from '../constants/'
 import { persistor } from '../store';
 
@@ -78,6 +82,11 @@ const initialAuthState = Immutable.Map({
   isSubmitVerifyCode: false,
   submitVerifyCodeSuccess: false,
   submitVerifyCodeError: false,
+
+  doctorProfile: null,
+  isGetDoctorProfile: false,
+  getDoctorProfileSuccess: false,
+  getDoctorProfileError: false,
 });
 
 const auth = function auth(state = initialAuthState, action) {
@@ -306,6 +315,31 @@ const auth = function auth(state = initialAuthState, action) {
         verifyCodeSuccess: false,
         verifyCodeError: false,
       });
+
+    case GET_DOCTOR_PROFILE:
+
+      return state.merge({
+        isGetDoctorProfile: true,
+        getDoctorProfileSuccess: false,
+        getDoctorProfileError: false,
+      });
+
+    case GET_DOCTOR_PROFILE_SUCCESS:
+
+    const { doctorProfile } = action;
+
+      return state.merge({
+        isGetDoctorProfile: false,
+        getDoctorProfileSuccess: true,
+        doctorProfile,
+      })
+
+    case GET_DOCTOR_PROFILE_ERROR:
+
+      return state.merge({
+        isGetDoctorProfile: false,
+        getDoctorProfileError: true,
+      })
       
     case CLEAR_TOKEN: 
 

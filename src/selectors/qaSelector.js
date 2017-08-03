@@ -10,10 +10,11 @@ const getMyQuestions = (state) => state.getIn(['patient', 'questionFav']);
 
 const getUserId = (state) => state.getIn(['auth', 'id']);
 const getDoctorAnswers = (state) => state.getIn(['doctor', 'answers']);
+const getDoctorId = (state) => state.getIn(['auth', 'doctorProfile', 'id']);
 
 const getQaSelector = createSelector(
-  [ getToken, getQuestions, getQuestionStarredFav, getMyQuestions, getUserId, getDoctorAnswers ],
-  (token, questions, questionStarredFav, questionFav, userId, answers ) => {
+  [ getToken, getQuestions, getQuestionStarredFav, getMyQuestions, getUserId, getDoctorAnswers, getDoctorId ],
+  (token, questions, questionStarredFav, questionFav, userId, answers, doctorId ) => {
       return {
       token,
       questions,
@@ -21,6 +22,7 @@ const getQaSelector = createSelector(
       questionFav,
       userId,
       answers,
+      doctorId,
     }
   }
 );
@@ -45,13 +47,14 @@ const getCreateAnswerSuccess = (state) => state.getIn(['qa', 'createAnswerSucces
 const getCreateAnswerError = (state) => state.getIn(['qa', 'createAnswerError']);
 
 const getCreateAnswerSelector = createSelector(
-  [ getQuestion, getQuestionAllImg, getIsCreateAnswer, getCreateAnswerSuccess, getCreateAnswerError ],
-  (question, AllImg, isCreateAnswer, createAnswerSuccess, createAnswerError) => ({
+  [ getQuestion, getQuestionAllImg, getIsCreateAnswer, getCreateAnswerSuccess, getCreateAnswerError, getDoctorId ],
+  (question, AllImg, isCreateAnswer, createAnswerSuccess, createAnswerError, doctorId) => ({
     question,
     AllImg, 
     isCreateAnswer,
     createAnswerSuccess,
     createAnswerError,
+    doctorId,
   })
 );
 
