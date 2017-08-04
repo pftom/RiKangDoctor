@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Dimensions, } from 'react-native';
+import { StyleSheet, Dimensions,  Platform } from 'react-native';
 
 
 //import screen adapt util
@@ -57,7 +57,14 @@ export const QaAnswerListStyle = StyleSheet.create({
     letterSpacing: px2dp(-0.28),
   },  
   spreadBox: {
-    width: px2dp(24),
+    ...Platform.select({
+      ios: {
+        width: px2dp(24),
+      },
+      android: {
+        width: px2dp(30),
+      }
+    }),
     alignItems: 'center',
     height: px2dp(43),
     justifyContent: 'center',
@@ -80,7 +87,14 @@ export const QaAnswerListStyle = StyleSheet.create({
     borderBottomColor: '#DDDDDD',
     flexDirection: 'row',
     marginTop: px2dp(14),
-    height: px2dp(51),
+    ...Platform.select({
+      ios: {
+        height: px2dp(51),
+      },
+      android: {
+        height: px2dp(55),
+      }
+    }),
     alignItems: 'center',
     paddingBottom: px2dp(9),
   }, 
@@ -89,7 +103,14 @@ export const QaAnswerListStyle = StyleSheet.create({
     borderBottomColor: '#FFF',
   },
   leftBox: {
-    width: px2dp(48),
+    ...Platform.select({
+      ios: {
+        width: px2dp(48),
+      },
+      android: {
+        width: px2dp(55),
+      }
+    }),
     justifyContent: 'center',
     alignItems: 'center',
     marginRight: px2dp(40),
