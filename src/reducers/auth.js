@@ -77,7 +77,7 @@ const initialAuthState = Immutable.Map({
   feedbackError: false,
 
   authCode: Immutable.Map({
-    status: 1,
+    status: 2,
   }),
   id: null,
 
