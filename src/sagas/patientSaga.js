@@ -34,6 +34,10 @@ import {
   UPDATE_DOCTOR_INFO,
   UPDATE_DOCTOR_INFO_ERROR,
   UPDATE_DOCTOR_INFO_SUCCESS,
+
+  GET_DOCTOR_INCOME,
+  GET_DOCTOR_INCOME_SUCCESS,
+  GET_DOCTOR_INCOME_ERROR,
 } from '../constants/';
 
 //import request api
@@ -145,6 +149,18 @@ function* getPatientServices(payload) {
   }
 }
 
+  //get doctor income
+function* getDoctorIncome(payload) {
+  try {
+    const { token } = payload;
+    const doctorIncome = yield call(request.get, base + usersApi.doctorIncome, null, token);
+    yield put({ type: GET_DOCTOR_INCOME_SUCCESS, doctorIncome });
+  } catch (error) {
+    yield put({ type: GET_DOCTOR_INCOME_ERROR, error });
+  }
+}
+
+
 
 
 
@@ -219,6 +235,16 @@ function* watchGetPatientServices() {
   }
 }
 
+//doctor income async actions watch function
+function* watchGetDoctorIncome() {
+  while (true) {
+    const { payload } = yield take(GET_DOCTOR_INCOME);
+    // fork return a Task object for cancel later
+    yield call(getDoctorIncome, payload);
+  }
+}
+
+
 
 
 
@@ -232,4 +258,6 @@ export {
   watchGetPatientServices,
   watchGetPatientStarredQuestions,
   watchUpdateDoctorInfo,
+
+  watchGetDoctorIncome,
 }

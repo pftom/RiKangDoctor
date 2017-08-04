@@ -42,6 +42,7 @@ export const usersApi = {
   doctorInit: 'users/doctor/init',
   doctorProfile: 'users/doctor/profile/',
   doctorInfo: 'users/doctor/info/',
+  doctorIncome: 'users/doctor/income/'
 };
 
 export const qaApi = {

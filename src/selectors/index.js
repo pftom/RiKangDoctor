@@ -9,6 +9,8 @@ import {
   getDoctorSelector,
   getDoctorInfoSelector, 
   getDoctorsSelector,
+
+  getDoctorIncomeSelector,
 } from './doctorSelector';
 
 import {
@@ -43,6 +45,7 @@ export {
 
   getDoctorProfileSelector,
   getDoctorInfoSelector,
+  getDoctorIncomeSelector,
 
   getDoctorSelector,
   getPatientProfileSelector,

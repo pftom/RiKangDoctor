@@ -150,7 +150,8 @@ class PatientPersonInfo extends PureComponent {
         <ScrollView
           showsVerticalScrollIndicator={false}
           style={{
-            height: px2dp(height - px2dp(81))
+            height: px2dp(height - px2dp(81)),
+            marginBottom: px2dp(10),
           }}
         >
           <List style={{ marginTop: 16 }}>

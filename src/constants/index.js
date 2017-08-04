@@ -83,6 +83,11 @@ export const CLEAR_ORDER_STATE = 'CLEAR_ORDER_STATE';
   USER section
 */
 
+//get questions action constants
+export const GET_DOCTOR_INCOME = 'GET_DOCTOR_INCOME';
+export const GET_DOCTOR_INCOME_SUCCESS = 'GET_DOCTOR_INCOME_SUCCESS';
+export const GET_DOCTOR_INCOME_ERROR = 'GET_DOCTOR_INCOME_ERROR';
+
 //doctor profile action type
 export const GET_DOCTOR_PROFILE = 'GET_DOCTOR_PROFILE';
 export const GET_DOCTOR_PROFILE_SUCCESS = 'GET_DOCTOR_PROFILE_SUCCESS';

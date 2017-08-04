@@ -47,6 +47,7 @@ import Chat from '../im/Chat';
  * service section screen
 */
 import ConsultOrder from '../components/TabOne/views/ConsultOrder';
+import Income from '../components/TabThree/views/Income';
 
 
 /*
@@ -141,6 +142,8 @@ export const AppNavigator = StackNavigator({
     ImageView: { screen: ImageView },
     CommentList: { screen: CommentList },
     NewAnswer: { screen: NewAnswer },
+
+    Income: { screen: Income },
 
     BasicDataFirst: { screen: BasicDataFirst },
     BasicDataSecond: { screen: BasicDataSecond },

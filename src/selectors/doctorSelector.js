@@ -51,3 +51,12 @@ export const getDoctorsSelector = createSelector(
     doctors,
   }),
 );
+
+const getDoctorIncome = (state) => state.getIn(['patient', 'doctorIncome']);
+
+export const getDoctorIncomeSelector = createSelector(
+  [ getDoctorIncome ],
+  (doctorIncome) => ({
+    doctorIncome,
+  }),
+);

@@ -65,6 +65,8 @@ import {
   GET_DOCTOR_INFO,
   GET_DOCTOR_INFO_SUCCESS,
   GET_DOCTOR_INFO_ERROR,
+
+  GET_DOCTOR_INCOME_SUCCESS,
 } from '../constants/';
 
 //import util for update data
@@ -107,6 +109,7 @@ const initialPatientValue = Map({
   submitProfileSuccess: false,
 
   doctorInfo: null,
+  doctorIncome: null,
 });
 
 
@@ -356,6 +359,14 @@ const patient = (state = initialPatientValue, action) => {
               isLoadingData: false,
               loadingSuccess: true,
             });
+
+    case GET_DOCTOR_INCOME_SUCCESS:
+            
+      const { doctorIncome } = action;
+
+      return state.merge({
+        doctorIncome,
+      });
 
     case REHYDRATE: 
 

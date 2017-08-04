@@ -53,6 +53,8 @@ import {
   watchGetPatientServices,
   watchGetPatientStarredQuestions,
   watchUpdateDoctorInfo,
+
+  watchGetDoctorIncome,
 } from './patientSaga';
 
 //question watch and handle func
@@ -93,6 +95,7 @@ export default function* rootSaga() {
     watchGetDoctorProfile(),
     watchGetDoctorInfo(),
     watchUpdateDoctorInfo(),
+    watchGetDoctorIncome(),
 
     watchGetQuestions(),
     watchGetSingleQuestion(),
