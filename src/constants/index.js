@@ -84,6 +84,9 @@ export const CLEAR_ORDER_STATE = 'CLEAR_ORDER_STATE';
 */
 
 //get questions action constants
+export const GO_HOME = 'GO_HOME';
+
+//get questions action constants
 export const GET_DOCTOR_INCOME = 'GET_DOCTOR_INCOME';
 export const GET_DOCTOR_INCOME_SUCCESS = 'GET_DOCTOR_INCOME_SUCCESS';
 export const GET_DOCTOR_INCOME_ERROR = 'GET_DOCTOR_INCOME_ERROR';

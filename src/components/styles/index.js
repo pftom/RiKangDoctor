@@ -21,6 +21,8 @@ import { FinishedListItemStyle } from './FinishedListItemStyle';
 import { HeaderSectionStyle } from './HeaderSectionStyle';
 import { BasicDataFirstStyle } from './BasicDataFirstStyle';
 
+import { SubmitSuccessStyle } from './SubmitSuccessStyle';
+
 
 export {
   ContainerStyle,
@@ -39,6 +41,7 @@ export {
   CommentListStyle,
   PostDetailStyle,
   SelectBoxStyle,
+  SubmitSuccessStyle,
 
   PutQuestionStyle,
   ConsultOrderStyle,
