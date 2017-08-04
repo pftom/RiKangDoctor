@@ -88,3 +88,18 @@ export const getUpdateDoctorInfoSelector = createSelector(
     updateInfoError,
   }),
 );
+
+
+const getIsSubmitVerifyCode = (state) => state.getIn(['auth', 'isSubmitVerifyCode']);
+const getSubmitVerifyCodeSuccess = (state) => state.getIn(['auth', 'submitVerifyCodeSuccess']);
+const getSubmitVerifyCodeError = (state) => state.getIn(['auth', 'submitVerifyCodeError']);
+
+export const getSubmitVerifyCodeSelector = createSelector(
+  [ getIsSubmitVerifyCode, getSubmitVerifyCodeSuccess, getSubmitVerifyCodeError, getToken ],
+  (isSubmitVerifyCode, submitVerifyCodeSuccess, submitVerifyCodeError, token) => ({
+    isSubmitVerifyCode,
+    submitVerifyCodeSuccess,
+    submitVerifyCodeError,
+    token,
+  }),
+);

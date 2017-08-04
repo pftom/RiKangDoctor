@@ -21,6 +21,7 @@ import {
   getFeedbackSelector,
 
   getUpdateDoctorInfoSelector,
+  getSubmitVerifyCodeSelector,
 } from './userSelector';
 
 import {
@@ -54,6 +55,7 @@ export {
   getChangePasswdSelector,
   getFeedbackSelector,
   getUpdateDoctorInfoSelector,
+  getSubmitVerifyCodeSelector,
 
   getQaSelector,
   getSingleQaSelector,

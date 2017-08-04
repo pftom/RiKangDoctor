@@ -39,6 +39,9 @@ import DoctorList from '../components/TabOne/views/DoctorList';
 import ProfileScreen from '../components/ProfileScreen';
 import Practice from '../components/practice';
 
+import SubmitSuccess from '../components/TabOne/views/SubmitSuccess';
+import DoctorInfo from '../components/TabOne/views/DoctorInfo';
+
 import Chat from '../im/Chat';
 
 /*
@@ -95,6 +98,8 @@ export const BasicNavigator = StackNavigator(
     BasicDataSecond: { screen: BasicDataSecond },
     BasicDataThird: { screen: BasicDataThird },
     BasicDataFourth: { screen: BasicDataFourth },
+    SubmitSuccess: { screen: SubmitSuccess },
+    DoctorInfo: { screen: DoctorInfo },
   },
   {
     navigationOptions: {

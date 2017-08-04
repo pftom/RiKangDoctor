@@ -43,6 +43,8 @@ import {
   GET_DOCTOR_PROFILE,
   GET_DOCTOR_PROFILE_SUCCESS,
   GET_DOCTOR_PROFILE_ERROR,
+
+  GO_HOME,
 } from '../constants/'
 import { persistor } from '../store';
 
@@ -100,6 +102,14 @@ const auth = function auth(state = initialAuthState, action) {
         registerError: false,
         registerSuccess: false,
       });
+    
+    case GO_HOME:
+
+      return state.merge({
+          authCode: Immutable.Map({
+          status: 2,
+        }),
+      })
 
 
     case REGISTER_ERROR:
@@ -114,7 +124,12 @@ const auth = function auth(state = initialAuthState, action) {
       return state.merge({
         isLoadingData: false,
         registerSuccess: true,
+        authCode: Immutable.Map({
+          status: 1,
+        }),
       });
+
+
 
     case LOGIN: 
       //capture login action and show loading spinner
@@ -275,7 +290,6 @@ const auth = function auth(state = initialAuthState, action) {
       return state.merge({
         isSubmitVerifyCode: false,
         submitVerifyCodeSuccess: true,
-        authCode: Immutable.Map({ status: 2 })
       });
 
     case SUBMIT_VERIFY_DATA_ERROR:

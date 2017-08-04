@@ -12,9 +12,11 @@ import { BasicDataFirstStyle as styles } from './styles/';
 //import opposit department
 import { opppsiteDepartment } from '../utils/transferAbbr';
 
+import { getSubmitVerifyCodeSelector } from '../selectors/';
+
 import SelectPhoto from './TabThree/common/SelectPhoto';
 
-import { SUBMIT_VERIFY_DATA } from '../constants/';
+import { SUBMIT_VERIFY_DATA, CLEAR_VERIFY_DATA_STATE } from '../constants/';
 
 
 import {  selectTitle, mapTitle } from './TabOne/data/selectDep';
@@ -82,6 +84,24 @@ class BasicDataSecond extends PureComponent {
     }
   }
 
+  componentWillReceiveProps(nextProps) {
+    const { isSubmitVerifyCode, submitVerifyCodeSuccess, submitVerifyCodeError } = nextProps;
+    const { navigation, token, dispatch } = this.props;
+
+    if (isSubmitVerifyCode) {
+      this.loadingToast();
+    }
+
+    if (submitVerifyCodeSuccess) {
+      this.successToast('提交成功');
+      navigation.navigate('SubmitSuccess', { token, dispatch });
+    }
+
+    if (submitVerifyCodeError) {
+      this.failToast('提交失败');
+    }
+  }
+
   handleSubmit = () => {
     const { doctor_license, id_card } = this.state;
 
@@ -99,10 +119,16 @@ class BasicDataSecond extends PureComponent {
   }
 
   successToast(msg) {
+    const { dispatch } = this.props;
+
+    dispatch({ type: CLEAR_VERIFY_DATA_STATE });
+
     Toast.success(msg, 1);
   }
 
   failToast(msg) {
+    
+    dispatch({ type: CLEAR_VERIFY_DATA_STATE });
     Toast.fail(msg, 1);
   }
 
@@ -146,7 +172,5 @@ class BasicDataSecond extends PureComponent {
 }
 
 export default connect(
-  state => ({
-    token: state.getIn(['auth', 'token']),
-  })
+  (state) => getSubmitVerifyCodeSelector(state),
 )(BasicDataSecond);
