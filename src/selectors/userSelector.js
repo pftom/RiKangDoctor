@@ -73,3 +73,18 @@ export const getFeedbackSelector = createSelector(
     feedbackError,
   }),
 );
+
+
+
+const getIsUpdateDoctorInfo = (state) => state.getIn(['patient', 'isUpdateInfo']);
+const getUpdateInfoSuccess = (state) => state.getIn(['patient', 'updateInfoSuccess']);
+const getUpdateInfoError = (state) => state.getIn(['patient', 'updateInfoError']);
+
+export const getUpdateDoctorInfoSelector = createSelector(
+  [ getIsUpdateDoctorInfo, getUpdateInfoSuccess, getUpdateInfoError ],
+  (isUpdateInfo, updateInfoSuccess, updateInfoError) => ({
+    isUpdateInfo,
+    updateInfoSuccess,
+    updateInfoError,
+  }),
+);

@@ -67,6 +67,12 @@ import {
   GET_DOCTOR_INFO_ERROR,
 
   GET_DOCTOR_INCOME_SUCCESS,
+
+  UPDATE_DOCTOR_INFO,
+  UPDATE_DOCTOR_INFO_SUCCESS,
+  UPDATE_DOCTOR_INFO_ERROR,
+
+  CLEAR_INFO_STATE,
 } from '../constants/';
 
 //import util for update data
@@ -109,6 +115,9 @@ const initialPatientValue = Map({
   submitProfileSuccess: false,
 
   doctorInfo: null,
+  isUpdateInfo: false,
+  updateInfoSuccess: false,
+  updateInfoError: false,
   doctorIncome: null,
 });
 
@@ -367,6 +376,36 @@ const patient = (state = initialPatientValue, action) => {
       return state.merge({
         doctorIncome,
       });
+
+    case UPDATE_DOCTOR_INFO:
+      
+      return state.merge({
+        isUpdateInfo: true,
+        updateInfoSuccess: false,
+        updateInfoError: false,
+      });
+
+    case UPDATE_DOCTOR_INFO_SUCCESS:
+      
+      return state.merge({
+        isUpdateInfo: false,
+        updateInfoSuccess: true,
+      });
+
+    case UPDATE_DOCTOR_INFO_ERROR:
+      
+      return state.merge({
+        isUpdateInfo: false,
+        updateInfoError: true,
+      });
+
+    case CLEAR_INFO_STATE:
+
+      return state.merge({
+        isUpdateInfo: false,
+        updateInfoSuccess: false,
+        updateInfoError: false,
+      }); 
 
     case REHYDRATE: 
 

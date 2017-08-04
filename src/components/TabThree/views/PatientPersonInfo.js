@@ -73,6 +73,7 @@ class PatientPersonInfo extends PureComponent {
     if (!doctorProfile || !doctorInfo) {
       return;
     }
+    
 
     let body1 = {
       achievements,
@@ -197,6 +198,7 @@ class PatientPersonInfo extends PureComponent {
                 placeholder={item.placeholder}
                 count={200}
                 rows={5}
+                defaultValue={item.defaultValue}
                 onChange={(text) => { this.handleInput(item.sign, text) }}
               />
             </List>
