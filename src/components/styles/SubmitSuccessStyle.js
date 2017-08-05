@@ -22,6 +22,7 @@ export const SubmitSuccessStyle = StyleSheet.create({
   box: {
     width: px2dp(276),
     alignItems: 'center',
+    marginTop: px2dp(101),
   },
   title: {
     fontFamily: 'PingFangSC-Medium',
@@ -65,7 +66,10 @@ export const SubmitSuccessStyle = StyleSheet.create({
   content: {
     fontFamily: 'PingFangSC-Medium',
     fontSize: 20,
-    color: '#FFF',
+    color: '#F5F6F7',
     letterSpacing: px2dp(-0.4),
   },
+  extraContent: {
+    color: '#09C79C',
+  }
 });
