@@ -29,27 +29,101 @@ import { UnderGoingListItemStyle as styles } from '../../styles/';
 
 class UnderGoingListItem extends PureComponent {
 
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      normalConv: [],
+    }
+  }
+
+  componentDidMount() {
+
+    this.getConversations();
+  }
+
+  getNormalConvs = () => {
+    const {  LeanRT, navigation, item } = this.props;
+
+    const patientId = item.service_object.patient.id;
+    const clientId = item.service_object.doctor;
+    const imClient = LeanRT.imClient;
+    console.log('imClient', imClient);
+    if (imClient && imClient.getQuery) {
+      return imClient.getQuery().withLastMessagesRefreshed(true).containsMembers([String(clientId), String(patientId)]).find();
+    }
+  }
+
+  getConversations = () => {
+    const that = this;
+
+    const convs =  this.getNormalConvs()
+    
+    if (convs) {
+      return convs.then((data) => {
+        that.setState({
+          normalConv: data,
+        });
+      })
+    }
+  }
+
   handleBtn = () => {
 
+  }
+
+  handleChat(patientId) {
+    const { navigation, LeanRT, userId, item } = this.props;
+
+    const clientId = item.service_object.doctor;
+    const imClient = LeanRT.imClient;
+    
+    return imClient.createConversation({
+      members: [String(patientId)],
+      name: `${String(patientId)} 和 ${imClient.id}的对话`,
+      transient: false,
+      unique: true,
+    }).then(conversation => {
+
+      navigation.navigate('TestRNIMUI', { clientId, patientId, imClient: imClient, conv: conversation })
+    }).catch(console.error.bind(console));
   }
 
   render() {
     const { item, navigation, dispatch } = this.props;
 
-    let lastMessage = "每次洗完澡后记得局部要用护肤品哈哈哈哈或或";
+    const { normalConv } = this.state;
+    console.log('normalConv', normalConv);
+
+    const patientId = item.service_object.patient.id;
+
+    let lastMessage = '';
+    let lastTime = '';
+
+    if (normalConv.length > 0) {
+      const message = normalConv[0].lastMessage;
+
+      if (!message._lcfile && message._lctext !== 'data:image/jpeg;base64,') {
+        lastMessage = message._lctext;
+      } else if (message._lcfile && message._lctext === 'data:image/jpeg;base64,') {
+        lastMessage = '发来了一张图片...';
+      } else if (message._lcfile && message._lctext === "data:audio/m4a;base64,") {
+        lastMessage = '发来了一段语音...';
+      }
+
+      lastTime = getNowTime(normalConv[0]);
+    }
 
     if (lastMessage.length > 13) {
       lastMessage = lastMessage.slice(0, 13) + '...';
     }
 
-    const lastTime = '12:01';
-    // item.avatar
-
     return (
+    <TouchableOpacity onPress={() => { this.handleChat(patientId) }}>
       <View style={styles.container}>
         <View style={styles.box}>
           <View style={styles.doctorAvatarBox}>
-            <Image source={{ uri: 'https://facebook.github.io/react/img/logo_og.png' }} style={styles.doctorAvatar} />
+            <Image source={{ uri: item.avatar }} style={styles.doctorAvatar} />
           </View>
           <View style={styles.rightBox}>
               <View style={styles.nameBox}>
@@ -60,6 +134,7 @@ class UnderGoingListItem extends PureComponent {
             </View>
         </View>
       </View>
+    </TouchableOpacity>
     )
   }
 }

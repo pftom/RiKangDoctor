@@ -8,7 +8,7 @@ const getSingleCommentLoadingError = (state) => state.getIn(['answer', 'commentE
 const getSingleCommentLoadingSuccess = (state) => state.getIn(['answer', 'commentSuccess']);
 const getUserId = (state) => state.getIn(['auth', 'id']);
 
-const getDoctorId = (state) => state.getIn(['auth', 'doctorProfile', 'id']);
+export const getDoctorId = (state) => state.getIn(['auth', 'doctorProfile', 'id']);
 
 
 export const getAnswerCommentSelector = createSelector(

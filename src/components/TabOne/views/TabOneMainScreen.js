@@ -20,7 +20,7 @@ import {
   CLEAR_ORDER_STATE,
 
   GET_DOCTOR_PROFILE,
- } from '../../../constants/'
+ } from '../../../constants/';
 
 //import selector from select data
 import { getServiceSelector } from '../../../selectors/';
@@ -44,26 +44,79 @@ import {
 } from '../data/'
 
 
+//for im init
+import AV from 'leancloud-storage';
+import { Realtime } from 'leancloud-realtime';
+import { TypedMessagesPlugin } from 'leancloud-realtime-plugin-typed-messages';
+
+AV.init({
+  appId: 'QpmY5B86OewxLjxu2Yo6izF4-gzGzoHsz',
+  appKey:'gT9756x6BXMEAlAnNVyfS6q7',
+});
+
+const realtime = new Realtime({
+  appId: 'QpmY5B86OewxLjxu2Yo6izF4-gzGzoHsz',
+  plugins: [TypedMessagesPlugin], // 注册富媒体消息插件
+  region: 'cn',
+});
+
+const LeanRT = {};
+LeanRT.realtime = realtime;
+LeanRT.imClient = null;
+LeanRT.currentConversation = null;
+
 
 class TabOneMainScreen extends PureComponent {
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      isCreatedImClient: false,
+    }
+  }
 
   componentDidMount() {
 
     const { dispatch, navigation, token } = this.props;
 
-    // dispatch({ type: GET_SERVICE_ORDER, payload: { token } });
+
+    dispatch({ type: GET_SERVICE_ORDER, payload: { token } });
     dispatch({ type: GET_DOCTOR_PROFILE, payload: { token } });
   } 
 
+  componentWillReceiveProps(nextProps) {
+    const { doctorId } = nextProps;
+    if (doctorId && !this.state.isCreatedImClient) {
+      this.getImClient(doctorId);
+    }
+  }
+
+  getImClient = (doctorId) => {
+
+    const that = this;
+    console.log('userId', doctorId, )
+    LeanRT.realtime.createIMClient(String(doctorId))
+      .then(userClient => {
+        LeanRT.imClient = userClient;
+
+        that.setState({
+          isCreatedImClient: true
+        })
+        console.log('LeanRT', LeanRT);
+      })
+      .catch(console.error.bind(console));
+  }
+
   renderItem = (item, kind) => {
-    const { navigation, dispatch, token } = this.props;
+    const { navigation, dispatch, token, doctorId } = this.props;
 
     if (kind === 'newOrderData') {
       return <NewOrderListItem item={item} navigation={navigation} dispatch={dispatch} token={token} />;
     }
 
     if (kind === 'underGoingData') {
-      return <UnderGoingListItem item={item} navigation={navigation} dispatch={dispatch} token={token} />;
+      return <UnderGoingListItem LeanRT={LeanRT} userId={doctorId} item={item} navigation={navigation} dispatch={dispatch} token={token} />;
     }
 
     if (kind === 'finishedData') {
@@ -97,14 +150,56 @@ class TabOneMainScreen extends PureComponent {
       {
         name: '指尖泛出的繁华',
         key: 1,
+        "order_no": "77ba48aeb4fc41598c2f39a2d7a54a19",
+        "service_object": {
+            "doctor": 1,
+            "patient": {
+                "age": null,
+                "avatar": null,
+                "id": 1,
+                "medical_history": "",
+                "name": "阿哲",
+                "phone": "18321025181",
+                "sex": "M"
+            },
+            "status": "U"
+        },
       },
       {
         name: '指尖泛出的繁华',
         key: 2,
+        "order_no": "77ba48aeb4fc41598c2f39a2d7a54a19",
+        "service_object": {
+            "doctor": 1,
+            "patient": {
+                "age": null,
+                "avatar": null,
+                "id": 1,
+                "medical_history": "",
+                "name": "阿哲",
+                "phone": "18321025181",
+                "sex": "M"
+            },
+            "status": "U"
+        },
       },
       {
         name: '指尖泛出的繁华',
         key: 3,
+        "order_no": "77ba48aeb4fc41598c2f39a2d7a54a19",
+        "service_object": {
+            "doctor": 1,
+            "patient": {
+                "age": null,
+                "avatar": null,
+                "id": 1,
+                "medical_history": "",
+                "name": "阿哲",
+                "phone": "18321025181",
+                "sex": "M"
+            },
+            "status": "U"
+        },
       },
     ];
     let finishedData = [

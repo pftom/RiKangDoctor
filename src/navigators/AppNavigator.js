@@ -44,6 +44,8 @@ import DoctorInfo from '../components/TabOne/views/DoctorInfo';
 
 import Chat from '../im/Chat';
 
+import TestRNIMUI  from '../components/TabOne/views/miui';
+
 /*
  *
  * 
@@ -129,6 +131,7 @@ export const AppNavigator = StackNavigator({
     DoctorList: { screen: DoctorList },
     DoctorDetail: { screen: DoctorDetail },
     Chat: { screen: Chat },
+    TestRNIMUI: { screen: TestRNIMUI },
     
     ConsultOrder: { screen: ConsultOrder },
 

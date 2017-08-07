@@ -39,7 +39,7 @@ function* getServiceOrder(payload) {
     const { token } = payload;
 
 
-    const { orders } = yield call(request.get, base + serviceApi.doctorService, token);
+    const { orders } = yield call(request.get, base + serviceApi.doctorService, null, token);
 
     yield put({ type: GET_SERVICE_ORDER_SUCCESS, orders });
   } catch (error) {
