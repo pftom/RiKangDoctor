@@ -7,6 +7,7 @@ import {
   StatusBar,
   Animated,
   Image,
+  Platform,
 } from 'react-native';
 
 import { NavigationActions } from 'react-navigation';
@@ -96,8 +97,11 @@ class UnderGoingListItem extends PureComponent {
       transient: false,
       unique: true,
     }).then(conversation => {
-
-      navigation.navigate('TestRNIMUI', { clientId, patientId, imClient: imClient, conv: conversation })
+      const SELECT = {
+        'ios': 'TestRNIMUI',
+        'android': 'TestRNIMUIAndroid'
+      };
+      navigation.navigate(SELECT[Platform.OS], { clientId, patientId, imClient: imClient, conv: conversation })
     }).catch(console.error.bind(console));
   }
 
