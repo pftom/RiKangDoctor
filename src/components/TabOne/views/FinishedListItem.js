@@ -37,12 +37,7 @@ class FinishedListItem extends PureComponent {
   render() {
     const { item } = this.props;
 
-    let lastMessage = "每次洗完澡后记得局部要用护肤品哈哈哈哈或或";
-
-    if (lastMessage.length > 13) {
-      lastMessage = lastMessage.slice(0, 13) + '...';
-    }
-
+    // const lastIime = item.orderCreatedTime;
     const lastTime = '2017年7月15日';
 
     let ITEM = [];
@@ -64,7 +59,7 @@ class FinishedListItem extends PureComponent {
       <View style={styles.container}>
         <View style={styles.box}>
           <View style={styles.doctorAvatarBox}>
-            <Image source={{ uri: 'https://facebook.github.io/react/img/logo_og.png' }} style={styles.doctorAvatar} />
+            <Image source={{ uri: item.avatar }} style={styles.doctorAvatar} />
           </View>
           <View style={styles.rightBox}>
               <View style={styles.nameBox}>
@@ -86,11 +81,6 @@ class FinishedListItem extends PureComponent {
                           ))
                         }
                       </View>
-                      <TouchableHighlight onPress={() => { this.handleBtn() }} style={styles.buttonContainer}>
-                      <View style={styles.buttonBox}>
-                        <Text style={[ styles.content, this.props.textStyle ]}>查看评论详情</Text>
-                      </View>
-                    </TouchableHighlight>
                     </View>
                   )
                 }
@@ -103,3 +93,9 @@ class FinishedListItem extends PureComponent {
 }
 
 export default FinishedListItem;
+
+                    //   <TouchableHighlight onPress={() => { this.handleBtn() }} style={styles.buttonContainer}>
+                    //   <View style={styles.buttonBox}>
+                    //     <Text style={[ styles.content, this.props.textStyle ]}>查看评论详情</Text>
+                    //   </View>
+                    // </TouchableHighlight>

@@ -69,7 +69,7 @@ const service = (state = initialServiceValue, action) => {
         acceptOrderSuccess: true,
       });
 
-    case ACCEPT_SERVICE_ORDER:
+    case ACCEPT_SERVICE_ORDER_ERROR:
 
       return state.merge({
         isAcceptOrder: false,
