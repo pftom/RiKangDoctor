@@ -407,28 +407,6 @@ const patient = (state = initialPatientValue, action) => {
         updateInfoError: false,
       }); 
 
-    case REHYDRATE: 
-
-      const { auth, patient } = action.payload;
-      const token = auth && auth.has('token') && auth.get('token');
-
-
-      if (token) {
-        const data = {};
-        console.log('patient', patient.toJS());
-        patient.mapEntries(([key, value]) => {
-          if (DATA.includes(key)) {
-
-            data[key] = (value && value.keySeq().count() > 0 && value.toList().filter(item => item !== null) ) || List([]);
-          }
-        });
-
-        let newState = state.merge(data);
-
-        console.log('newState', newState.toJS());
-        return newState;
-      }
-
       return state;
 
     case CLEAR_FAV_STATE: 

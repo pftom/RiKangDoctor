@@ -152,7 +152,7 @@ class TabOneMainScreen extends PureComponent {
         key: 1,
         "order_no": "77ba48aeb4fc41598c2f39a2d7a54a19",
         "service_object": {
-            "doctor": 1,
+            "doctor": 10,
             "patient": {
                 "age": null,
                 "avatar": null,
@@ -170,7 +170,7 @@ class TabOneMainScreen extends PureComponent {
         key: 2,
         "order_no": "77ba48aeb4fc41598c2f39a2d7a54a19",
         "service_object": {
-            "doctor": 1,
+            "doctor": 10,
             "patient": {
                 "age": null,
                 "avatar": null,
@@ -188,7 +188,7 @@ class TabOneMainScreen extends PureComponent {
         key: 3,
         "order_no": "77ba48aeb4fc41598c2f39a2d7a54a19",
         "service_object": {
-            "doctor": 1,
+            "doctor": 10,
             "patient": {
                 "age": null,
                 "avatar": null,

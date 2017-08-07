@@ -25,6 +25,16 @@ import { getPostSelector } from '../../../selectors/';
 //import post style
 import { UnderGoingListItemStyle as styles } from '../../styles/';
 
+export function getNowTime(item) {
+  const now = new Date(item._lastMessageAt);
+
+  const hour = now.getHours();
+  const minute = now.getMinutes();
+
+  const nowTime = `${hour}:${minute}`;
+
+  return nowTime;
+}
 
 
 class UnderGoingListItem extends PureComponent {
@@ -48,6 +58,8 @@ class UnderGoingListItem extends PureComponent {
     const patientId = item.service_object.patient.id;
     const clientId = item.service_object.doctor;
     const imClient = LeanRT.imClient;
+
+    console.log('clientId', clientId, patientId)
     console.log('imClient', imClient);
     if (imClient && imClient.getQuery) {
       return imClient.getQuery().withLastMessagesRefreshed(true).containsMembers([String(clientId), String(patientId)]).find();

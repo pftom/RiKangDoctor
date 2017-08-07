@@ -53,6 +53,9 @@
 		E2DB78C91F384D35003A7A14 /* libAuroraIMUI.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E2DB78A31F384BB9003A7A14 /* libAuroraIMUI.a */; };
 		E2DB78CA1F384D3A003A7A14 /* libRNFetchBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E2DB78C11F384BB9003A7A14 /* libRNFetchBlob.a */; };
 		E2DB78CB1F384D41003A7A14 /* libRNFS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E2DB78841F384AA4003A7A14 /* libRNFS.a */; };
+		E2DB78E11F385477003A7A14 /* defoult_header.png in Resources */ = {isa = PBXBuildFile; fileRef = E2DB78DE1F385477003A7A14 /* defoult_header.png */; };
+		E2DB78E21F385477003A7A14 /* defoult_header@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E2DB78DF1F385477003A7A14 /* defoult_header@2x.png */; };
+		E2DB78E31F385477003A7A14 /* defoult_header@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = E2DB78E01F385477003A7A14 /* defoult_header@3x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -369,6 +372,9 @@
 		C5DEB9FF1F298BD6002FB400 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		CB7F17BB502343B986912DD3 /* CFNetwork.framework */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		D4B2A2F61379413F97E0F951 /* RNImagePicker.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNImagePicker.xcodeproj; path = "../node_modules/react-native-image-picker/ios/RNImagePicker.xcodeproj"; sourceTree = "<group>"; };
+		E2DB78DE1F385477003A7A14 /* defoult_header.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = defoult_header.png; path = ../../../rikang/ios/defoult_header.png; sourceTree = "<group>"; };
+		E2DB78DF1F385477003A7A14 /* defoult_header@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "defoult_header@2x.png"; path = "../../../rikang/ios/defoult_header@2x.png"; sourceTree = "<group>"; };
+		E2DB78E01F385477003A7A14 /* defoult_header@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "defoult_header@3x.png"; path = "../../../rikang/ios/defoult_header@3x.png"; sourceTree = "<group>"; };
 		EAEEDD7978EC4F188C5E0FE8 /* SystemConfiguration.framework */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		FCA0AB7C9B1341C5839EDF6B /* BVLinearGradient.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = BVLinearGradient.xcodeproj; path = "../node_modules/react-native-linear-gradient/BVLinearGradient.xcodeproj"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -617,6 +623,9 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				E2DB78DE1F385477003A7A14 /* defoult_header.png */,
+				E2DB78DF1F385477003A7A14 /* defoult_header@2x.png */,
+				E2DB78E01F385477003A7A14 /* defoult_header@3x.png */,
 				13B07FAE1A68108700A75B9A /* RiKang */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* RiKangTests */,
@@ -1143,7 +1152,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				E2DB78E21F385477003A7A14 /* defoult_header@2x.png in Resources */,
+				E2DB78E31F385477003A7A14 /* defoult_header@3x.png in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
+				E2DB78E11F385477003A7A14 /* defoult_header.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
