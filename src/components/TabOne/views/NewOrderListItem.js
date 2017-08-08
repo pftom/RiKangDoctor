@@ -109,10 +109,10 @@ class NewOrderListItem extends PureComponent {
         <View style={styles.box}>
           <View style={styles.idBox}>
             <View style={styles.doctorAvatarBox}>
-              <Image source={{ uri: 'https://facebook.github.io/react/img/logo_og.png' }} style={styles.doctorAvatar} />
+              <Image source={{ uri: item.service_object.patient.avatar }} style={styles.doctorAvatar} />
             </View>
             <View style={styles.nameBox}>
-              <Text style={styles.name}>{item.name}</Text>
+              <Text style={styles.name}>{item.service_object.patient.name}</Text>
               <Text style={styles.consult}>向您发出咨询请求</Text>
             </View>
           </View>

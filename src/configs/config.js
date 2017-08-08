@@ -69,5 +69,5 @@ export const qaSingleApi = (id) => ({
 
 export const serviceApi = {
   acceptOrder: 'services/accept-order',
-  doctorService: 'users/doctor/services/',
+  doctorService: 'users/doctor/orders/',
 };

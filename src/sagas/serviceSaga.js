@@ -23,11 +23,11 @@ import { base, serviceApi } from '../configs/config';
 function* acceptOrder(payload) {
   try {
     const { token, body } = payload;
-
+    const { order_no } = body;
 
     yield call(request.post, base + serviceApi.acceptOrder, body, token);
 
-    yield put({ type: ACCEPT_SERVICE_ORDER_SUCCESS });
+    yield put({ type: ACCEPT_SERVICE_ORDER_SUCCESS, order_no });
   } catch (error) {
     yield put({ type: ACCEPT_SERVICE_ORDER_ERROR, error });
   }
@@ -39,7 +39,7 @@ function* getServiceOrder(payload) {
     const { token } = payload;
 
 
-    const { orders } = yield call(request.get, base + serviceApi.doctorService, null, token);
+    const orders = yield call(request.get, base + serviceApi.doctorService, null, token);
 
     yield put({ type: GET_SERVICE_ORDER_SUCCESS, orders });
   } catch (error) {

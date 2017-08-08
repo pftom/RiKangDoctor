@@ -129,25 +129,9 @@ class TabOneMainScreen extends PureComponent {
     //get service data
     const { token, orders, isGetOrders, getOrderSuccess, getOrderError, isAcceptOrder, acceptOrderSuccess, acceptOrderError } = this.props;
 
-    let newOrderData = [
-      {
-        avatar: require('../img/avatar.jpg'),
-        name: '指尖泛出的繁华',
-        key: 1,
-      },
-      {
-        avatar: require('../img/avatar.jpg'),
-        name: '指尖泛出的繁华',
-        key: 2,
-      },
-      {
-        avatar: require('../img/avatar.jpg'),
-        name: '指尖泛出的繁华',
-        key: 3,
-      },
-    ];
+    let newOrderData = [];
     let underGoingData = [
-      {
+            {
         name: '指尖泛出的繁华',
         key: 1,
         "order_no": "77ba48aeb4fc41598c2f39a2d7a54a19",
@@ -202,29 +186,17 @@ class TabOneMainScreen extends PureComponent {
         },
       },
     ];
-    let finishedData = [
-      {
-        name: '指尖泛出的繁华',
-        key: 1,
-        ratings: 4,
-      },
-      {
-        name: '指尖泛出的繁华',
-        key: 2,
-        ratings: 3,
-      },
-      {
-        name: '指尖泛出的繁华',
-        key: 3,
-        ratings: 5,
-      },
-    ];
+    let finishedData = [];
     //service for later handle
-    if (orders.size > 0) {
-      newOrderData = handleUserData(orders, 'paid');
-      underGoingData = handleUserData(orders, 'underway')
-      finishedData = handleUserData(orders, 'finished');
-    }
+    // if (orders.size > 0) {
+    //   newOrderData = handleServiceData(orders, 'paid');
+    //   underGoingData = handleServiceData(orders, 'underway')
+    //   finishedData = handleServiceData(orders, 'finished');
+
+    //   console.log('newOrderData', newOrderData);
+    //   console.log('underGoingData', underGoingData);
+    //   console.log('finishedData', finishedData);
+    // }
 
     const DATA = [
       newOrderData,

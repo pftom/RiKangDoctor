@@ -15,20 +15,28 @@ const handleServiceData = (data, kind) => {
   data.map((item) => {
     if (MAP_PAID_STATUS[item.get('status')] === kind) {
       let data = {
-          patient: {
-
+          service_object: {
+            patient: {
+              
+            }
           }
         };
         item.mapEntries(([key, value]) => {
-          if (key === 'patient') {
+          if (key === 'service_object') {
             value.mapEntries(([key, value]) => {
-              data['patient'][key] = value;
+              if (key === 'patient') {
+                value.mapEntries(([key, value]) => {
+                    data['service_object']['patient'][key] = value;
+                })
+              } else {
+                data['service_object'][key] = value;
+              }
             })
           } else {
             data[key] = value;
           }
       })
-      data['key'] = item.get('id');
+      data['key'] = item.get('order_no');
       dataSource.push(data);
     }
   })
