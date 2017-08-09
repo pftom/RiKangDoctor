@@ -28,6 +28,7 @@ function* acceptOrder(payload) {
     yield call(request.post, base + serviceApi.acceptOrder, body, token);
 
     yield put({ type: ACCEPT_SERVICE_ORDER_SUCCESS, order_no });
+    yield put({ type: GET_SERVICE_ORDER, payload: { token }});
   } catch (error) {
     yield put({ type: ACCEPT_SERVICE_ORDER_ERROR, error });
   }

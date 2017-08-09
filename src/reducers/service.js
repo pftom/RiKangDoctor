@@ -65,7 +65,7 @@ const service = (state = initialServiceValue, action) => {
     case ACCEPT_SERVICE_ORDER_SUCCESS:
       const { order_no } = action; 
       return state
-        .updateIn(['services', 'orders'], list => list.filter(item => item.get('order_no') !== order_no ))
+        .updateIn(['service', 'orders'], list => list.filter(item => item.get('order_no') !== order_no ))
         .merge({
           isAcceptOrder: false,
           acceptOrderSuccess: true,

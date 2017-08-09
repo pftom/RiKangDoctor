@@ -116,7 +116,7 @@ class UnderGoingListItem extends PureComponent {
     let lastMessage = '';
     let lastTime = '';
 
-    if (normalConv.length > 0) {
+    if (normalConv.length > 0 && normalConv[0].lastMessage) {
       const message = normalConv[0].lastMessage;
 
       if (!message._lcfile && message._lctext !== 'data:image/jpeg;base64,') {
@@ -132,6 +132,8 @@ class UnderGoingListItem extends PureComponent {
 
     if (lastMessage.length > 13) {
       lastMessage = lastMessage.slice(0, 13) + '...';
+    } else if (lastMessage.length === 0) {
+      lastMessage = '暂无消息';
     }
 
     return (
@@ -139,11 +141,11 @@ class UnderGoingListItem extends PureComponent {
       <View style={styles.container}>
         <View style={styles.box}>
           <View style={styles.doctorAvatarBox}>
-            <Image source={{ uri: item.avatar }} style={styles.doctorAvatar} />
+            <Image source={{ uri: item.service_object.patient.avatar }} style={styles.doctorAvatar} />
           </View>
           <View style={styles.rightBox}>
               <View style={styles.nameBox}>
-                <Text style={styles.name}>{item.name}</Text>
+                <Text style={styles.name}>{item.service_object.patient.name}</Text>
                 <Text style={styles.lastTime}>{lastTime}</Text>
               </View>
               <Text style={styles.lastMessage}>{lastMessage}</Text>

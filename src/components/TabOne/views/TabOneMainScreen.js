@@ -130,73 +130,18 @@ class TabOneMainScreen extends PureComponent {
     const { token, orders, isGetOrders, getOrderSuccess, getOrderError, isAcceptOrder, acceptOrderSuccess, acceptOrderError } = this.props;
 
     let newOrderData = [];
-    let underGoingData = [
-            {
-        name: '指尖泛出的繁华',
-        key: 1,
-        "order_no": "77ba48aeb4fc41598c2f39a2d7a54a19",
-        "service_object": {
-            "doctor": 10,
-            "patient": {
-                "age": null,
-                "avatar": null,
-                "id": 1,
-                "medical_history": "",
-                "name": "阿哲",
-                "phone": "18321025181",
-                "sex": "M"
-            },
-            "status": "U"
-        },
-      },
-      {
-        name: '指尖泛出的繁华',
-        key: 2,
-        "order_no": "77ba48aeb4fc41598c2f39a2d7a54a19",
-        "service_object": {
-            "doctor": 10,
-            "patient": {
-                "age": null,
-                "avatar": null,
-                "id": 1,
-                "medical_history": "",
-                "name": "阿哲",
-                "phone": "18321025181",
-                "sex": "M"
-            },
-            "status": "U"
-        },
-      },
-      {
-        name: '指尖泛出的繁华',
-        key: 3,
-        "order_no": "77ba48aeb4fc41598c2f39a2d7a54a19",
-        "service_object": {
-            "doctor": 10,
-            "patient": {
-                "age": null,
-                "avatar": null,
-                "id": 1,
-                "medical_history": "",
-                "name": "阿哲",
-                "phone": "18321025181",
-                "sex": "M"
-            },
-            "status": "U"
-        },
-      },
-    ];
+    let underGoingData = [];
     let finishedData = [];
     //service for later handle
-    // if (orders.size > 0) {
-    //   newOrderData = handleServiceData(orders, 'paid');
-    //   underGoingData = handleServiceData(orders, 'underway')
-    //   finishedData = handleServiceData(orders, 'finished');
+    if (orders.size > 0) {
+      newOrderData = handleServiceData(orders, 'paid');
+      underGoingData = handleServiceData(orders, 'underway')
+      finishedData = handleServiceData(orders, 'finished');
 
-    //   console.log('newOrderData', newOrderData);
-    //   console.log('underGoingData', underGoingData);
-    //   console.log('finishedData', finishedData);
-    // }
+      console.log('newOrderData', newOrderData);
+      console.log('underGoingData', underGoingData);
+      console.log('finishedData', finishedData);
+    }
 
     const DATA = [
       newOrderData,
