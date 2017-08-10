@@ -628,7 +628,7 @@ export default class ChatActivity extends React.Component {
       .config({
         fileCache : true,
         // by adding this option, the temp files will have a file extension
-        appendExt : 'mp3'
+        appendExt : 'm4a'
       })
       .fetch('GET', item._lcfile.url)
       .then((res) => {
@@ -647,7 +647,7 @@ export default class ChatActivity extends React.Component {
 						msgType: "voice",
 						isOutgoing: isOutgoing,
 						mediaPath: res.path(),
-						duration: 3,
+						duration: 0,
 						fromUser: {
 							userId: "1",
 							displayName: "ken",
