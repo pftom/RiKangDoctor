@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Dimensions, } from 'react-native';
+import { StyleSheet, Dimensions, Platform } from 'react-native';
 
 
 //import screen adapt util
@@ -24,7 +24,14 @@ export const  UserScreenStyle = StyleSheet.create({
     width: width / 2 - 1,
     borderRightWidth: px2dp(0.5),
     borderRightColor: '#CECECE',
-    height: px2dp(193),
+    ...Platform.select({
+      ios: {
+        height: px2dp(193),
+      },
+      android: {
+        height: px2dp(130),
+      }
+    }),
     marginBottom: px2dp(0.5),
     borderBottomWidth: px2dp(0.5),
     borderBottomColor: '#CECECE',

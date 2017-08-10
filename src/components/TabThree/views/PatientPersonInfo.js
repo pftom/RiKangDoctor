@@ -151,7 +151,14 @@ class PatientPersonInfo extends PureComponent {
         <ScrollView
           showsVerticalScrollIndicator={false}
           style={{
-            height: px2dp(height - px2dp(81)),
+            ...Platform.select({
+              ios: {
+                height: px2dp(height - px2dp(81)),
+              },
+              android: {
+                height: px2dp(height - px2dp(145)),
+              }
+            }),
             marginBottom: px2dp(10),
           }}
         >
