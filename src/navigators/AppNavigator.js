@@ -44,8 +44,8 @@ import DoctorInfo from '../components/TabOne/views/DoctorInfo';
 
 import Chat from '../im/Chat';
 
-import TestRNIMUI  from '../components/TabOne/views/miui';
-import TestRNIMUIAndroid  from '../components/TabOne/views/miuiAndroid';
+import TestRNIMUI  from '../../miui';
+import TestRNIMUIAndroid  from '../../miuiAndroid';
 
 /*
  *

@@ -36,19 +36,17 @@ class FinishedListItem extends PureComponent {
 
   render() {
     const { item } = this.props;
-
-    // const lastIime = item.orderCreatedTime;
-    const lastTime = '2017年7月15日';
+    console.log('item', item.comment && item.comment.toJS());
 
     let ITEM = [];
-    if (item.ratings && !isNaN(parseInt(item.ratings))) {
-      for (let i = 0; i < parseInt(item.ratings); i++) {
+    if (item.comment.get('ratings') && !isNaN(parseInt(item.comment.get('ratings')))) {
+      for (let i = 0; i < parseInt(item.comment.get('ratings')); i++) {
         ITEM.push(
           <Image source={require('../img/smallHeart.png')} style={styles.img} key={i} />
         )
       }
 
-      for (let i = 0; i < 5 - parseInt(item.ratings); i++) {
+      for (let i = 0; i < 5 - parseInt(item.comment.get('ratings')); i++) {
         ITEM.push(
           <Image source={require('../img/smallSolidHeart.png')} style={styles.img} key={5 - i} />
         )
@@ -59,16 +57,15 @@ class FinishedListItem extends PureComponent {
       <View style={styles.container}>
         <View style={styles.box}>
           <View style={styles.doctorAvatarBox}>
-            <Image source={{ uri: item.avatar }} style={styles.doctorAvatar} />
+            <Image source={{ uri: item.service_object.patient.avatar }} style={styles.doctorAvatar} />
           </View>
           <View style={styles.rightBox}>
               <View style={styles.nameBox}>
-                <Text style={styles.name}>{item.name}</Text>
-                <Text style={styles.lastTime}>{lastTime}</Text>
+                <Text style={styles.name}>{item.service_object.patient.name}</Text>
               </View>
               <View style={styles.appraiseBox}>
                 {
-                  item.appraised 
+                  !item.comment 
                   ? (
                     <Text style={styles.unApparise}>该用户暂未评价</Text>
                   )

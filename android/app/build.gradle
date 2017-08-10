@@ -129,6 +129,7 @@ dependencies {
     compile project(':react-native-picker')
     compile project(':react-native-linear-gradient')
     compile project(':react-native-image-picker')
+    compile project(':aurora-imui-react-native')
     compile project(':react-native-fs')
     compile project(':react-native-fetch-blob')
     compile fileTree(dir: "libs", include: ["*.jar"])

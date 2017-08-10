@@ -49,11 +49,11 @@
 		B1F6D60F19E740BAA1C5CCBF /* libRNFS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 642706BEC8A0406CBA941673 /* libRNFS.a */; };
 		C2FDCC1EEFDE431DB84C493C /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09943B4D453F477FB9C71C54 /* SystemConfiguration.framework */; };
 		C394D466E5B54E02AB47ACC6 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05750851C7E84FDB8E62F371 /* UIKit.framework */; };
+		E23A55711F3B29C700DBD740 /* defoult_header@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E23A556E1F3B29C700DBD740 /* defoult_header@2x.png */; };
+		E23A55721F3B29C700DBD740 /* defoult_header@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = E23A556F1F3B29C700DBD740 /* defoult_header@3x.png */; };
+		E23A55731F3B29C700DBD740 /* defoult_header.png in Resources */ = {isa = PBXBuildFile; fileRef = E23A55701F3B29C700DBD740 /* defoult_header.png */; };
 		E28C0A4A1F3A0202001018FA /* RCTAuroraIMUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E28C0A221F3A015A001018FA /* RCTAuroraIMUI.framework */; };
 		E28C0A4B1F3A0202001018FA /* RCTAuroraIMUI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E28C0A221F3A015A001018FA /* RCTAuroraIMUI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		E28C0A521F3A0404001018FA /* defoult_header.png in Resources */ = {isa = PBXBuildFile; fileRef = E28C0A4F1F3A0404001018FA /* defoult_header.png */; };
-		E28C0A531F3A0404001018FA /* defoult_header@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E28C0A501F3A0404001018FA /* defoult_header@2x.png */; };
-		E28C0A541F3A0404001018FA /* defoult_header@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = E28C0A511F3A0404001018FA /* defoult_header@3x.png */; };
 		ED94FC65C434478B94727635 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45110E3D05DC4E13B320282D /* CoreFoundation.framework */; };
 /* End PBXBuildFile section */
 
@@ -378,9 +378,9 @@
 		CE17C30E03584AC0AC7F5732 /* libAuroraIMUI.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libAuroraIMUI.a; sourceTree = "<group>"; };
 		D125F6F9D8AD4E8A9BFAA5DC /* libRNFetchBlob.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNFetchBlob.a; sourceTree = "<group>"; };
 		E129D6EEACB4437EA8BB15F1 /* Foundation.framework */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		E28C0A4F1F3A0404001018FA /* defoult_header.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = defoult_header.png; path = ../../../rikang/ios/defoult_header.png; sourceTree = "<group>"; };
-		E28C0A501F3A0404001018FA /* defoult_header@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "defoult_header@2x.png"; path = "../../../rikang/ios/defoult_header@2x.png"; sourceTree = "<group>"; };
-		E28C0A511F3A0404001018FA /* defoult_header@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "defoult_header@3x.png"; path = "../../../rikang/ios/defoult_header@3x.png"; sourceTree = "<group>"; };
+		E23A556E1F3B29C700DBD740 /* defoult_header@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "defoult_header@2x.png"; path = "../../../defoult_header@2x.png"; sourceTree = "<group>"; };
+		E23A556F1F3B29C700DBD740 /* defoult_header@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "defoult_header@3x.png"; path = "../../../defoult_header@3x.png"; sourceTree = "<group>"; };
+		E23A55701F3B29C700DBD740 /* defoult_header.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = defoult_header.png; path = ../../../defoult_header.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -625,9 +625,9 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
-				E28C0A4F1F3A0404001018FA /* defoult_header.png */,
-				E28C0A501F3A0404001018FA /* defoult_header@2x.png */,
-				E28C0A511F3A0404001018FA /* defoult_header@3x.png */,
+				E23A556E1F3B29C700DBD740 /* defoult_header@2x.png */,
+				E23A556F1F3B29C700DBD740 /* defoult_header@3x.png */,
+				E23A55701F3B29C700DBD740 /* defoult_header.png */,
 				13B07FAE1A68108700A75B9A /* RiKangDoctor */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* RiKangDoctorTests */,
@@ -1146,10 +1146,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
-				E28C0A531F3A0404001018FA /* defoult_header@2x.png in Resources */,
-				E28C0A541F3A0404001018FA /* defoult_header@3x.png in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
-				E28C0A521F3A0404001018FA /* defoult_header.png in Resources */,
+				E23A55721F3B29C700DBD740 /* defoult_header@3x.png in Resources */,
+				E23A55711F3B29C700DBD740 /* defoult_header@2x.png in Resources */,
+				E23A55731F3B29C700DBD740 /* defoult_header.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
